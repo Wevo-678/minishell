@@ -6,13 +6,13 @@
 /*   By: mabenet <mabenet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/11 11:06:27 by mabenet           #+#    #+#             */
-/*   Updated: 2024/10/14 16:29:27 by mabenet          ###   ########.fr       */
+/*   Updated: 2024/10/14 16:43:18 by mabenet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int parse_input(char *s)
+int unclosed_quote_check(char *s)
 {
 	bool	d_quote;
 	bool	s_quote;
@@ -42,8 +42,11 @@ int parse_input(char *s)
 void treat_input(char *input /*t_node *arg_list*/)
 {
 	// char **tab;
-	if (parse_input(input) == 0)
-		printf("quote unclosed\n");
+	if (unclosed_quote_check(input) == 0)
+	{
+		printf("minishell: unclosed quote error.\n");
+		break;
+	}	
 		
 	// ft_token(input, arg_list);
 	// ft_treat_token(arg_list);
