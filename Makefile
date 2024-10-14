@@ -6,7 +6,7 @@
 #    By: mabenet <mabenet@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/09/24 11:01:54 by mabenet           #+#    #+#              #
-#    Updated: 2024/10/11 10:36:51 by mabenet          ###   ########.fr        #
+#    Updated: 2024/10/11 11:15:36 by mabenet          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,7 @@ CC = cc
 CFLAGS = -Wall -Werror -Wextra -g -lreadline -lhistory
 
 SRC = main.c \
-
+	treat_input.c \
 
 all: $(NAME)
 

@@ -6,7 +6,7 @@
 /*   By: mabenet <mabenet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/07 08:25:40 by mabenet           #+#    #+#             */
-/*   Updated: 2024/10/11 10:33:56 by mabenet          ###   ########.fr       */
+/*   Updated: 2024/10/14 14:47:12 by mabenet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,19 @@
 # include <readline/readline.h>
 # include <readline/history.h>
 
+typedef struct s_node
+{
+    char **data;            // Pointeur vers un tableau de chaînes de caractères
+    struct s_node *next;    // Pointeur vers le prochain noeud de la liste
+} t_node;
+
 //main
 
 void handle_sigint(int sig);
 void start_shell(void);
+
+//treat_input
+
+void treat_input(char *input);
 
 #endif

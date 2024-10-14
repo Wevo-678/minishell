@@ -6,18 +6,11 @@
 /*   By: mabenet <mabenet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/11 09:56:07 by mabenet           #+#    #+#             */
-/*   Updated: 2024/10/11 10:35:21 by mabenet          ###   ########.fr       */
+/*   Updated: 2024/10/14 14:51:14 by mabenet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-# include <readline/readline.h>
-# include <readline/history.h>
-void handle_sigint(int sig)
-{
-	(void)sig;
-	write(1, "\nMinishell$ ", 12);
-}
 
 void start_shell(void)
 {
@@ -26,7 +19,7 @@ void start_shell(void)
     while (1) {
         // Lire la commande utilisateur avec une invite "Minishell$ "
         input = readline("Minishell$ ");
-        
+        treat_input(input);// faire le parsing a partir de la
         // Si l'utilisateur entre "exit", quitter le programme
         if (input == NULL || strcmp(input, "exit") == 0) {
             free(input);
@@ -48,8 +41,9 @@ void start_shell(void)
 
 int main(void)
 {
-	// Capturer le signal Ctrl+C
-	signal(SIGINT, handle_sigint);
+    t_node *arg_list;
+
+    arg_list = NULL;
 
 	// Lancer le shell
 	start_shell();
