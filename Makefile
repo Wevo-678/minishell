@@ -6,7 +6,7 @@
 #    By: mabenet <mabenet@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/09/24 11:01:54 by mabenet           #+#    #+#              #
-#    Updated: 2024/10/11 11:15:36 by mabenet          ###   ########.fr        #
+#    Updated: 2024/10/14 16:16:05 by mabenet          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ NAME = Minishell
 
 CC = cc
 
-CFLAGS = -Wall -Werror -Wextra -g -lreadline -lhistory
+CFLAGS = -Wall -Werror -Wextra -g
 
 SRC = main.c \
 	treat_input.c \
@@ -22,7 +22,7 @@ SRC = main.c \
 all: $(NAME)
 
 $(NAME): $(SRC:.c=.o)
-	$(CC) $(CFLAGS) -lm $(SRC) -o $(NAME)
+	$(CC) $(CFLAGS) $(SRC) -o $(NAME) -lreadline -lhistory -lm
 	echo "Ready to minishell"
 
 clean:

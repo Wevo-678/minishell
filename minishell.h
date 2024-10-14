@@ -6,7 +6,7 @@
 /*   By: mabenet <mabenet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/07 08:25:40 by mabenet           #+#    #+#             */
-/*   Updated: 2024/10/14 14:47:12 by mabenet          ###   ########.fr       */
+/*   Updated: 2024/10/14 16:27:36 by mabenet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,11 +31,11 @@ typedef struct s_node
 
 //main
 
-void handle_sigint(int sig);
-void start_shell(void);
+void start_shell(t_node *arg_list);
 
 //treat_input
 
-void treat_input(char *input);
+void treat_input(char *input /*t_node *arg_list*/);
+int parse_input(char *input);
 
 #endif

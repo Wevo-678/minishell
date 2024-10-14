@@ -6,20 +6,21 @@
 /*   By: mabenet <mabenet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/11 09:56:07 by mabenet           #+#    #+#             */
-/*   Updated: 2024/10/14 14:51:14 by mabenet          ###   ########.fr       */
+/*   Updated: 2024/10/14 16:27:54 by mabenet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void start_shell(void)
+void start_shell(t_node *arg_list)
 {
     char *input;
 
+    arg_list = NULL;
     while (1) {
         // Lire la commande utilisateur avec une invite "Minishell$ "
         input = readline("Minishell$ ");
-        treat_input(input);// faire le parsing a partir de la
+        treat_input(input /*arg_list*/);// faire le parsing a partir de la
         // Si l'utilisateur entre "exit", quitter le programme
         if (input == NULL || strcmp(input, "exit") == 0) {
             free(input);
@@ -46,7 +47,7 @@ int main(void)
     arg_list = NULL;
 
 	// Lancer le shell
-	start_shell();
+	start_shell(arg_list);
 
 	return 0;
 }
