@@ -6,7 +6,7 @@
 /*   By: picarlie <picarlie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/15 17:40:26 by picarlie          #+#    #+#             */
-/*   Updated: 2024/10/15 18:25:11 by picarlie         ###   ########.fr       */
+/*   Updated: 2024/10/15 18:43:13 by picarlie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,11 +37,13 @@ t_node	**struct_init(void)
 	new->next = NULL;
 	return (&new);
 }
-
+/*
+#include <stdio.h>
 int	main(int argc, char **argv)
 {
 	t_node	**first;
 
-	
+	first = struct_init();
+	printf("%s\n", (*first)->data);
 	return (0);
-}
+}*/
