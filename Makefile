@@ -6,7 +6,7 @@
 #    By: mabenet <mabenet@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/09/24 11:01:54 by mabenet           #+#    #+#              #
-#    Updated: 2024/10/14 16:16:05 by mabenet          ###   ########.fr        #
+#    Updated: 2024/10/15 15:35:24 by mabenet          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,6 +18,7 @@ CFLAGS = -Wall -Werror -Wextra -g
 
 SRC = main.c \
 	treat_input.c \
+	format_check.c \
 
 all: $(NAME)
 

@@ -6,17 +6,17 @@
 /*   By: mabenet <mabenet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/11 09:56:07 by mabenet           #+#    #+#             */
-/*   Updated: 2024/10/14 16:27:54 by mabenet          ###   ########.fr       */
+/*   Updated: 2024/10/15 15:34:35 by mabenet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void start_shell(t_node *arg_list)
+void start_shell(/*t_node *arg_list**/void)
 {
     char *input;
 
-    arg_list = NULL;
+    // arg_list = NULL;
     while (1) {
         // Lire la commande utilisateur avec une invite "Minishell$ "
         input = readline("Minishell$ ");
@@ -42,12 +42,12 @@ void start_shell(t_node *arg_list)
 
 int main(void)
 {
-    t_node *arg_list;
+    // t_node *arg_list;
 
-    arg_list = NULL;
+    // arg_list = NULL;
 
 	// Lancer le shell
-	start_shell(arg_list);
+	start_shell(/*arg_list*/);
 
 	return 0;
 }
