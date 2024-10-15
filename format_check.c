@@ -6,7 +6,7 @@
 /*   By: picarlie <picarlie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 16:06:56 by picarlie          #+#    #+#             */
-/*   Updated: 2024/10/14 20:19:58 by picarlie         ###   ########.fr       */
+/*   Updated: 2024/10/15 15:32:04 by picarlie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,19 +111,3 @@ int	check_empty_redir(char *input)
 	}
 	return(0);
 }
-/*
-#include <stdio.h>
-int main(int argc, char **argv)
-{
-	int i;
-
-	i = 0;
-	printf("%s\n", argv[1]);
-	printf("%d\n", check_empty_redir(argv[1]));
-	while (argv[1][i])
-	{
-		printf("%c\t%d\n",argv[1][i], whitespace_cmd(argv[1], i));
-		i++;
-	}
-	return(0);
-}*/
