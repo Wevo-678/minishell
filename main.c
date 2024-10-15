@@ -6,13 +6,13 @@
 /*   By: mabenet <mabenet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/11 09:56:07 by mabenet           #+#    #+#             */
-/*   Updated: 2024/10/15 15:34:35 by mabenet          ###   ########.fr       */
+/*   Updated: 2024/10/15 18:18:38 by mabenet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void start_shell(/*t_node *arg_list**/void)
+void start_shell(t_main *main_str)
 {
     char *input;
 
@@ -20,7 +20,7 @@ void start_shell(/*t_node *arg_list**/void)
     while (1) {
         // Lire la commande utilisateur avec une invite "Minishell$ "
         input = readline("Minishell$ ");
-        treat_input(input /*arg_list*/);// faire le parsing a partir de la
+        treat_input(input, main_str);// faire le parsing a partir de la
         // Si l'utilisateur entre "exit", quitter le programme
         if (input == NULL || strcmp(input, "exit") == 0) {
             free(input);
@@ -40,14 +40,41 @@ void start_shell(/*t_node *arg_list**/void)
     }
 }
 
-int main(void)
+int main(int ac, char **av, char **envp)
 {
-    // t_node *arg_list;
+    t_main *main_str;
 
-    // arg_list = NULL;
+    av = av; // Cela évite le warning de la variable inutilisée
 
-	// Lancer le shell
-	start_shell(/*arg_list*/);
+    // Vérification des arguments
+    if (ac != 1)
+    {
+        printf("Don't need arguments with Minishell\n");
+        return (1);
+    }
 
-	return 0;
+    // Allocation de mémoire pour la structure
+    main_str = (t_main *)malloc(sizeof(t_main));
+    if (!main_str)
+    {
+        printf("Erreur d'allocation pour main_str\n");
+        return (1);
+    }
+
+    // Copie de l'environnement dans la structure main_str->env
+    if (dup_array(&main_str->env, envp) != 0)
+    {
+        printf("Erreur lors de la copie de l'environnement\n");
+        free(main_str); // Libérer la structure en cas d'échec
+        return (1);
+    }
+
+    // Lancer le shell
+    start_shell(main_str);
+
+    // Libérer l'environnement et la structure avant de quitter
+    free(main_str->env);
+    free(main_str);
+
+    return (0);
 }
