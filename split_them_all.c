@@ -1,3 +1,4 @@
+
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
@@ -13,36 +14,36 @@
 #include "minishell.h"
 
 
-// /* Return the number of pipes in the string */
-// int	pipe_count(char *input)
-// {
-// 	int	i;
-// 	int	pcount;
+/* Return the number of pipes in the string */
+int	pipe_count(char *input)
+{
+	int	i;
+	int	pcount;
 
-// 	i = 0;
-// 	pcount = 0;
-// 	while (input[i])
-// 	{
-// 		if (input[i] == '|')
-// 			if (!between_quotes(input, i))
-// 				pcount++;
-// 		i++;
-// 	}
-// 	return (pcount);
-// }
+	i = 0;
+	pcount = 0;
+	while (input[i])
+	{
+		if (input[i] == '|')
+			if (!between_quotes(input, i))
+				pcount++;
+		i++;
+	}
+	return (pcount);
+}
 
-// t_node	*split_on_pipes(t_node **first_node, char *input)
-// {
-// 	t_node	*new_node;
-// 	t_node	*tmp;
+t_node	*split_on_pipes(t_node **first_node, char *input)
+{
+	t_node	*new_node;
+	t_node	*tmp;
 	
-// 	new_node = (t_node *)malloc(sizeof(t_node));
-// 	if (!new_node)
-// 		return (NULL);
-// 	*first_node = new_node;
-// 	new_node->next = NULL;
-// 	return();
-// }
+	new_node = (t_node *)malloc(sizeof(t_node));
+	if (!new_node)
+		return (NULL);
+	*first_node = new_node;
+	new_node->next = NULL;
+	return();
+}
 
 /*
 int	ft_strlen_cmd(char *str, int i)
