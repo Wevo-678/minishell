@@ -168,7 +168,7 @@ ENVIRONNEMENT DE BASE
 42.XDG_RUNTIME_DIR=/run/user/101566
 43.DOCKER_HOST=unix:///run/user/101566/docker.sock
 44.XDG_DATA_DIRS=/usr/share/ubuntu:/usr/share/gnome:/home/mabenet/.local/share/flatpak/exports/share:/var/lib/flatpak/exports/share:/usr/local/share:/usr/share:/var/lib/snapd/desktop
-45.PATH=/home/mabenet/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin
+/home/mabenet/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin45.PATH=
 46.GDMSESSION=ubuntu
 47.DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/101566/bus
 48.OLDPWD=/home/mabenet/42/minishell

@@ -6,7 +6,7 @@
 /*   By: mabenet <mabenet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/16 10:47:22 by mabenet           #+#    #+#             */
-/*   Updated: 2024/10/16 10:51:34 by mabenet          ###   ########.fr       */
+/*   Updated: 2024/10/16 15:10:49 by mabenet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,28 +68,21 @@ int	ft_strncmp(const char *s1, const char *s2, size_t n)
 	return (0);
 }
 
-void	*ft_realloc(void *ptr, size_t old_size, size_t new_size)
+
+char	*ft_strncpy(char *dest, const char *src, size_t n)
 {
-	char	*new_ptr;
 	size_t	i;
 
-	if (new_size == 0)
-	{
-		free(ptr);
-		return (NULL);
-	}
-	new_ptr = malloc(new_size);
-	if (!new_ptr)
-		return (NULL);
 	i = 0;
-	if (ptr)
+	while (src[i] && i < n)  // Copier les caractères jusqu'à la limite de n ou la fin de src
 	{
-		while (i < old_size && i < new_size)
-		{
-			new_ptr[i] = ((char *)ptr)[i];  // Copier l'ancien contenu
-			i++;
-		}
-		free(ptr);
+		dest[i] = src[i];
+		i++;
 	}
-	return (new_ptr);
+	while (i < n)  // Si la source est plus courte que n, remplir le reste avec des '\0'
+	{
+		dest[i] = '\0';
+		i++;
+	}
+	return (dest);
 }

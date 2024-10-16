@@ -6,7 +6,7 @@
 /*   By: mabenet <mabenet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/15 14:31:06 by mabenet           #+#    #+#             */
-/*   Updated: 2024/10/16 10:32:48 by mabenet          ###   ########.fr       */
+/*   Updated: 2024/10/16 16:50:19 by mabenet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,25 +23,36 @@ int ft_strcmp(const char *s1, const char *s2)
 }
 
 
-// int is_build_in(char *cmd)
-// {
-// 	if (ft_strcmp(cmd, "cd") == 0 || ft_strcmp(cmd, "echo") == 0 || ft_strcmp(cmd, "pwd") == 0 ||
-// 		ft_strcmp(cmd, "export") == 0 || ft_strcmp(cmd, "unset") == 0 || ft_strcmp(cmd, "env") == 0 ||
-// 		ft_strcmp(cmd, "exit") == 0)
-// 		return(1);
-// 	else
-// 		return(0);
-// }
+int is_builtin(char **args/*, char ***envp*/)
+{
+    if (strcmp(args[1], "cd") == 0)
+        return (1);   // Changer de répertoire
+    else if (strcmp(args[1], "echo") == 0)
+        return (1);       // Afficher des chaînes
+    else if (strcmp(args[1], "pwd") == 0)
+        return (1);            // Afficher le chemin actuel
+    else if (strcmp(args[1], "export") == 0)
+        return (1);  // Ajouter/modifier des variables d'environnement
+    else if (strcmp(args[1], "unset") == 0)
+        return (1);   // Supprimer des variables d'environnement
+    else if (strcmp(args[1], "env") == 0)
+        return (1);          // Afficher toutes les variables d'environnement
+    // else if (strcmp(args[0], "exit") == 0)
+    // {
+    //     ft_exit(args);  // Quitter le shell
+    //     return (1);     // On retourne 1 pour signaler l'exécution d'un built-in
+    // }
+    return (0);  // Si ce n'est pas un built-in, on retourne 0
+}
 
-// int script_checking(char **script)
-// {
-// 	if(is_build_in(script[0]) == 1)
-// 		check_build_in(**script);
-// 	else
-// 		// executer avec execve
-// }
-
-// void check_build_in(char **script)
-// {
-
-// }
+void execute_command(char **args/*, char ***envp*/)
+{
+    if (is_builtin(args))  // Si c'est un built-in, il est exécuté
+        return;
+    else
+    {
+        // Si ce n'est pas un built-in, exécuter la commande externe avec execv
+        if (execv("/home/mabenet/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin", args) == -1)
+            perror("execv");
+    }
+}

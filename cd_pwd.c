@@ -6,7 +6,7 @@
 /*   By: mabenet <mabenet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/16 10:43:00 by mabenet           #+#    #+#             */
-/*   Updated: 2024/10/16 11:41:40 by mabenet          ###   ########.fr       */
+/*   Updated: 2024/10/16 16:01:41 by mabenet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,28 +56,42 @@ int	ft_update_pwd(char ***envp)
 
 int ft_cd(char **args, char ***envp)
 {
+ const char *home;
+
     if (!args[1])  // Aucun argument donné, aller dans $HOME
     {
-        const char *home = getenv("HOME");
+        home = getenv("HOME");
         if (!home)
         {
             printf("cd: HOME not set\n");
             return (1);
         }
+        printf("Trying to change directory to HOME: %s\n", home);  // Debug
         if (chdir(home) != 0)
         {
             perror("cd");
             return (1);
         }
     }
-    else if (chdir(args[1]) != 0)  // Essayer de changer vers le répertoire donné
+    else
     {
-        perror("cd");
-        return (1);
+        printf("Trying to change directory to: '%s'\n", args[1]);  // Debug
+        if (chdir(args[1]) != 0)  // Essayer de changer vers le répertoire donné
+        {
+            perror("cd");
+            return (1);
+        }
     }
 
-    // Mettre à jour la variable PWD dans l'environnement
-    return ft_update_pwd(envp);
+    // Vérifier si le répertoire a bien changé et mettre à jour PWD
+    if (ft_update_pwd(envp) != 0)
+    {
+        printf("Error updating PWD\n");
+        return (1);
+    }
+    printf("Updated PWD: %s\n", getenv("PWD"));  // Debug
+
+    return (0);
 }
 
 int	ft_pwd(void)
