@@ -6,21 +6,21 @@
 /*   By: mabenet <mabenet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/15 14:31:06 by mabenet           #+#    #+#             */
-/*   Updated: 2024/10/15 16:52:44 by mabenet          ###   ########.fr       */
+/*   Updated: 2024/10/16 10:32:48 by mabenet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-// #include "minishell.h"
+#include "minishell.h"
 
-// int ft_strcmp(const char *s1, const char *s2)
-// {
-//     while (*s1 && (*s1 == *s2) && *s2) // Tant que les deux caractères sont égaux
-//     {
-//         s1++;
-//         s2++;
-//     }
-//     return (unsigned char)(*s1) - (unsigned char)(*s2);
-// }
+int ft_strcmp(const char *s1, const char *s2)
+{
+    while (*s1 && (*s1 == *s2) && *s2) // Tant que les deux caractères sont égaux
+    {
+        s1++;
+        s2++;
+    }
+    return (unsigned char)(*s1) - (unsigned char)(*s2);
+}
 
 
 // int is_build_in(char *cmd)

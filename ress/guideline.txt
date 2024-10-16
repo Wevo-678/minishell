@@ -1,0 +1,174 @@
+Plan pour Minishell
+
+1. Étude du sujet
+
+Lire attentivement les consignes du projet minishell.
+Comprendre les fonctionnalités à implémenter (gestion des processus, redirections, pipes, variables d'environnement, signaux, etc.).
+Lister toutes les fonctionnalités requises et leurs priorités.
+
+
+1.1 Lire attentivement les consignes du projet
+La première étape est de bien comprendre ce qui est attendu. Chaque projet de l’école 42, notamment minishell, a des règles spécifiques et des fonctionnalités obligatoires. Voici comment vous pouvez aborder cette lecture en détail :
+
+Objectifs principaux : Le projet demande de recréer un shell minimaliste, c’est-à-dire un programme capable de lire des commandes de l’utilisateur, de les exécuter (soit via des commandes internes, soit externes comme ls), et de gérer des concepts de shell comme les redirections, les pipes et les signaux.
+Fonctionnalités obligatoires :
+Commandes intégrées (built-ins) : Vous devez réimplémenter certaines commandes internes comme cd, echo, pwd, etc.
+Redirections et pipes : Il faut pouvoir rediriger les entrées et sorties des commandes (>, <, >>) et exécuter des chaînes de commandes connectées par des pipes (|).
+Gestion des processus : Le shell doit être capable de lancer des processus en arrière-plan (via fork), et de gérer les signaux (par exemple, gérer les interruptions avec Ctrl+C).
+Variables d'environnement : Il faut implémenter la gestion des variables d'environnement comme $HOME, $PATH.
+Fonctionnalités supplémentaires : Certains projets proposent des fonctionnalités bonus comme la gestion des fichiers .bashrc, la gestion de l’historique des commandes, ou encore le support des opérateurs logiques (&&, ||).
+1.2 Décomposer les fonctionnalités requises
+Une fois que vous avez bien saisi les consignes, divisez le projet en sous-tâches spécifiques à chaque fonctionnalité requise. Voici une manière de les catégoriser :
+
+Built-ins : Commandes internes du shell.
+cd : Changer de répertoire.
+echo : Afficher des chaînes de caractères.
+pwd : Afficher le chemin actuel.
+export : Ajouter des variables d'environnement.
+unset : Supprimer des variables d'environnement.
+env : Afficher toutes les variables d'environnement.
+exit : Quitter le shell.
+Gestion des processus :
+Comprendre le rôle de fork(), execve(), waitpid(), et exit() pour créer, exécuter et gérer des processus fils.
+Redirections :
+Comment utiliser les redirections d'entrée et de sortie avec <, >, et >>.
+Pipes :
+Comment enchaîner plusieurs commandes avec |, par exemple : ls | grep minishell.
+Gestion des signaux :
+Comment capturer et réagir aux signaux comme Ctrl+C (SIGINT) ou Ctrl+D (EOF).
+Variables d'environnement :
+Lire et écrire des variables comme $PATH pour localiser les binaires exécutables.
+Cela vous permet de prioriser les différentes parties à implémenter.
+
+1.3 Identifier les points de complexité
+Fork et gestion des processus : Comprendre et bien maîtriser fork() et execve() est essentiel, car ils permettent de créer des processus enfants et de les exécuter.
+Gestion des pipes : S’assurer que vous comprenez bien comment lier plusieurs commandes entre elles avec des pipes, notamment avec pipe() et dup2() pour rediriger les sorties et les entrées.
+Manipulation des redirections : La redirection d’entrée et de sortie (<, >, >>) peut être subtile à mettre en œuvre, surtout avec les fichiers ouverts et la duplication des descripteurs de fichier.
+Gestion des signaux : Savoir gérer les interruptions utilisateur via Ctrl+C ou Ctrl+D de manière appropriée, pour ne pas interrompre le fonctionnement de votre shell, mais juste annuler la commande en cours.
+1.4 Vérifier les critères de performance et les restrictions
+Interdictions : Certains projets peuvent interdire l’utilisation de certaines fonctions, donc vérifiez bien les restrictions.
+Performance : Le shell doit être rapide et gérer les processus sans bloquer ou consommer trop de mémoire.
+Gestion des erreurs : Votre shell doit toujours gérer les erreurs proprement (par exemple, afficher des messages d’erreur clairs si une commande est introuvable ou si une redirection échoue).
+1.5 Créer une checklist
+À la fin de cette étape, vous devez avoir une liste claire de toutes les fonctionnalités à implémenter. Chaque élément de la liste sera ensuite un objectif pour les prochaines étapes de développement.
+
+Voici un exemple de checklist :
+
+ Implémentation de cd
+ Implémentation de echo
+ Implémentation de pwd
+ Implémentation des pipes (|)
+ Implémentation des redirections (<, >, >>)
+ Gestion des signaux (Ctrl+C, Ctrl+D)
+ Gestion des variables d’environnement
+ Gestion des processus (fork, execve, waitpid)
+Cette checklist vous servira de guide tout au long du projet.
+
+
+
+
+
+
+
+2. Découpage du projet en sous-projets
+
+Commandes intégrées (built-ins) : cd, echo, pwd, export, unset, env, exit.
+Gestion des processus :
+Fork, exec, gestion des processus enfants.
+Gestion des statuts de retour.
+Gestion des redirections :
+Redirections d'entrée (<), de sortie (>), et double redirection (>>).
+Pipes (|) :
+Comprendre la gestion des pipes en ligne de commande.
+Mise en place des pipes dans les processus enfants.
+Variables d'environnement :
+Lecture et modification des variables d’environnement ($HOME, $PATH).
+Signaux :
+Gestion des signaux tels que Ctrl+C, Ctrl+D, Ctrl+\.
+
+3. Outils à apprendre et utiliser
+
+Langage C : Revoir la gestion de la mémoire dynamique (allocation, libération).
+Librairies standard C : stdio.h, unistd.h, fcntl.h, signal.h, sys/wait.h, stdlib.h.
+Fonctions système :
+fork(), execve(), pipe(), dup2(), waitpid(), sigaction().
+Gérer les erreurs : Utilisation de perror() ou strerror() pour afficher les erreurs des fonctions systèmes.
+
+4. Organisation et gestion de la collaboration
+
+Répartition des tâches : Chaque membre du binôme peut se concentrer sur une partie (par exemple, l’un sur les commandes internes et l’autre sur les redirections et les pipes).
+Système de versionnage : Utilisez Git pour gérer le code et faciliter la collaboration.
+Créez des branches pour chaque fonctionnalité, puis fusionnez une fois testée.
+Revue de code : Vérifiez mutuellement le code pour éviter les erreurs et s'assurer de la compréhension de chacun.
+
+5. Tests et validation
+
+Écrire des tests unitaires pour chaque fonctionnalité (par exemple, vérification des commandes internes, des pipes, etc.).
+Tester votre shell avec des commandes externes (ls, grep, etc.) et internes.
+Utiliser des outils comme valgrind pour vérifier les fuites de mémoire.
+
+6. Documentation
+
+Documenter chaque partie du code avec des commentaires pour faciliter la compréhension.
+Rédiger un README détaillé expliquant comment utiliser votre minishell, ainsi que les commandes implémentées et celles manquantes (si nécessaire).
+Apprentissage des outils
+Voici quelques ressources utiles :
+
+Programmation système en C : Documentation sur les fonctions comme fork(), pipe(), execve().
+Gestion des signaux en C : Documentation sur sigaction() et autres fonctions pour gérer les signaux.
+Tutoriels sur les shells : Comprendre le fonctionnement de bash pour s'inspirer.
+En suivant ce plan et en vous répartissant bien les tâches, vous devriez être en mesure de gérer minishell efficacement.
+
+
+ENVIRONNEMENT DE BASE
+
+
+0.SHELL=/bin/zsh
+1.SESSION_MANAGER=local/c2r8p8.42perpignan.fr:@/tmp/.ICE-unix/458056,unix/c2r8p8.42perpignan.fr:/tmp/.ICE-unix/458056
+2.QT_ACCESSIBILITY=1
+3.COLORTERM=truecolor
+4.XDG_CONFIG_DIRS=/etc/xdg/xdg-ubuntu:/etc/xdg
+5.SSH_AGENT_LAUNCHER=gnome-keyring
+6.XDG_SESSION_PATH=/org/freedesktop/DisplayManager/Session3
+7.XDG_MENU_PREFIX=gnome-
+8.GNOME_DESKTOP_SESSION_ID=this-is-deprecated
+9.GTK_IM_MODULE=ibus
+10.LANGUAGE=en
+11.SSH_AUTH_SOCK=/run/user/101566/keyring/ssh
+12.XMODIFIERS=@im=ibus
+13.DESKTOP_SESSION=ubuntu
+14.FT_HOOK_NAME=login-user
+15.GTK_MODULES=gail:atk-bridge
+16.FT_HOOK_PATHNAME=login-user.d
+17.PWD=/home/mabenet/42/minishell/v2
+18.KRB5CCNAME=FILE:/tmp/krb5cc_101566_GBZU3n
+19.LOGNAME=mabenet
+20.XDG_SESSION_DESKTOP=ubuntu
+21.XDG_SESSION_TYPE=x11
+22.GPG_AGENT_INFO=/run/user/101566/gnupg/S.gpg-agent:0:1
+23.SYSTEMD_EXEC_PID=458075
+24.XAUTHORITY=/home/mabenet/.Xauthority
+25.XDG_GREETER_DATA_DIR=/var/lib/lightdm-data/mabenet
+26.GDM_LANG=en
+27.HOME=/home/mabenet
+28.LANG=en_US.UTF-8
+29.LS_COLORS=rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=00:su=37;41:sg=30;43:ca=30;41:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arc=01;31:*.arj=01;31:*.taz=01;31:*.lha=01;31:*.lz4=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.tzo=01;31:*.t7z=01;31:*.zip=01;31:*.z=01;31:*.dz=01;31:*.gz=01;31:*.lrz=01;31:*.lz=01;31:*.lzo=01;31:*.xz=01;31:*.zst=01;31:*.tzst=01;31:*.bz2=01;31:*.bz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.war=01;31:*.ear=01;31:*.sar=01;31:*.rar=01;31:*.alz=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.cab=01;31:*.wim=01;31:*.swm=01;31:*.dwm=01;31:*.esd=01;31:*.jpg=01;35:*.jpeg=01;35:*.mjpg=01;35:*.mjpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.webm=01;35:*.webp=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=00;36:*.au=00;36:*.flac=00;36:*.m4a=00;36:*.mid=00;36:*.midi=00;36:*.mka=00;36:*.mp3=00;36:*.mpc=00;36:*.ogg=00;36:*.ra=00;36:*.wav=00;36:*.oga=00;36:*.opus=00;36:*.spx=00;36:*.xspf=00;36:
+30.XDG_CURRENT_DESKTOP=ubuntu:GNOME
+31.VTE_VERSION=6800
+32.XDG_SEAT_PATH=/org/freedesktop/DisplayManager/Seat0
+33.GNOME_TERMINAL_SCREEN=/org/gnome/Terminal/screen/49b83b06_e4ab_4f54_9075_a5a845c2818d
+34.XDG_SESSION_CLASS=user
+35.TERM=xterm-256color
+36.LIBVIRT_DEFAULT_URI=qemu:///system
+37.USER=mabenet
+38.GNOME_TERMINAL_SERVICE=:1.347
+39.DISPLAY=:0
+40.SHLVL=2
+41.QT_IM_MODULE=ibus
+42.XDG_RUNTIME_DIR=/run/user/101566
+43.DOCKER_HOST=unix:///run/user/101566/docker.sock
+44.XDG_DATA_DIRS=/usr/share/ubuntu:/usr/share/gnome:/home/mabenet/.local/share/flatpak/exports/share:/var/lib/flatpak/exports/share:/usr/local/share:/usr/share:/var/lib/snapd/desktop
+45.PATH=/home/mabenet/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin
+46.GDMSESSION=ubuntu
+47.DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/101566/bus
+48.OLDPWD=/home/mabenet/42/minishell

@@ -1,0 +1,159 @@
+Étapes pour collaborer efficacement avec Git
+1. Création du dépôt Git
+Le dépôt Git central est la source commune pour tous les membres de l'équipe. Il est souvent hébergé sur une plateforme comme GitHub, GitLab, ou Bitbucket.
+
+Si tu n’as pas encore de dépôt, crée-en un via :
+
+bash
+git init
+
+Si le dépôt existe déjà (par exemple sur GitHub), chaque membre doit le cloner avec la commande :
+
+bash
+git clone https://github.com/Wevo-678/minishell.git
+
+2. Création d'une branche pour chaque fonctionnalité
+Lorsqu'on travaille à plusieurs, il est courant que chacun travaille sur une fonctionnalité spécifique, isolée sur sa propre branche. Cela évite que le code de chacun interfère avec celui des autres.
+
+Créer une branche pour une nouvelle fonctionnalité :
+
+bash
+git checkout -b nom-de-branche
+
+Par exemple :
+
+bash
+git checkout -b feature-parser
+
+Cela crée et te déplace dans une nouvelle branche nommée feature-parser.
+
+3. Travailler sur une branche
+
+Chaque membre peut alors travailler sur sa branche sans affecter la branche principale (souvent nommée main ou master). Pendant le développement :
+
+Ajouter les fichiers modifiés :
+
+bash
+git add fichier_modifie.c
+
+Faire un commit avec un message décrivant le changement :
+
+bash
+git commit -m "Ajout du parser pour les redirections"
+
+4. Pousser les changements sur la branche distante
+Une fois que les modifications sont prêtes à être partagées avec l’équipe :
+
+Pousser la branche locale vers le dépôt distant :
+
+bash
+git push origin nom-de-branche
+
+Par exemple :
+bash
+git push origin feature-parser
+
+5. Collaborer via les pull requests / merge requests
+Sur des plateformes comme GitHub ou GitLab, il est courant de demander une pull request (ou merge request) lorsque tu veux intégrer ton travail dans la branche principale (souvent main ou master).
+
+Créer une pull request : Une fois les changements poussés, tu peux ouvrir une pull request pour que tes coéquipiers puissent réviser ton travail avant de l'intégrer à la branche principale.
+Revue de code : Les autres membres de l'équipe peuvent commenter, suggérer des modifications ou approuver le code.
+Fusion : Une fois que la pull request est approuvée, elle peut être fusionnée dans la branche principale.
+
+6. Mettre à jour ta branche locale avec les changements du dépôt central
+Avant d’intégrer ton travail à la branche principale, assure-toi que ta branche est à jour avec les dernières modifications. Si quelqu’un a déjà fusionné des changements dans main, tu dois d'abord les récupérer et les intégrer à ta branche.
+
+Récupérer les dernières modifications de la branche principale :
+
+bash
+git checkout main
+git pull origin main
+
+Fusionner les dernières modifications dans ta branche : Si tu travailles sur feature-parser et que main a évolué :
+
+bash
+git checkout feature-parser
+git merge main
+
+Si des conflits apparaissent, tu devras les résoudre manuellement, puis faire un commit une fois résolus.
+
+7. Fusion des branches
+Une fois que le travail sur une fonctionnalité est terminé et que toutes les modifications sont à jour avec la branche principale, tu peux fusionner ta branche dans main.
+
+Fusionner localement : Si tu préfères fusionner directement depuis ta machine après avoir synchronisé :
+bash
+git checkout main
+git merge feature-parser
+
+Ensuite, pousse les modifications fusionnées :
+
+bash
+git push origin main
+
+8. Suppression des branches
+Après avoir fusionné une branche et si elle n’est plus nécessaire, il est recommandé de la supprimer pour garder le dépôt propre.
+
+Supprimer une branche locale :
+
+bash
+Copy code
+git branch -d nom-de-branche
+
+Supprimer une branche distante :
+
+bash
+Copy code
+git push origin --delete nom-de-branche
+
+9. Bonne pratique : pull souvent !
+Pour éviter de travailler sur une branche trop obsolète par rapport à la branche principale (ou par rapport au travail des autres), il est recommandé de pull régulièrement les dernières modifications avant de commencer ou de continuer à travailler :
+
+bash
+Copy code
+git pull origin main
+Cela permet de réduire les risques de conflits majeurs au moment de la fusion.
+
+Résumé des commandes Git pour le travail en équipe :
+Cloner le dépôt :
+
+bash
+Copy code
+git clone https://github.com/nom-utilisateur/nom-depot.git
+Créer et se déplacer sur une branche :
+
+bash
+Copy code
+git checkout -b nom-de-branche
+Commits et push :
+
+Ajouter les fichiers modifiés :
+
+bash
+git add fichier_modifie.c
+
+Faire un commit :
+
+bash
+git commit -m "Message de description"
+
+Pousser la branche vers le dépôt distant :
+
+bash
+git push origin nom-de-branche
+
+Fusionner les changements depuis la branche principale :
+
+bash
+git merge main
+
+Fusionner une branche dans la branche principale :
+
+bash
+git checkout main
+git merge nom-de-branche
+
+Pull des dernières modifications :
+
+bash
+Copy code
+git pull origin main

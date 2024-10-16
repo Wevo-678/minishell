@@ -6,7 +6,7 @@
 /*   By: mabenet <mabenet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/11 09:56:07 by mabenet           #+#    #+#             */
-/*   Updated: 2024/10/15 18:18:38 by mabenet          ###   ########.fr       */
+/*   Updated: 2024/10/16 11:12:22 by mabenet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ int main(int ac, char **av, char **envp)
 {
     t_main *main_str;
 
-    av = av; // Cela évite le warning de la variable inutilisée
+    (void)av; // Cela évite le warning de la variable inutilisée
 
     // Vérification des arguments
     if (ac != 1)

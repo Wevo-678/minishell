@@ -6,7 +6,7 @@
 /*   By: mabenet <mabenet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/11 11:06:27 by mabenet           #+#    #+#             */
-/*   Updated: 2024/10/15 17:38:08 by mabenet          ###   ########.fr       */
+/*   Updated: 2024/10/16 11:30:25 by mabenet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,8 +46,12 @@ void treat_input(char *input ,t_main *main_str)
 		printf("minishell: unclosed quote error.\n");
 	else if (check_empty_pipe(input) == 1 || check_empty_redir(input) == 1)
 		printf("minishell: syntax error near unexpected token\n");
-	else if(strcmp(input, "env") == 0)
+	else if(ft_strcmp(input, "env") == 0)
 		ft_print_env(main_str->env);
+	else if(ft_strcmp(input, "cd") == 0)
+		ft_cd(&input ,&main_str->env);
+	else if(ft_strcmp(input, "pwd") == 0)
+		ft_pwd();
 
 
 	// ft_token(input, arg_list);

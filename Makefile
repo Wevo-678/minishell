@@ -6,7 +6,7 @@
 #    By: mabenet <mabenet@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/09/24 11:01:54 by mabenet           #+#    #+#              #
-#    Updated: 2024/10/15 17:32:30 by mabenet          ###   ########.fr        #
+#    Updated: 2024/10/16 11:16:21 by mabenet          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,12 +16,15 @@ CC = cc
 
 CFLAGS = -Wall -Werror -Wextra -g
 
-SRC = main.c \
-	treat_input.c \
-	format_check.c \
+SRC = cd_pwd.c \
 	cheking_args.c \
-	split_them_all.c \
 	env_tools.c \
+	format_check.c \
+	main.c \
+	split_them_all.c \
+	str_utils.c \
+	struct_init.c \
+	treat_input.c \
 
 all: $(NAME)
 
