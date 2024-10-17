@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mabenet <mabenet@student.42.fr>            +#+  +:+       +#+        */
+/*   By: picarlie <picarlie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/07 08:25:40 by mabenet           #+#    #+#             */
-/*   Updated: 2024/10/16 16:43:52 by mabenet          ###   ########.fr       */
+/*   Updated: 2024/10/17 20:41:04 by picarlie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,8 +80,8 @@ int	ft_strncmp(const char *s1, const char *s2, size_t n);
 char *ft_strncpy(char *dest, const char *src, size_t n);
 
 //struct_init
-void	append_node(t_node **first);
-t_node	**struct_init(void);
+void	*append_node(t_node **first);
+t_node	**struct_init(t_node **first);
 
 //split&node
 char **ft_split(char const *s, char c);

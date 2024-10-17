@@ -6,7 +6,7 @@
 /*   By: picarlie <picarlie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 16:06:56 by picarlie          #+#    #+#             */
-/*   Updated: 2024/10/15 15:32:04 by picarlie         ###   ########.fr       */
+/*   Updated: 2024/10/17 22:17:12 by picarlie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,12 +44,14 @@ int	between_quotes(char *str, int i)
 /* Check if there is only whitespace from index i */
 /* to next pipe or redirection */
 /* Return 1 if true */
-/* Return 0 if there is other characters */
+/* Return 0 if there are other characters */
 int	whitespace_cmd(char *str, int i)
 {
 	int	j;
 	
 	j = i + 1;
+	if (!i)
+		j--;
 	while (str[j] && str[j] != '<' && str[j] != '>' && str[j] != '|')
 	{
 		if (str[j] < 9)

@@ -6,7 +6,7 @@
 /*   By: picarlie <picarlie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/15 17:40:26 by picarlie          #+#    #+#             */
-/*   Updated: 2024/10/16 18:15:55 by picarlie         ###   ########.fr       */
+/*   Updated: 2024/10/17 16:27:31 by picarlie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,8 @@ typedef struct s_node
     struct s_node *next;
 } t_node;
 
-
+/* Add a node at then end of the LC */
+/* Return NULL if malloc fails */
 void	*append_node(t_node **first)
 {
 	t_node	*new;
@@ -40,8 +41,6 @@ void	*append_node(t_node **first)
 		return (NULL);
 	new->next = NULL;
 	tmp->next = new;
-	tmp->test = 10;
-	new->test = 10;
 }
 /* Initialize the first node of the linked chain */
 /* Return NULL if malloc fails */
@@ -54,8 +53,9 @@ void *struct_init(t_node **first)
 		return (NULL);
 	*first = new;
 	(*first)->next = NULL;
-	(*first)->test = 10;
 }
+
+
 
 #include <stdio.h>
 int	main(int argc, char **argv)

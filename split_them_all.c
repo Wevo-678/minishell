@@ -32,34 +32,69 @@ int	pipe_count(char *input)
 	return (pcount);
 }
 
-t_node	*split_on_pipes(t_node **first_node, char *input)
-{
-	t_node	*new_node;
-	t_node	*tmp;
-	
-	new_node = (t_node *)malloc(sizeof(t_node));
-	if (!new_node)
-		return (NULL);
-	*first_node = new_node;
-	new_node->next = NULL;
-	return();
-}
-
-/*
-int	ft_strlen_cmd(char *str, int i)
+int	ft_strlen_cmd(char **str, int i)
 {
 	int	j;
-	int	white_count;
 
 	j = 0;
 	while(str[i] && str[i] != '|')
 	{
-		if (str[i] == ' ')
-			white_count++;
-		if (str[i] >= 9 && str[i] <= 13)
-			white_count++;
+		if (!j)
+		{
+			while (str[i] == ' ' && !between_quotes(str, i))
+				i++;
+		}
 		j++;
 		i++;
 	}
 	return(j);
-}*/
+}
+
+int	number_cmd(char *str, int i)
+{
+	int count_cmd;
+	int new_cmd;
+
+	count_cmd = 1;
+	new_cmd = 1;
+	while (str[i] && str[i] != '|')
+	{
+		if (str[i] == ' ')
+		{
+			if (!new_cmd)
+			{
+				new_cmd++;
+				count_cmd++;
+			}
+			while (str[i] == ' ' && !between_quotes(str, i))
+				i++;
+		}
+		if (str[i] != ' ')
+			new_cmd = 0;
+		i++;
+	}
+	return ();
+}
+
+t_node	*split_on_pipes(t_node **first, char *input)
+{
+	int	pcount;
+	int	i = 0;
+
+	pcount = pipe_count(input);
+	if ((t_node *)struct_init(first) == NULL)
+		return (NULL);
+	while (i < pcount)
+	{
+		if (i)
+			if ((void *)append_node(first) == NULL)
+				return (NULL);
+		i++;
+	}
+	while (i)
+	{
+		fill_char(first, input);
+		i--;
+	}
+	return();
+}
