@@ -6,7 +6,7 @@
 /*   By: mabenet <mabenet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/11 11:06:27 by mabenet           #+#    #+#             */
-/*   Updated: 2024/10/16 16:41:40 by mabenet          ###   ########.fr       */
+/*   Updated: 2024/10/18 13:54:02 by mabenet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ int unclosed_quote_check(char *s)
 }
 
 
-void treat_input(char *input /*,t_main *main_str*/)
+void treat_input(char *input ,t_main *main_str)
 {
 	if (unclosed_quote_check(input) == 0)
 		printf("minishell: unclosed quote error.\n");

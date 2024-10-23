@@ -6,7 +6,7 @@
 /*   By: mabenet <mabenet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/11 09:56:07 by mabenet           #+#    #+#             */
-/*   Updated: 2024/10/16 16:43:30 by mabenet          ###   ########.fr       */
+/*   Updated: 2024/10/18 13:53:27 by mabenet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@
 
 
 
-void start_shell(/*t_main *main_str,*/ char **av)
+void start_shell(t_main *main_str)
 {
     char *input;
 
@@ -71,8 +71,8 @@ void start_shell(/*t_main *main_str,*/ char **av)
         // Ajouter la commande à l'historique
         if (*input)
             add_history(input);
-        treat_input(input/*, main_str*/);// premier level de parsing + allocation de la liste chainee
-        execute_command(av/*, &main_str->env*/);
+        treat_input(input, main_str);// premier level de parsing + allocation de la liste chainee
+        // execute_command( &main_str->env);
         // Libérer la mémoire allouée par readline
         free(input);
     }
@@ -83,8 +83,13 @@ void start_shell(/*t_main *main_str,*/ char **av)
 int main(int ac, char **av, char **envp)
 {
     t_main *main_str;
-    if (ac == 1)
-        return(0);
+    (void)av;
+    
+    if (ac != 1)
+    {
+        printf("no need argument");
+        return (0);
+    }
     // Allocation de mémoire pour la structure
     main_str = (t_main *)malloc(sizeof(t_main));
     if (!main_str)
@@ -102,7 +107,7 @@ int main(int ac, char **av, char **envp)
     }
 
     // Lancer le shell
-    start_shell(/*main_str,*/ av);
+    start_shell(main_str);
 
     // Libérer l'environnement et la structure avant de quitter
     free(main_str->env);

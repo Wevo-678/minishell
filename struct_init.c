@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   struct_init.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: picarlie <picarlie@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mabenet <mabenet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/15 17:40:26 by picarlie          #+#    #+#             */
-/*   Updated: 2024/10/17 16:27:31 by picarlie         ###   ########.fr       */
+/*   Updated: 2024/10/18 13:45:15 by mabenet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,48 +28,48 @@ typedef struct s_node
 
 /* Add a node at then end of the LC */
 /* Return NULL if malloc fails */
-void	*append_node(t_node **first)
-{
-	t_node	*new;
-	t_node	*tmp;
+// void	*append_node(t_node **first)
+// {
+// 	t_node	*new;
+// 	t_node	*tmp;
 
-	tmp = *first;
-	while (tmp->next)
-		tmp = tmp->next;
-	new = (t_node *)malloc(sizeof(t_node));
-	if (!new)
-		return (NULL);
-	new->next = NULL;
-	tmp->next = new;
-}
-/* Initialize the first node of the linked chain */
-/* Return NULL if malloc fails */
-void *struct_init(t_node **first)
-{
-	t_node	*new;
+// 	tmp = *first;
+// 	while (tmp->next)
+// 		tmp = tmp->next;
+// 	new = (t_node *)malloc(sizeof(t_node));
+// 	if (!new)
+// 		return (NULL);
+// 	new->next = NULL;
+// 	tmp->next = new;
+// }
+// /* Initialize the first node of the linked chain */
+// /* Return NULL if malloc fails */
+// void *struct_init(t_node **first)
+// {
+// 	t_node	*new;
 	
-	new = (t_node *)malloc(sizeof(t_node));
-	if (!new)
-		return (NULL);
-	*first = new;
-	(*first)->next = NULL;
-}
+// 	new = (t_node *)malloc(sizeof(t_node));
+// 	if (!new)
+// 		return (NULL);
+// 	*first = new;
+// 	(*first)->next = NULL;
+// }
 
 
 
-#include <stdio.h>
-int	main(int argc, char **argv)
-{
-	t_node	*first;
-	t_node	*tmp;
+// #include <stdio.h>
+// int	main(int argc, char **argv)
+// {
+// 	t_node	*first;
+// 	t_node	*tmp;
 
-	first = struct_init(&first);
-	append_node(&first);
-	tmp = first;
-	while (tmp)
-	{
-		printf("%d\n", tmp->test);
-		tmp = tmp->next;
-	}
-	return (0);
-}
+// 	first = struct_init(&first);
+// 	append_node(&first);
+// 	tmp = first;
+// 	while (tmp)
+// 	{
+// 		printf("%d\n", tmp->test);
+// 		tmp = tmp->next;
+// 	}
+// 	return (0);
+// }

@@ -1,48 +1,37 @@
-# **************************************************************************** #
-#                                                                              #
-#                                                         :::      ::::::::    #
-#    Makefile                                           :+:      :+:    :+:    #
-#                                                     +:+ +:+         +:+      #
-#    By: mabenet <mabenet@student.42.fr>            +#+  +:+       +#+         #
-#                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2024/09/24 11:01:54 by mabenet           #+#    #+#              #
-#    Updated: 2024/10/16 15:06:30 by mabenet          ###   ########.fr        #
-#                                                                              #
-# **************************************************************************** #
 
-NAME = Minishell
+NAME = minishell
+DIR_SRC = src/
+DIR_OBJ = obj/
+CC = gcc
+CFLAGS = -Wall -Wextra -Werror -ggdb
+LDFLAGS = -lreadline
+RM = rm -f
 
-CC = cc
+SRCS =  $(wildcard $(DIR_SRC)*.c) \
+		$(wildcard $(DIR_SRC)/exec/*.c) \
+		$(wildcard $(DIR_SRC)/builtins/*.c) \
+		$(wildcard $(DIR_SRC)/env/*.c) \
+		$(wildcard $(DIR_SRC)/parsing/*.c) \
+		$(wildcard $(DIR_SRC)/utils/*.c) \
+		$(wildcard $(DIR_SRC)/temp/*.c) \
 
-CFLAGS = -Wall -Werror -Wextra -g
-
-SRC = cd_pwd.c \
-	cheking_args.c \
-	array_utils.c \
-	format_check.c \
-	main.c \
-	split_them_all.c \
-	str_utils.c \
-	struct_init.c \
-	treat_input.c \
-	split_node.c \
+OBJS = $(SRCS:$(DIR_SRC)%.c=$(DIR_OBJ)%.o)
 
 all: $(NAME)
+	@clear
 
-$(NAME): $(SRC:.c=.o)
-	$(CC) $(CFLAGS) $(SRC) -o $(NAME) -lreadline -lhistory -lm
-	echo "Ready to minishell"
+$(DIR_OBJ)%.o: $(DIR_SRC)%.c
+	@mkdir -p $(dir $@)
+	$(CC) $(CFLAGS) -c $< -o $@
+
+
+$(NAME): $(OBJS)
+	$(CC) $(CFLAGS) -o $(NAME) $(OBJS) $(LDFLAGS)
 
 clean:
-	rm -rf $(SRC:.c=.o)
-	echo "OBJ deleted"
+	rm -rf $(DIR_OBJ)
 
 fclean: clean
-	rm -rf $(NAME)
-	echo "$(NAME) deleted"
+	$(RM) $(NAME)
 
 re: fclean all
-
-.PHONY: all, clean, fclean, re, bonus
-
-.SILENT:
