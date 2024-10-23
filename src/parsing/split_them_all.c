@@ -11,7 +11,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-//#include "../../includes/minishell.h"
+#include "../../includes/minishell.h"
 
 /* Return the number of pipes in the string */
 int	pipe_count(char *input)

@@ -1,15 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: mabenet <mabenet@student.42.fr>            +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/07 08:25:40 by mabenet           #+#    #+#             */
-/*   Updated: 2024/10/22 10:36:25 by mabenet          ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #ifndef MINISHELL_H
 # define MINISHELL_H
 
@@ -25,8 +13,9 @@
 
 typedef struct s_node
 {
-    char **data;            // Pointeur vers un tableau de chaînes de caractères
-    struct s_node *next;    // Pointeur vers le prochain noeud de la liste
+    char    *data_dup;
+    char    **data;            // Pointeur vers un tableau de chaînes de caractères
+    struct  s_node *next;    // Pointeur vers le prochain noeud de la liste
 } t_node;
 
 typedef struct s_main
@@ -91,8 +80,14 @@ char *ft_strncpy(char *dest, const char *src, size_t n);
 
 //struct_init
 void	*append_node(t_node **first);
-t_node	**struct_init(t_node **first);
+void    *struct_init(t_node **first);
 
+//dup_on_pipes
+int	skip_space_last(char *input, int start, int end);
+int skip_space_first(char *input, int start, int end);
+void	fill_dup(t_node **node, char *input, int start, int end);
+void	*str_dup(t_node **first, char *input, int start, int end);
+void    *dup_on_pipes(t_node **first, char *input);
 
 //treat_input
 
