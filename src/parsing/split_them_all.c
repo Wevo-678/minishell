@@ -13,89 +13,28 @@
 
 #include "../../includes/minishell.h"
 
-/* Return the number of pipes in the string */
-int	pipe_count(char *input)
+
+		// if (input[i + j] == '\"' && !between_quotes(input, i + j))
+		// 	return (j + 1);
+		// if (input[i + j] == '\'' && !between_quotes(input, i + j))
+		// 	return (j + 1);
+		// if (input[i + j] == '<' && !between_quotes(input, i + j))
+		// {
+		// 	if (input[i + j + 1] == '<' && !j)
+		// 		return (2);
+
+		// }
+		// 	return (j);
+		// if (input[i + j] == '>' && !between_quotes(input, i + j))
+		// 	return (j);
+int main(int argc, char **argv)
 {
-	int	i;
-	int	pcount;
-
-	i = 0;
-	pcount = 0;
-	while (input[i])
-	{
-		if (input[i] == '|')
-			if (!between_quotes(input, i))
-				pcount++;
-		i++;
-	}
-	return (pcount);
-}
-/*
-int	ft_strlen_cmd(char **str, int i)
-{
-	int	j;
-
-	j = 0;
-	while(str[i] && str[i] != '|')
-	{
-		if (!j)
-		{
-			while (str[i] == ' ' && !between_quotes(str, i))
-				i++;
-		}
-		j++;
-		i++;
-	}
-	return(j);
-}
-
-//en cours
-int	number_cmd(char *str, int i)
-{
-	int count_cmd;
-	int new_cmd;
-
-	count_cmd = 1;
-	new_cmd = 1;
-	while (str[i] && str[i] != '|')
-	{
-		if (str[i] == ' ')
-		{
-			if (!new_cmd)
-			{
-				new_cmd++;
-				count_cmd++;
-			}
-			while (str[i] == ' ' && !between_quotes(str, i))
-				i++;
-		}
-		if (str[i] != ' ')
-			new_cmd = 0;
-		i++;
-	}
+	printf("str : %s\n", argv[1]);
+	printf("len : %d\n", cmd_len(argv[1], 0));
 	return (0);
 }
-//en cours
-t_node	*split_on_pipes(t_node **first, char *input)
-{
-	int	pcount;
-	int	i = 0;
 
-	pcount = pipe_count(input);
-	if ((t_node *)struct_init(first) == NULL)
-		return (NULL);
-	while (i < pcount)
-	{
-		if (i)
-			if ((void *)append_node(first) == NULL)
-				return (NULL);
-		i++;
-	}
-	while (i)
-	{
-		fill_char(first, input);
-		i--;
-	}
-	return(*first);
-}
-*/
+/* /!\/!\/!\/!\/!\ A faire echo"test" a remplacer par echotest
+ie : enlever les quotes  et remplacer les variables si necessaire
+selon les quotes*/
+/* /!\/!\/!\/!\/!\ A faire free les node->data_dup */
