@@ -14,12 +14,15 @@
 		// 	return (j);
 		// if (input[i + j] == '>' && !between_quotes(input, i + j))
 		// 	return (j);
-int main(int argc, char **argv)
-{
-	printf("str : %s\n", argv[1]);
-	printf("len : %d\n", cmd_len(argv[1], 0));
-	return (0);
-}
+
+
+		
+// int main(int argc, char **argv)
+// {
+// 	printf("str : %s\n", argv[1]);
+// 	printf("len : %d\n", cmd_len(argv[1], 0));
+// 	return (0);
+// }
 
 /* /!\/!\/!\/!\/!\ A faire echo"test" a remplacer par echotest
 ie : enlever les quotes  et remplacer les variables si necessaire
