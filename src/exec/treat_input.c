@@ -28,13 +28,13 @@ int unclosed_quote_check(char *s)
 }
 
 
-// void treat_input(char *input ,t_main *main_str)
-// {
-// 	if (unclosed_quote_check(input) == 0)
-// 		printf("minishell: unclosed quote error.\n");
-// 	else if (check_empty_pipe(input) == 1 || check_empty_redir(input) == 1)
-// 		printf("minishell: syntax error near unexpected token\n");
-// 	// else
-// 	// 	split on pipe
+void treat_input(char *input ,t_main *main_str)
+{
+	if (unclosed_quote_check(input) == 0)
+		printf("minishell: unclosed quote error.\n");
+	else if (check_empty_pipe(input) == 1 || check_empty_redir(input) == 1)
+		printf("minishell: syntax error near unexpected token\n");
+	else if (ft_strcmp(input, "print") == 0)
+		ft_print_env(main_str->env);
 
-// }
+}
