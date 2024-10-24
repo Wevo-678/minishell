@@ -60,4 +60,40 @@ char	*ft_strdup(const char *s)
 	return (dup);
 }
 
+int	ft_sprintf(char *buffer, const char *format, ...)
+{
+	va_list	args;
+	int		i;
+	int		j;
+	char	*str;
+
+	va_start(args, format);
+	i = 0;
+	j = 0;
+	while (format[i])
+	{
+		if (format[i] == '%' && format[i + 1] == 's' && i++)
+		{
+			str = va_arg(args, char *);
+			while (*str)
+				buffer[j++] = *str++;
+		}
+		else if (format[i] == '%' && format[i + 1] == 'd' && i++)
+		{
+			str = ft_itoa(va_arg(args, int));
+			if (!str)
+				return (-1);
+			while (*str)
+				buffer[j++] = *str++;
+			free(str);
+		}
+		else
+			buffer[j++] = format[i];
+		i++;
+	}
+	buffer[j] = '\0';
+	va_end(args);
+	return (j);
+}
+
 

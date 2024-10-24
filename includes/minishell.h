@@ -8,6 +8,7 @@
 # include <stdbool.h>
 # include <signal.h>
 # include <string.h>
+# include <stdarg.h>
 # include <readline/readline.h>
 # include <readline/history.h>
 
@@ -46,6 +47,16 @@ int	ft_env(char **envp);
 int	ft_increment_shlvl(char ***envp);
 int	ft_echo(char **args);
 
+//env
+char *get_env_value(char **envp, const char *name);
+int set_env_value(char ***envp, const char *name, const char *value);
+int	copy_value(char *expanded, int j, char **envp, char *var_name);
+int	copy_variable(char *expanded, char *input, int *i, char **envp);
+char	*expand_variables(char *input, char **envp);
+
+//env_2
+void ft_test(char ***env);
+
 
 //format_check
 int	between_quotes(char *str, int i);
@@ -74,6 +85,7 @@ int	cmd_len(char *input, int i);
 char **ft_split(char const *s, char c);
 int	ft_strncmp(const char *s1, const char *s2, size_t n);
 char	*ft_strdup(const char *s);
+int	ft_sprintf(char *buffer, const char *format, ...);
 
 //str_utils
 size_t	ft_strlen(const char *str);
@@ -94,7 +106,7 @@ void    *dup_on_pipes(t_node **first, char *input);
 
 //treat_input
 
-// void treat_input(char *input, t_main *main_str);
+void treat_input(char *input, t_main *main_str);
 int parse_input(char *input);
 
 //unset_export

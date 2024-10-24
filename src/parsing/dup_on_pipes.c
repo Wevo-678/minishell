@@ -52,56 +52,56 @@ void	fill_dup(t_node **node, char *input, int start, int end)
 /* Malloc all the nodes */
 /* Call the fill function */
 /* Return NULL if malloc fails */
-void	*str_dup(t_node **first, char *input, int start, int end)
-{
-	t_node	*end_list;
+// void	*str_dup(t_node **first, char *input, int start, int end)
+// {
+// 	t_node	*end_list;
 
-	if (!start)
-	{
-		if(!struct_init(first))
-			return (NULL);
-		end_list = (*first);
-	}
-	else
-	{
-		end_list = (*first);
-		if (!append_node(first))
-			return (NULL);
-		while (end_list->next)
-			end_list = end_list->next;
-	}
-	end_list->data_dup = (char *)malloc(sizeof(char) * (end - start + 1));
-	if (!end_list->data_dup)
-		return (NULL);
-	fill_dup(&end_list, input, start, end);
-}
+// 	if (!start)
+// 	{
+// 		if(!struct_init(first))
+// 			return (NULL);
+// 		end_list = (*first);
+// 	}
+// 	else
+// 	{
+// 		end_list = (*first);
+// 		if (!append_node(first))
+// 			return (NULL);
+// 		while (end_list->next)
+// 			end_list = end_list->next;
+// 	}
+// 	end_list->data_dup = (char *)malloc(sizeof(char) * (end - start + 1));
+// 	if (!end_list->data_dup)
+// 		return (NULL);
+// 	fill_dup(&end_list, input, start, end);
+// }
 
 /* Count the number of nodes needed */
 /* Call the dup function */
 /* Return NULL if malloc fails */
-void	*dup_on_pipes(t_node **first, char *input)
-{
-	t_node	*new;
-	int	nb_dup;
-	int	nb_pipes;
-	int	old_pipe;
-	int	i;
+// void	*dup_on_pipes(t_node **first, char *input)
+// {
+// 	t_node	*new;
+// 	int	nb_dup;
+// 	int	nb_pipes;
+// 	int	old_pipe;
+// 	int	i;
 	
-	i = 0;
-	nb_dup = 0;
-	nb_pipes = pipe_count(input);
-	while (nb_dup <= nb_pipes)
-	{
-		old_pipe = i;
-		while (input[i] && (input[i] != '|' 
-				|| (input[i] == '|' && between_quotes(input, i))))
-			i++;
-		if (!str_dup(first, input, old_pipe, i))
-			return (NULL);
-		nb_dup++;
-		i++;
-	}
-}
+// 	i = 0;
+// 	nb_dup = 0;
+// 	nb_pipes = pipe_count(input);
+// 	while (nb_dup <= nb_pipes)
+// 	{
+// 		old_pipe = i;
+// 		while (input[i] && (input[i] != '|' 
+// 				|| (input[i] == '|' && between_quotes(input, i))))
+// 			i++;
+// 		if (!str_dup(first, input, old_pipe, i))
+// 			return (NULL);
+// 		nb_dup++;
+// 		i++;
+// 	}
+// }
 
 /*
 #include <stdio.h>
