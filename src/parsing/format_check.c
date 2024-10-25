@@ -51,8 +51,8 @@ int	whitespace_cmd(char *str, int i)
 	return(1);
 }
 
-/* Check is there is an empty pipe */
-/* Return 1 there is at least one */
+/* Check if there is an empty pipe */
+/* Return 1 if there is at least one */
 /* Return 0 if not */
 int	check_empty_pipe(char *input)
 {
@@ -71,8 +71,8 @@ int	check_empty_pipe(char *input)
 	return(0);
 }
 
-/* Check is there is an empty redirection */
-/* Return 1 there is at least one */
+/* Check if there is an empty redirection */
+/* Return 1 if there is at least one */
 /* Return 0 if not */
 int	check_empty_redir(char *input)
 {
