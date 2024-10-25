@@ -79,6 +79,7 @@ t_node	*split_on_pipes(t_node **first_node, char *input);
 
 //count_args
 int	pipe_count(char *input);
+int	count_cmd(char *input);
 int	cmd_len(char *input, int i);
 
 //str_utils_two
