@@ -35,7 +35,7 @@ void	*ft_realloc(void *ptr, size_t old_size, size_t new_size);
 //cd_pwd
 int	ft_update_pwd(char ***envp);
 int ft_cd(char **args, char ***envp);
-int	ft_pwd(void);
+int	ft_pwd(char **env);
 
 // checking_args
 int ft_strcmp(const char *s1, const char *s2);
@@ -106,7 +106,7 @@ void    *dup_on_pipes(t_node **first, char *input);
 
 //treat_input
 
-void treat_input(char *input, t_main *main_str);
+void treat_input(char *input ,t_main *main_str);
 int parse_input(char *input);
 
 //unset_export

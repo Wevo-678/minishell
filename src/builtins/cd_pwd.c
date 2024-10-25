@@ -45,16 +45,19 @@ int	ft_update_pwd(char ***envp)
 int ft_cd(char **args, char ***envp)
 {
  const char *home;
-
+ char *oldpwd; 
+	oldpwd = get_env_value(*envp, "PWD");
+	set_env_value(envp, "OLDPWD", oldpwd);
+	
     if (!args[1])  // Aucun argument donné, aller dans $HOME
     {
-        home = getenv("HOME");
+        home = get_env_value(*envp, "HOME");
         if (!home)
         {
             printf("cd: HOME not set\n");
             return (1);
         }
-        printf("Trying to change directory to HOME: %s\n", home);  // Debug
+        // printf("Trying to change directory to HOME: %s\n", home);  // Debug
         if (chdir(home) != 0)
         {
             perror("cd");
@@ -63,7 +66,7 @@ int ft_cd(char **args, char ***envp)
     }
     else
     {
-        printf("Trying to change directory to: '%s'\n", args[1]);  // Debug
+        // printf("Trying to change directory to: '%s'\n", args[1]);  // Debug
         if (chdir(args[1]) != 0)  // Essayer de changer vers le répertoire donné
         {
             perror("cd");
@@ -77,18 +80,18 @@ int ft_cd(char **args, char ***envp)
         printf("Error updating PWD\n");
         return (1);
     }
-    printf("Updated PWD: %s\n", getenv("PWD"));  // Debug
+    // printf("Updated PWD: %s\n", getenv("PWD"));  // Debug
 
     return (0);
 }
 
-int	ft_pwd(void)
+int	ft_pwd(char **env)
 {
-	char	cwd[1024];  // Buffer pour stocker le répertoire courant
+	  // Buffer pour stocker le répertoire courant
 
-	if (getcwd(cwd, sizeof(cwd)) != NULL)  // Obtenir le répertoire courant
+	if (get_env_value(env, "PWD") != NULL)  // Obtenir le répertoire courant
 	{
-		printf("%s\n", cwd);  // Afficher le répertoire
+		printf("%s\n", get_env_value(env, "PWD"));  // print la ligne recuperer
 		return (0);  // Succès
 	}
 	else

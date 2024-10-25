@@ -4,7 +4,9 @@
 char *get_env_value(char **envp, const char *name)
 {
     int len = ft_strlen(name);
-    for (int i = 0; envp[i]; i++)
+    int i = 0;
+
+    while (envp[i])
     {
         // Comparer le nom de la variable avec le début de la chaîne
         if (ft_strncmp(envp[i], name, len) == 0 && envp[i][len] == '=')
@@ -12,9 +14,11 @@ char *get_env_value(char **envp, const char *name)
             // Retourner la partie après le "="
             return ((envp[i]) + len + 1);
         }
+        i++;
     }
-    return (NULL); // Si la variable n'est pas trouvée
+    return ("Error dir no find"); // Si la variable n'est pas trouvée
 }
+
 
 int set_env_value(char ***envp, const char *name, const char *value)
 {
