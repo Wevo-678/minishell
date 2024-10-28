@@ -11,6 +11,8 @@
 # include <stdarg.h>
 # include <readline/readline.h>
 # include <readline/history.h>
+# include <sys/wait.h>
+
 
 typedef struct s_node
 {
@@ -21,6 +23,7 @@ typedef struct s_node
 
 typedef struct s_main
 {
+    char **path;
     char **env;
     t_node **arg_list;
 }   t_main;
@@ -39,13 +42,19 @@ int	ft_pwd(char **env);
 
 // checking_args
 int ft_strcmp(const char *s1, const char *s2);
-void execute_command(char **args/*, char ***envp*/);
-int is_builtin(char **args/*, char ***envp*/);
+void is_builtin(char **args, char ***envp, char **path);
+
+//exit
+void	ft_exit(char **args);
 
 //env_echo
-int	ft_env(char **envp);
+int	ft_env(char **envpm);
 int	ft_increment_shlvl(char ***envp);
 int	ft_echo(char **args);
+
+//execution
+void execute_command(char **path, char **args, char **envp);
+
 
 //env
 char *get_env_value(char **envp, const char *name);
@@ -55,7 +64,9 @@ int	copy_variable(char *expanded, char *input, int *i, char **envp);
 char	*expand_variables(char *input, char **envp);
 
 //env_2
-void ft_test(char ***env);
+void ft_test(char ***env, t_main *main_str);
+int count_tokens(const char *str, char delim);
+void init_path(char *path, char ***path_tab);
 
 
 //format_check
