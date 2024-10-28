@@ -37,8 +37,6 @@
 // 	}
 // }
 
-//Hello
-
 // /* /!\/!\/!\/!\/!\ A faire echo"test" a remplacer par echotest
 // ie : enlever les quotes  et remplacer les variables si necessaire
 // selon les quotes => remplacer si double quote, garder sinon */
