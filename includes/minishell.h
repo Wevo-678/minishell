@@ -86,7 +86,7 @@ char	*ft_itoa(int n);
 int	ft_atoi(const char *str);
 
 //split_them_all
-t_node	*split_on_pipes(t_node **first_node, char *input);
+void	*split_init(t_node **first);
 
 //count_args
 int	pipe_count(char *input);
