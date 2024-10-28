@@ -41,7 +41,7 @@ int	count_cmd(char *input)
 {
 	int	i;
 	int	count;
-	int new_cmd;
+	int	new_cmd;
 
 	i = 0;
 	count = 0;
@@ -80,7 +80,7 @@ int	cmd_len2(char *input, int i, int j)
 /* Return 0 if EOF */
 int	cmd_len(char *input, int i)
 {
-	int j;
+	int	j;
 
 	j = 0;
 	while (input[i + j])

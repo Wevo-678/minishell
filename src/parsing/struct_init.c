@@ -20,10 +20,10 @@ void	*append_node(t_node **first)
 
 /* Initialize the first node of the linked chain */
 /* Return first or NULL if malloc fails */
-void *struct_init(t_node **first)
+void	*struct_init(t_node **first)
 {
 	t_node	*new;
-	
+
 	new = (t_node *)malloc(sizeof(t_node));
 	if (!(new))
 		return (NULL);

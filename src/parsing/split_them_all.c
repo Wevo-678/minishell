@@ -1,13 +1,37 @@
 #include "../../includes/minishell.h"
 
-void	delete_quotes(t_node **node)
-{
-	int	i;
-	int	j;
+// void	delete_quotes(t_node **node, int cmd)
+// {
+// 	int	i;
+// 	int	j;
 
-	i = 0;
-	while ()
-}
+// 	i = 0;
+// 	while ()
+// }
+
+// int	too_much_quotes(t_node *node, int cmd)
+// {
+// 	int	i;
+// 	int	simple_q;
+// 	int	double_q;
+
+// 	i = 0;
+// 	simple_q = 0;
+// 	double_q = 0;
+// 	while (node->data[cmd][i])
+// 	{
+// 		if (node->data[cmd][i] == '\'' && !simple_q && !double_q)
+// 			simple_q = 1;
+// 		else if (node->data[cmd][i] == '\'' && simple_q)
+// 			simple_q = 0;
+// 		else if (node->data[cmd][i] == '\"' && !double_q && !simple_q)
+// 			double_q = 2;
+// 		else if (node->data[cmd][i] == '\"' && double_q)
+// 			double_q = 0;
+// 		j++;
+// 	}
+// 	return(simple_q + double_q);
+// }
 
 /* Fill the data splited */
 void	fill_data(t_node **node, int i, int len, int cmd)
@@ -24,7 +48,7 @@ void	fill_data(t_node **node, int i, int len, int cmd)
 }
 
 /* Malloc the second dimension of data */
-/* Call the fill function */
+/* Call the fill and the quote function */
 /* Return first or NULL if malloc fails */
 void	*split_init2(t_node **node, int nb_cmd)
 {
@@ -44,8 +68,10 @@ void	*split_init2(t_node **node, int nb_cmd)
 		}
 		(*node)->data[cmd] = (char *)malloc(sizeof(char) * (len + 1));
 		if ((*node)->data[cmd] == NULL)
-			return NULL;
+			return (NULL);
 		fill_data(node, i, len, cmd);
+		if (too_much_quotes((*node), cmd))
+			delete_quotes(node, cmd);
 		i += len;
 		cmd++;
 	}
@@ -54,7 +80,7 @@ void	*split_init2(t_node **node, int nb_cmd)
 }
 
 /* Malloc the data for each node */
-/* Call split_init2 and the quote function */
+/* Call split_init2 */
 /* Return first or NULL if malloc fails */
 void	*split_init(t_node **first)
 {
@@ -71,7 +97,6 @@ void	*split_init(t_node **first)
 		tmp->data[nb_cmd] = NULL;
 		if (split_init2(&tmp, nb_cmd) == NULL)
 			return (NULL);
-		delete_quotes(&tmp);
 		tmp = tmp->next;
 	}
 	return (first);
@@ -81,8 +106,8 @@ void	*split_init(t_node **first)
 ie : enlever les quotes  et remplacer les variables si necessaire
 selon les quotes => remplacer si double quote, garder sinon */
 /* /!\/!\/!\/!\/!\ A faire free les node->data_dup */
-/* /!\/!\/!\/!\/!\ A mettre au debut check whitespace_cmd pour voir si on a une commande vide
-si jamais, juste faire un saut de ligne */
+/* /!\/!\/!\/!\/!\ A mettre au debut check whitespace_cmd pour voir si on a
+une commande vide si jamais, juste faire un saut de ligne */
 /* /!\/!\/!\/!\/!\ Cascade de NULL si malloc fail a mettre en place */
 /*int	main(int argc, char **argv)
 {

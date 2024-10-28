@@ -18,8 +18,8 @@ int	skip_space_last(char *input, int start, int end)
 int	skip_space_first(char *input, int start, int end)
 {
 	while (input[start] && input[start] == ' ' && (start < end - 1)
-					&& !between_quotes(input, start))
-				start++;
+		&& !between_quotes(input, start))
+		start++;
 	return (start);
 }
 
@@ -40,7 +40,7 @@ void	fill_dup(t_node **node, char *input, int start, int end)
 			if (skip_space_last(input, start + i, end))
 			{
 				tmp->data_dup[i] = 0;
-				break;
+				break ;
 			}
 		}
 		tmp->data_dup[i] = input[start + i];
@@ -58,7 +58,7 @@ void	*str_dup(t_node **first, char *input, int start, int end)
 
 	if (!start)
 	{
-		if(!struct_init(first))
+		if (!struct_init(first))
 			return (NULL);
 		end_list = (*first);
 	}
@@ -86,14 +86,14 @@ void	*dup_on_pipes(t_node **first, char *input)
 	int	nb_pipes;
 	int	old_pipe;
 	int	i;
-	
+
 	i = 0;
 	nb_dup = 0;
 	nb_pipes = pipe_count(input);
 	while (nb_dup <= nb_pipes)
 	{
 		old_pipe = i;
-		while (input[i] && (input[i] != '|' 
+		while (input[i] && (input[i] != '|'
 				|| (input[i] == '|' && between_quotes(input, i))))
 			i++;
 		if (!str_dup(first, input, old_pipe, i))
