@@ -91,9 +91,9 @@ int	cmd_len(char *input, int i)
 			if (!j)
 			{
 				if (input[i + j + 1] == '<')
-					return (2);
+					return (-2);
 				else
-					return (1);
+					return (-1);
 			}
 			else
 				return (j);
