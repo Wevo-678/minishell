@@ -10,15 +10,20 @@ void ft_switch(t_main *main_str, char **input)
 
 char *join_path(char *dir, char *command)
 {
-    size_t len = strlen(dir) + strlen(command) + 2; // +2 pour '/' et '\0'
-    char *complete_path = malloc(len);
-    if (!complete_path)
-        return NULL;
+    if(ft_strncmp(command, "./", 2) == 0 || ft_strncmp(command, "/", 1) == 0)
+        return(command);
+    else
+    {
+        size_t len = strlen(dir) + strlen(command) + 2; // +2 pour '/' et '\0'
+        char *complete_path = malloc(len);
+        if (!complete_path)
+            return NULL;
 
-    strcpy(complete_path, dir);
-    strcat(complete_path, "/");
-    strcat(complete_path, command);
-    return complete_path;
+        strcpy(complete_path, dir);
+        strcat(complete_path, "/");
+        strcat(complete_path, command);
+        return complete_path;
+    }
 }
 // Fonction pour exécuter une commande en utilisant execve
 void execute_command(char **path, char **args, char **envp)

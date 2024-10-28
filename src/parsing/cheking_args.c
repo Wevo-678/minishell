@@ -32,15 +32,3 @@ void is_builtin(char **args, char ***envp, char **path)
     else
         execute_command(path, args, *envp);
 }
-
-// void execute_command(char **args/*, char ***envp*/)
-// {
-//     if (is_builtin(args))  // Si c'est un built-in, il est exécuté
-//         return;
-//     else
-//     {
-//         // Si ce n'est pas un built-in, exécuter la commande externe avec execv
-//         if (execv("/home/mabenet/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin", args) == -1)
-//             perror("execv");
-//     }
-// }

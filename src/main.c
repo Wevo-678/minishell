@@ -4,26 +4,31 @@ void start_shell(t_main *main_str)
 {
     char *input;
 
-    ft_increment_shlvl(&main_str->env);
+    setup_signal_handlers();
     while (1) {
         // Lire la commande utilisateur avec une invite "Minishell$ "
         input = readline("Minishell$ ");
-        if (ft_strcmp(input, "./minishell") == 0)
-            ft_increment_shlvl(&main_str->env);
-        if ((input == NULL || ft_strcmp(input, "exit" ) == 0))
+        if (input == NULL)
+        {
+            printf("exit\n");
+            if(ft_strcmp(get_env_value(main_str->env, "SHLVL"), "2") == 0)
+                break;
+            else
+                ft_reduce_shlvl(&main_str->env);
+        }
+            if (input[0] == '\0')
         {
             free(input);
-            break;
+            continue; // Relancer la boucle sans traiter l'entrée
         }
+        if (ft_strcmp(input, "./minishell") == 0)
+            ft_increment_shlvl(&main_str->env);
         // Ajouter la commande à l'historique
         if (*input)
+        {
             add_history(input);
-        // treat_input(input, main_str);
-            
-        if(ft_strcmp(input, "test") == 0)
-            ft_test(&main_str->env, main_str);
-        else
             is_builtin(ft_split(input, ' '),&main_str->env, main_str->path);
+        }
         // else if (ft_strcmp(input, "pwd"))
 		//     ft_pwd(main_str->env);
         // Libérer la mémoire allouée par readline
@@ -60,6 +65,7 @@ int main(int ac, char **av, char **envp)
         free(main_str); // Libérer la structure en cas d'échec
         return (1);
     }
+    ft_increment_shlvl(&main_str->env);
     init_path(get_env_value(envp, "PATH"), &main_str->path);
 
     // Lancer le shell

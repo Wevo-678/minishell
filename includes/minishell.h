@@ -62,6 +62,7 @@ int set_env_value(char ***envp, const char *name, const char *value);
 int	copy_value(char *expanded, int j, char **envp, char *var_name);
 int	copy_variable(char *expanded, char *input, int *i, char **envp);
 char	*expand_variables(char *input, char **envp);
+void ft_reduce_shlvl(char ***env);
 
 //env_2
 void ft_test(char ***env, t_main *main_str);
@@ -130,5 +131,8 @@ int	ft_export(char **args, char ***envp);
 //utils
 int ft_isalnum(int c);
 int ft_isdigit(int c);
+
+//signal
+void setup_signal_handlers();
 
 #endif

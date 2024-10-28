@@ -48,3 +48,12 @@ int	ft_increment_shlvl(char ***envp)
 	(*envp)[i + 1] = NULL;
 	return (0);
 }
+
+void ft_reduce_shlvl(char ***env)
+{
+	int value;
+	
+	value = ft_atoi(get_env_value(*env, "SHLVL"));
+	value--;
+	set_env_value(env, "SHLVL", ft_itoa(value));
+}
