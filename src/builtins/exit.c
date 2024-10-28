@@ -8,7 +8,7 @@ int	is_numeric(const char *str)
 		i++;
 	while (str[i])
 	{
-		if (!isdigit(str[i]))
+		if (!ft_isdigit(str[i]))
 			return (0);
 		i++;
 	}
@@ -22,7 +22,7 @@ void	ft_exit(char **args)
 	if (args[1] == NULL)
 		exit(0);  // Pas d'argument, on quitte avec code 0
 
-	if (!is_numeric(args[1]))
+	if (!ft_isdigit(ft_atoi(args[1])))
 	{
 		printf("minishell: exit: %s: numeric argument required\n", args[1]);
 		exit(2);  // Code d'erreur pour argument non numérique

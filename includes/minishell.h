@@ -127,4 +127,8 @@ char	*ft_strtok(char *str, const char *delim);
 int	ft_unset(char **args, char ***envp);
 int	ft_export(char **args, char ***envp);
 
+//utils
+int ft_isalnum(int c);
+int ft_isdigit(int c);
+
 #endif

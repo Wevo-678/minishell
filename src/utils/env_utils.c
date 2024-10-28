@@ -80,7 +80,7 @@ int	copy_variable(char *expanded, char *input, int *i, char **envp)
 
 	start = *i + 1;
 	(*i)++;
-	while (input[*i] && (isalnum(input[*i]) || input[*i] == '_'))
+	while (input[*i] && (ft_isalnum(input[*i]) || input[*i] == '_'))
 		(*i)++;
 	strncpy(var_name, input + start, *i - start);
 	var_name[*i - start] = '\0';
