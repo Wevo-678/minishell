@@ -9,11 +9,10 @@ int	between_quotes(char *str, int i)
 	int	j;
 	int	simple_q;
 	int	double_q;
-	
+
 	j = 0;
 	simple_q = 0;
 	double_q = 0;
-	
 	while (j < i)
 	{
 		if (str[j] == '\'' && !simple_q && !double_q)
@@ -26,7 +25,7 @@ int	between_quotes(char *str, int i)
 			double_q = 0;
 		j++;
 	}
-	return(simple_q + double_q);
+	return (simple_q + double_q);
 }
 
 /* Check if there is only whitespace from index i */
@@ -36,19 +35,19 @@ int	between_quotes(char *str, int i)
 int	whitespace_cmd(char *str, int i)
 {
 	int	j;
-	
+
 	j = i + 1;
 	if (!i)
 		j--;
 	while (str[j] && str[j] != '<' && str[j] != '>' && str[j] != '|')
 	{
 		if (str[j] < 9)
-			return(0);
+			return (0);
 		if (str[j] > 13 && str[j] != 32)
-			return(0);
+			return (0);
 		j++;
 	}
-	return(1);
+	return (1);
 }
 
 /* Check if there is an empty pipe */
@@ -59,16 +58,16 @@ int	check_empty_pipe(char *input)
 	int	i;
 
 	if (input[0] == '|')
-		return(1);
+		return (1);
 	i = 0;
 	while (input[i])
 	{
 		if (input[i] == '|' && !between_quotes(input, i))
 			if (whitespace_cmd(input, i))
-				return(1);
+				return (1);
 		i++;
 	}
-	return(0);
+	return (0);
 }
 
 /* Check if there is an empty redirection */
@@ -79,7 +78,7 @@ int	check_empty_redir(char *input)
 	int	i;
 
 	if (input[0] == '<' || input[0] == '>')
-		return(1);
+		return (1);
 	i = 0;
 	while (input[i])
 	{
@@ -88,16 +87,16 @@ int	check_empty_redir(char *input)
 			if (input[i + 1] == '>')
 				i++;
 			if (whitespace_cmd(input, i))
-				return(1);
+				return (1);
 		}
 		if (input[i] == '<' && !between_quotes(input, i))
 		{
 			if (input[i + 1] == '<')
 				i++;
 			if (whitespace_cmd(input, i))
-				return(1);
+				return (1);
 		}
 		i++;
 	}
-	return(0);
+	return (0);
 }
