@@ -13,16 +13,12 @@ void start_shell(t_main *main_str)
             printf("exit\n");
             if(ft_strcmp(get_env_value(main_str->env, "SHLVL"), "2") == 0)
                 break;
-            else
-                ft_reduce_shlvl(&main_str->env);
         }
             if (input[0] == '\0')
         {
             free(input);
             continue; // Relancer la boucle sans traiter l'entrée
         }
-        if (ft_strcmp(input, "./minishell") == 0)
-            ft_increment_shlvl(&main_str->env);
         // Ajouter la commande à l'historique
         if (*input)
         {

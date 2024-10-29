@@ -34,24 +34,11 @@ void execute_command(char **path, char **args, char **envp)
 
     while (path[i])
     {
-        // Concaténer le chemin avec la commande
         complete_path = join_path(path[i], args[0]);
-        if (!complete_path)
-        {
-            perror("Erreur d'allocation");
-            return;
-        }
-
         pid = fork();
-        if (pid < 0)
-        {
-            perror("Erreur de fork");
-            free(complete_path);
-            return;
-        }
+
         if (pid == 0)
         {
-            // Processus enfant
             if (execve(complete_path, args, envp) == -1)
             {
                 free(complete_path); // Libérer et essayer le chemin suivant
@@ -60,7 +47,6 @@ void execute_command(char **path, char **args, char **envp)
         }
         else
         {
-            // Processus parent attend pour vérifier le succès
             int status;
             waitpid(pid, &status, 0);
             if (WIFEXITED(status) && WEXITSTATUS(status) == 0)
@@ -70,10 +56,12 @@ void execute_command(char **path, char **args, char **envp)
                 return;  // Sortir si execve réussit
             }
         }
-
         free(complete_path);
         i++;
     }
 }
 
-    // Si aucun chemin n'est valide
+// char *change_envvar(char *input, char **env)
+// {
+
+// }
