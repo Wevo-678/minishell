@@ -16,7 +16,7 @@ void is_builtin(char **args, char ***envp, char **path)
     if (strcmp(args[0], "cd") == 0)
         ft_cd(args, envp);   // Changer de répertoire
     else if (strcmp(args[0], "echo") == 0)
-        ft_echo(args);      // Afficher des chaînes
+        ft_echo(args, envp);      // Afficher des chaînes
     else if (strcmp(args[0], "pwd") == 0)
         ft_pwd(*envp);            // Afficher le chemin actuel
     else if (strcmp(args[0], "export") == 0)

@@ -50,7 +50,7 @@ void	ft_exit(char **args);
 //env_echo
 int	ft_env(char **envpm);
 int	ft_increment_shlvl(char ***envp);
-int	ft_echo(char **args);
+int	ft_echo(char **args, char ***envp);
 
 //execution
 void execute_command(char **path, char **args, char **envp);
