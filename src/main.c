@@ -1,5 +1,19 @@
 #include "../includes/minishell.h"
 
+void test_print(t_node *node)
+{
+    int i = 0;
+    	while (node)
+	{
+		i = 0;
+		while (node->data[i])
+		{
+			printf("Split %d : %s\n",i, node->data[i]);
+			i++;
+		}
+		node = node->next;
+	}
+}
 void start_shell(t_main *main_str)
 {
     char *input;
@@ -23,8 +37,13 @@ void start_shell(t_main *main_str)
         if (*input)
         {
             add_history(input);
-            is_builtin(ft_split(input, ' '),&main_str->env, main_str->path);
+            dup_on_pipes(&main_str->arg_list, input);
+            split_init(&main_str->arg_list);
+            is_builtin(main_str->arg_list->data ,&main_str->env, main_str->path);
         }
+        if(ft_strcmp(input,  "test"))
+            test_print(main_str->arg_list);
+        
         // else if (ft_strcmp(input, "pwd"))
 		//     ft_pwd(main_str->env);
         // Libérer la mémoire allouée par readline
@@ -63,7 +82,7 @@ int main(int ac, char **av, char **envp)
     }
     ft_increment_shlvl(&main_str->env);
     init_path(get_env_value(envp, "PATH"), &main_str->path);
-
+    
     // Lancer le shell
     start_shell(main_str);
 

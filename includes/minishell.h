@@ -25,7 +25,7 @@ typedef struct s_main
 {
     char **path;
     char **env;
-    t_node **arg_list;
+    t_node *arg_list;
 }   t_main;
 
 //array_utils
