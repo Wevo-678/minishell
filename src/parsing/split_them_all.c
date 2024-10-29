@@ -1,38 +1,5 @@
 #include "../../includes/minishell.h"
 
-// void	delete_quotes(t_node **node, int cmd)
-// {
-// 	int	i;
-// 	int	j;
-
-// 	i = 0;
-// 	while ()
-// }
-
-// int	too_much_quotes(t_node *node, int cmd)
-// {
-// 	int	i;
-// 	int	simple_q;
-// 	int	double_q;
-
-// 	i = 0;
-// 	simple_q = 0;
-// 	double_q = 0;
-// 	while (node->data[cmd][i])
-// 	{
-// 		if (node->data[cmd][i] == '\'' && !simple_q && !double_q)
-// 			simple_q = 1;
-// 		else if (node->data[cmd][i] == '\'' && simple_q)
-// 			simple_q = 0;
-// 		else if (node->data[cmd][i] == '\"' && !double_q && !simple_q)
-// 			double_q = 2;
-// 		else if (node->data[cmd][i] == '\"' && double_q)
-// 			double_q = 0;
-// 		j++;
-// 	}
-// 	return(simple_q + double_q);
-// }
-
 /* Fill the data splited */
 void	fill_data(t_node **node, int i, int len, int cmd)
 {
@@ -70,8 +37,6 @@ void	*split_init2(t_node **node, int nb_cmd)
 		if ((*node)->data[cmd] == NULL)
 			return (NULL);
 		fill_data(node, i, len, cmd);
-		if (too_much_quotes((*node), cmd))
-			delete_quotes(node, cmd);
 		i += len;
 		cmd++;
 	}
@@ -100,6 +65,11 @@ void	*split_init(t_node **first)
 		tmp = tmp->next;
 	}
 	return (first);
+}
+
+void	*split_tem_all(t_node **first)
+{
+	
 }
 
 /* /!\/!\/!\/!\/!\ A faire echo"test" a remplacer par echotest
