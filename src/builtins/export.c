@@ -25,13 +25,69 @@ int add_env_var(char *name, char *value, char ***envp, int i)
     return (0);
 }
 
-int ft_export(char **args, char ***envp)
+void print_env_vars(char **envp)
 {
     int i = 0;
+
+    while (envp[i])
+    {
+        printf("declare -x %s\n", envp[i]);
+        i++;
+    }
+}
+
+char	**sort_ascii(char **array)
+{
+	int		i;
+	int		j;
+	int		len;
+	char	**sorted_array;
+	char	*temp;
+
+	len = ft_arraylen(array);
+	sorted_array = malloc(sizeof(char *) * (len + 1));
+	if (!sorted_array || dup_array(&sorted_array, array) != 0)
+		return (NULL);
+
+	i = 0;
+	while (i < len - 1)
+	{
+		j = i + 1;
+		while (j < len)
+		{
+			if (strcmp(sorted_array[i], sorted_array[j]) > 0)
+			{
+				temp = sorted_array[i];
+				sorted_array[i] = sorted_array[j];
+				sorted_array[j] = temp;
+			}
+			j++;
+		}
+		i++;
+	}
+	return (sorted_array);
+}
+
+int ft_export(char **args, char ***envp)
+{
+    char	**sorted_env;
+	int		i;
+
+    i = 0;
+    if (!args[1])
+    {
+		sorted_env = sort_ascii(*envp);
+		if (!sorted_env)
+			return (1);
+		print_env_vars(sorted_env);
+		ft_free_array(sorted_env);
+		return (0);
+    }
     char *name = ft_strtok(args[1], "=");
     char *value = ft_strtok(NULL, "=");
     if (!name || !value)
         return (1);
+
     while ((*envp)[i])
     {
         if (strncmp((*envp)[i], name, strlen(name)) == 0 && (*envp)[i][strlen(name)] == '=')

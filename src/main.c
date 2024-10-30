@@ -33,19 +33,13 @@ void start_shell(t_main *main_str)
             continue; // Relancer la boucle sans traiter l'entrée
         }
         // Ajouter la commande à l'historique
-        if (*input)
+        if (*input && (treat_input(input) == 0))
         {
             add_history(input);
             dup_on_pipes(&main_str->arg_list, input);
             split_init(&main_str->arg_list);
             is_builtin(main_str->arg_list->data ,&main_str->env, main_str->path);
         }
-        if(ft_strcmp(input,  "test"))
-            test_print(main_str->arg_list);
-        
-        // else if (ft_strcmp(input, "pwd"))
-		//     ft_pwd(main_str->env);
-        // Libérer la mémoire allouée par readline
         free(input);
     }
 }
