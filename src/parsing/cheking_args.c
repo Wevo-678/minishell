@@ -1,17 +1,16 @@
 #include "../../includes/minishell.h"
 
-int ft_strcmp(const char *s1, const char *s2)
+int	ft_strcmp(const char *s1, const char *s2)
 {
-    while (*s1 && (*s1 == *s2) && *s2) // Tant que les deux caractères sont égaux
-    {
-        s1++;
-        s2++;
-    }
-    return (unsigned char)(*s1) - (unsigned char)(*s2);
+	while (*s1 && (*s1 == *s2) && *s2)
+	{
+		s1++;
+		s2++;
+	}
+	return ((unsigned char)(*s1) - (unsigned char)(*s2));
 }
 
-
-void is_builtin(char **args, char ***envp, char **path)
+void	is_builtin(char **args, char ***envp, char **path)
 {
     if (strcmp(args[0], "cd") == 0)
         ft_cd(args, envp);   // Changer de répertoire
@@ -32,15 +31,3 @@ void is_builtin(char **args, char ***envp, char **path)
     else
         execute_command(path, args, *envp);
 }
-
-// void execute_command(char **args/*, char ***envp*/)
-// {
-//     if (is_builtin(args))  // Si c'est un built-in, il est exécuté
-//         return;
-//     else
-//     {
-//         // Si ce n'est pas un built-in, exécuter la commande externe avec execv
-//         if (execv("/home/mabenet/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin", args) == -1)
-//             perror("execv");
-//     }
-// }
