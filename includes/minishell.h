@@ -25,7 +25,7 @@ typedef struct s_main
 {
     char **path;
     char **env;
-    t_node **arg_list;
+    t_node *arg_list;
 }   t_main;
 
 //array_utils
@@ -62,6 +62,7 @@ int set_env_value(char ***envp, const char *name, const char *value);
 int	copy_value(char *expanded, int j, char **envp, char *var_name);
 int	copy_variable(char *expanded, char *input, int *i, char **envp);
 char	*expand_variables(char *input, char **envp);
+void ft_reduce_shlvl(char ***env);
 
 //env_2
 void ft_test(char ***env, t_main *main_str);
@@ -118,7 +119,7 @@ void    *dup_on_pipes(t_node **first, char *input);
 
 //treat_input
 
-void treat_input(char *input ,t_main *main_str);
+int treat_input(char *input);
 int parse_input(char *input);
 
 //unset_export
@@ -130,5 +131,8 @@ int	ft_export(char **args, char ***envp);
 //utils
 int ft_isalnum(int c);
 int ft_isdigit(int c);
+
+//signal
+void setup_signal_handlers();
 
 #endif

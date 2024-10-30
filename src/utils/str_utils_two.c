@@ -1,32 +1,33 @@
 #include "../../includes/minishell.h"
 
-
-char **ft_split(char const *s, char c)
+char	**ft_split(char const *s, char c)
 {
-    char **result;
-    int i = 0, j = 0, k = 0;
+	char	**result;
+	int		i;
+	int		j;
+	int		k;
 
-    result = malloc(sizeof(char *) * (ft_strlen(s) + 1));  // Allouer de la mémoire pour le résultat
-    if (!result)
-        return (NULL);
-    while (s[i])
-    {
-        if (s[i] != c)
-        {
-            j = i;
-            while (s[i] != c && s[i] != '\0')
-                i++;
-            result[k] = malloc(i - j + 1);
-            ft_strncpy(result[k], &s[j], i - j);
-            result[k++][i - j] = '\0';
-        }
-        else
-            i++;
-    }
-    result[k] = NULL;
-    return (result);
+	i = 0;
+	j = 0;
+	k = 0;
+	result = malloc(sizeof(char *) * (ft_strlen(s) + 1));
+	while (s[i])
+	{
+		if (s[i] != c)
+		{
+			j = i;
+			while (s[i] != c && s[i] != '\0')
+				i++;
+			result[k] = malloc(i - j + 1);
+			ft_strncpy(result[k], &s[j], i - j);
+			result[k++][i - j] = '\0';
+		}
+		else
+			i++;
+	}
+	result[k] = NULL;
+	return (result);
 }
-
 
 int	ft_strncmp(const char *s1, const char *s2, size_t n)
 {
@@ -59,41 +60,3 @@ char	*ft_strdup(const char *s)
 	dup[i] = '\0';
 	return (dup);
 }
-
-int	ft_sprintf(char *buffer, const char *format, ...)
-{
-	va_list	args;
-	int		i;
-	int		j;
-	char	*str;
-
-	va_start(args, format);
-	i = 0;
-	j = 0;
-	while (format[i])
-	{
-		if (format[i] == '%' && format[i + 1] == 's' && i++)
-		{
-			str = va_arg(args, char *);
-			while (*str)
-				buffer[j++] = *str++;
-		}
-		else if (format[i] == '%' && format[i + 1] == 'd' && i++)
-		{
-			str = ft_itoa(va_arg(args, int));
-			if (!str)
-				return (-1);
-			while (*str)
-				buffer[j++] = *str++;
-			free(str);
-		}
-		else
-			buffer[j++] = format[i];
-		i++;
-	}
-	buffer[j] = '\0';
-	va_end(args);
-	return (j);
-}
-
-
