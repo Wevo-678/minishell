@@ -32,7 +32,6 @@ int ft_export(char **args, char ***envp)
     char *value = ft_strtok(NULL, "=");
     if (!name || !value)
         return (1);
-
     while ((*envp)[i])
     {
         if (strncmp((*envp)[i], name, strlen(name)) == 0 && (*envp)[i][strlen(name)] == '=')

@@ -25,8 +25,7 @@ void start_shell(t_main *main_str)
         if (input == NULL)
         {
             printf("exit\n");
-            if(ft_strcmp(get_env_value(main_str->env, "SHLVL"), "2") == 0)
-                break;
+            break;
         }
             if (input[0] == '\0')
         {
