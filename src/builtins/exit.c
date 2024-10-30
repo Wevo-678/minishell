@@ -17,7 +17,7 @@ int	is_numeric(const char *str)
 
 void	ft_exit(char **args)
 {
-	printf("exit\n");
+	printf("exitfunc %s\n", args[1]);
 
 	if (args[1] == NULL)
 		exit(0);  // Pas d'argument, on quitte avec code 0
