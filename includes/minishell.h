@@ -119,7 +119,7 @@ void    *dup_on_pipes(t_node **first, char *input);
 
 //treat_input
 
-void treat_input(char *input ,t_main *main_str);
+int treat_input(char *input);
 int parse_input(char *input);
 
 //unset_export

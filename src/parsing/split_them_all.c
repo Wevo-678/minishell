@@ -71,9 +71,12 @@ void	*split_init(t_node **first)
 ie : enlever les quotes  et remplacer les variables si necessaire
 selon les quotes => remplacer si double quote, garder sinon */
 /* /!\/!\/!\/!\/!\ A faire free les node->data_dup */
-/* /!\/!\/!\/!\/!\ A mettre au debut check whitespace_cmd pour voir si on a
-une commande vide si jamais, juste faire un saut de ligne */
+/* /!\/!\/!\/!\/!\ A mettre au debut check whitespace_cmd + pipe/redir vidw pour voir si on a
+une commande vide si jamais */
 /* /!\/!\/!\/!\/!\ Cascade de NULL si malloc fail a mettre en place */
+/* /!\/!\/!\/!\/!\ Se renseigner sur cmd acces et voir si acces (le path) existe */
+
+
 /*int	main(int argc, char **argv)
 {
 	t_node	*first;
