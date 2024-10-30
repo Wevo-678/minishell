@@ -27,6 +27,14 @@ int unclosed_quote_check(char *s)
 		return (0);
 }
 
+// void treat_args(t_main *main_str)
+// {
+// 	/* -suite de redir
+// 		-fd
+// 		-quote
+// 		-heardoc
+// 	*/
+// }
 
 // void treat_input(char *input ,t_main *main_str)
 // {

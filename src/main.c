@@ -14,6 +14,13 @@ void test_print(t_node *node)
 		node = node->next;
 	}
 }
+
+void init_fd(t_main *main_str)
+{
+    main_str->fd_in = 0;
+    main_str->fd_out = 1;
+}
+
 void start_shell(t_main *main_str)
 {
     char *input;
@@ -41,8 +48,9 @@ void start_shell(t_main *main_str)
             split_init(&main_str->arg_list);
             is_builtin(main_str->arg_list->data ,&main_str->env, main_str->path);
         }
-        if(ft_strcmp(input,  "test"))
-            test_print(main_str->arg_list);
+    
+        test_print(main_str->arg_list);
+        printf("in %d, out %d\n", main_str->fd_in, main_str->fd_out);
         
         // else if (ft_strcmp(input, "pwd"))
 		//     ft_pwd(main_str->env);
@@ -82,6 +90,7 @@ int main(int ac, char **av, char **envp)
     }
     ft_increment_shlvl(&main_str->env);
     init_path(get_env_value(envp, "PATH"), &main_str->path);
+    init_fd(main_str);
     
     // Lancer le shell
     start_shell(main_str);

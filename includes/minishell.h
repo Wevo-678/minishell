@@ -23,6 +23,8 @@ typedef struct s_node
 
 typedef struct s_main
 {
+    int fd_out;
+    int fd_in;
     char **path;
     char **env;
     t_node *arg_list;
