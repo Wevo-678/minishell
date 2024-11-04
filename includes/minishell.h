@@ -44,13 +44,16 @@ int	ft_pwd(char **env);
 int ft_strcmp(const char *s1, const char *s2);
 void is_builtin(char **args, char ***envp, char **path);
 
+// parsing_command
+void	parsing(t_node *args_list, char ***envp);
+
 //exit
 void	ft_exit(char **args);
 
 //env_echo
 int	ft_env(char **envpm);
 int	ft_increment_shlvl(char ***envp);
-int	ft_echo(char **args, char ***envp);
+int	ft_echo(char **args);
 
 //execution
 void execute_command(char **path, char **args, char **envp);

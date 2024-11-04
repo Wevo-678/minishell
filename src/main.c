@@ -18,7 +18,7 @@ void start_shell(t_main *main_str)
 {
     char *input;
 
-    setup_signal_handlers();
+    // setup_signal_handlers();
     while (1) {
         // Lire la commande utilisateur avec une invite "Minishell$ "
         input = readline("Minishell$ ");
@@ -38,6 +38,7 @@ void start_shell(t_main *main_str)
             add_history(input);
             dup_on_pipes(&main_str->arg_list, input);
             split_init(&main_str->arg_list);
+			parsing(&main_str->arg_list, &main_str->env);
             is_builtin(main_str->arg_list->data ,&main_str->env, main_str->path);
         }
         if(ft_strcmp(input,  "test"))
