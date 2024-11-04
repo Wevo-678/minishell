@@ -41,7 +41,7 @@ void start_shell(t_main *main_str)
                 dup_on_pipes(&main_str->arg_list, input);
                 split_init(&main_str->arg_list);
                 is_builtin(main_str->arg_list->data ,&main_str->env, main_str->path);
-                free
+                //free;
             }
         }
         if(ft_strcmp(input,  "test"))
