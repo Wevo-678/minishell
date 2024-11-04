@@ -71,10 +71,7 @@ void	*split_init(t_node **first)
 ie : enlever les quotes  et remplacer les variables si necessaire
 selon les quotes => remplacer si double quote, garder sinon */
 /* /!\/!\/!\/!\/!\ A faire free les node->data_dup */
-/* /!\/!\/!\/!\/!\ A mettre au debut check whitespace_cmd pour voir si on a
-une commande vide si jamais, juste faire un saut de ligne */
-/* /!\/!\/!\/!\/!\ Cascade de NULL si malloc fail a mettre en place */
-/*int	main(int argc, char **argv)
+
 {
 	t_node	*first;
 	t_node	*tmp;
@@ -83,6 +80,7 @@ une commande vide si jamais, juste faire un saut de ligne */
 	(void)argc;
 	first = NULL;
 	dup_on_pipes(&first, argv[1]);
+	//FOUTRE STRJOIN POUR FAIRE BIEN LES TESTS
 	tmp = (first);
 	while (tmp)
 	{
@@ -99,7 +97,9 @@ une commande vide si jamais, juste faire un saut de ligne */
 			printf("Split %d : %s\n",i, tmp->data[i]);
 			i++;
 		}
+		printf("Split %d : %p\n",i, tmp->data[i]);
 		tmp = tmp->next;
 	}
 	return (0);
-}*/
+}
+*/

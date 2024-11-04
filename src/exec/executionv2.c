@@ -78,11 +78,13 @@ int	execution(char **path, t_node *tokens, char **envp)
 	int		fd[2];
 	int		redir[2];
 	int		ogout;
+	int		ogin;
 	t_list	*pidlst;
 
 	redir[0] = 0;
 	redir[1] = 1;
 	pidlst = NULL;
+	ogin = dup(0);
 	ogout = dup(1);
 	while (tokens != NULL)
 	{
@@ -110,5 +112,6 @@ int	execution(char **path, t_node *tokens, char **envp)
 	ft_lstiter(pidlst, lst_wait);
 	ft_lstclear(&pidlst, free);
 	dup2(ogout, 1);
+	dup2(ogin, 0);
 	return (0);
 }
