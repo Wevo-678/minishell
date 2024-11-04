@@ -72,6 +72,7 @@ ie : enlever les quotes  et remplacer les variables si necessaire
 selon les quotes => remplacer si double quote, garder sinon */
 /* /!\/!\/!\/!\/!\ A faire free les node->data_dup */
 
+/*
 {
 	t_node	*first;
 	t_node	*tmp;

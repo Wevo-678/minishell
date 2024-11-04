@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_lstclear.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alex <alex@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: ziratya <ziratya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/03 11:27:07 by alribeyr          #+#    #+#             */
-/*   Updated: 2024/10/30 12:20:58 by alex             ###   ########.fr       */
+/*   Updated: 2024/11/04 18:25:46 by ziratya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/libft.h"
+#include "../../includes/minishell.h"
 
 void	ft_lstclear(t_list **lst, void (*del)(void *))
 {
