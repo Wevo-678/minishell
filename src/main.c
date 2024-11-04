@@ -14,10 +14,25 @@ void test_print(t_node *node)
 		node = node->next;
 	}
 }
+void test_print(t_node *node)
+{
+    int i = 0;
+    	while (node)
+	{
+		i = 0;
+		while (node->data[i])
+		{
+			printf("Split %d : %s\n",i, node->data[i]);
+			i++;
+		}
+		node = node->next;
+	}
+}
 void start_shell(t_main *main_str)
 {
     char *input;
 
+    setup_signal_handlers();
     // setup_signal_handlers();
     while (1) {
         // Lire la commande utilisateur avec une invite "Minishell$ "
@@ -28,14 +43,33 @@ void start_shell(t_main *main_str)
             break;
         }
             if (input[0] == '\0')
+        if (input == NULL)
+        {
+            printf("exit\n");
+            break;
+        }
+            if (input[0] == '\0')
         {
             free(input);
+            continue; // Relancer la boucle sans traiter l'entrée
             continue; // Relancer la boucle sans traiter l'entrée
         }
         // Ajouter la commande à l'historique
         if (*input)
         {
+        {
             add_history(input);
+            if (!treat_input(input))
+            {
+                dup_on_pipes(&main_str->arg_list, input);
+                split_init(&main_str->arg_list);
+                is_builtin(main_str->arg_list->data ,&main_str->env, main_str->path);
+                //free;
+            }
+        }
+        if(ft_strcmp(input,  "test"))
+            test_print(main_str->arg_list);
+        
             dup_on_pipes(&main_str->arg_list, input);
             split_init(&main_str->arg_list);
 			parsing(&main_str->arg_list, &main_str->env);
@@ -81,7 +115,9 @@ int main(int ac, char **av, char **envp)
         return (1);
     }
     ft_increment_shlvl(&main_str->env);
+    ft_increment_shlvl(&main_str->env);
     init_path(get_env_value(envp, "PATH"), &main_str->path);
+    
     
     // Lancer le shell
     start_shell(main_str);
