@@ -1,16 +1,16 @@
 #include "../../includes/minishell.h"
 
-int	ft_print_env(char **envp)
+int ft_print_env(char **envp)
 {
-	int	i;
+    int i = 0;
 
-	i = 0;
-	while (envp[i])
-	{
-		printf("%s\n", envp[i]);
-		i++;
-	}
-	return (0);
+    // Parcourt le tableau envp jusqu'à la fin (NULL)
+    while (envp[i])
+    {
+        printf("%s\n", envp[i]); // Affiche chaque variable d'environnement
+        i++;
+    }
+    return 0;
 }
 
 int	ft_arraylen(char **array)
@@ -22,6 +22,8 @@ int	ft_arraylen(char **array)
 		i++;
 	return (i);
 }
+
+#include <stdlib.h>
 
 void	ft_free_array(char **array)
 {
@@ -38,7 +40,7 @@ void	ft_free_array(char **array)
 	free(array);
 }
 
-int	dup_array(char ***array1, char **array2)
+int	dup_array(char ***array1, char **array2) // copier array 2 dans array 1
 {
 	int		i;
 	int		len;
@@ -82,7 +84,7 @@ void	*ft_realloc(void *ptr, size_t old_size, size_t new_size)
 	{
 		while (i < old_size && i < new_size)
 		{
-			new_ptr[i] = ((char *)ptr)[i];
+			new_ptr[i] = ((char *)ptr)[i];  // Copier l'ancien contenu
 			i++;
 		}
 		free(ptr);
