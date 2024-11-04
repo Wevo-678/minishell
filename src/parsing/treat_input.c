@@ -27,7 +27,7 @@ int	unclosed_quote_check(char *s)
 		return (0);
 }
 
-int treat_input(char *input)
+int	treat_input(char *input)
 {
 	if (unclosed_quote_check(input) == 0)
 	{

@@ -67,22 +67,17 @@ void	*split_init(t_node **first)
 	return (first);
 }
 
-void	*split_tem_all(t_node **first)
-{
-	
-}
-
 /* /!\/!\/!\/!\/!\ A faire echo"test" a remplacer par echotest
 ie : enlever les quotes  et remplacer les variables si necessaire
 selon les quotes => remplacer si double quote, garder sinon */
 /* /!\/!\/!\/!\/!\ A faire free les node->data_dup */
-/* /!\/!\/!\/!\/!\ A mettre au debut check whitespace_cmd + pipe/redir vidw pour voir si on a
-une commande vide si jamais */
+/* /!\/!\/!\/!\/!\ A mettre au debut check whitespace_cmd + pipe/redir vide */
+/* pour voir si on a une commande vide si jamais */
 /* /!\/!\/!\/!\/!\ Cascade de NULL si malloc fail a mettre en place */
-/* /!\/!\/!\/!\/!\ Se renseigner sur cmd acces et voir si acces (le path) existe */
-
-
-/*int	main(int argc, char **argv)
+/* /!\/!\/!\/!\/!\ Se renseigner sur cmd acces */
+/* et voir si acces (le path) existe */
+/*
+int	main(int argc, char **argv)
 {
 	t_node	*first;
 	t_node	*tmp;
@@ -91,6 +86,7 @@ une commande vide si jamais */
 	(void)argc;
 	first = NULL;
 	dup_on_pipes(&first, argv[1]);
+	//FOUTRE STRJOIN POUR FAIRE BIEN LES TESTS
 	tmp = (first);
 	while (tmp)
 	{
@@ -107,7 +103,9 @@ une commande vide si jamais */
 			printf("Split %d : %s\n",i, tmp->data[i]);
 			i++;
 		}
+		printf("Split %d : %p\n",i, tmp->data[i]);
 		tmp = tmp->next;
 	}
 	return (0);
-}*/
+}
+*/

@@ -48,7 +48,7 @@ int	count_cmd(char *input)
 	new_cmd = 1;
 	while (input[i])
 	{
-		if (input[i] == ' ')
+		if (input[i] == ' ' && !between_quotes(input, i))
 		{
 			while (input[i + 1] == ' ')
 				i++;
