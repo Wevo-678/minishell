@@ -23,7 +23,7 @@ char *replace_env_vars(const char *str, char ***envp)
 	result = malloc(size + 1);
 	while (str[i] != '\0')
 	{
-		if (str[i] == '$' && str[i + 1] != '\0')
+		if (str[i] == '$' && str[i + 1] != '\0' && str[0] != '\'')
 		{
 			char var_name[100];
 			int k = 0;
@@ -33,7 +33,7 @@ char *replace_env_vars(const char *str, char ***envp)
 			var_name[k] = '\0';
 
 			char *env_value = get_env_value(*envp, var_name);
-			if (env_value && ft_strcmp(env_value,"Error dir no find"))
+			if (env_value && ft_strcmp(env_value,"Error dir not find"))
 			{
 				result = ft_realloc(result, size, size  + 200);
 				size += 200;
@@ -52,21 +52,25 @@ char *replace_env_vars(const char *str, char ***envp)
 		}
 	}
 	result[j] = '\0';
-	return result;
+	return (result);
 }
 
-void	parsing(t_node *args_list, char ***envp)
+void	parsing(t_node **args_list, char ***envp)
 {
 	int	i;
-	while (args_list)
+	t_node	*tmp;
+
+	tmp = (*args_list);
+	while (tmp)
 	{
 		i = 0;
-		while (args_list->data[i])
+
+		while (tmp->data[i])
 		{
-			replace_env_vars(args_list->data[i], envp);
-			delete_quote(args_list->data[i]);
+			tmp->data[i] = replace_env_vars(tmp->data[i], envp);
+			tmp->data[i] = delete_quote(tmp->data[i]);
 			i++;
 		}
-		args_list = args_list->next;
+		tmp = tmp->next;
 	}
 }

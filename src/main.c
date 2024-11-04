@@ -8,21 +8,7 @@ void test_print(t_node *node)
 		i = 0;
 		while (node->data[i])
 		{
-			printf("Split %d : %s\n",i, node->data[i]);
-			i++;
-		}
-		node = node->next;
-	}
-}
-void test_print(t_node *node)
-{
-    int i = 0;
-    	while (node)
-	{
-		i = 0;
-		while (node->data[i])
-		{
-			printf("Split %d : %s\n",i, node->data[i]);
+			// printf("Split %d : %s\n",i, node->data[i]);
 			i++;
 		}
 		node = node->next;
@@ -32,7 +18,6 @@ void start_shell(t_main *main_str)
 {
     char *input;
 
-    setup_signal_handlers();
     // setup_signal_handlers();
     while (1) {
         // Lire la commande utilisateur avec une invite "Minishell$ "
@@ -63,24 +48,19 @@ void start_shell(t_main *main_str)
             {
                 dup_on_pipes(&main_str->arg_list, input);
                 split_init(&main_str->arg_list);
+				parsing(&main_str->arg_list, &main_str->env);
                 is_builtin(main_str->arg_list->data ,&main_str->env, main_str->path);
                 //free;
             }
         }
-        if(ft_strcmp(input,  "test"))
-            test_print(main_str->arg_list);
+        // if(ft_strcmp(input,  "test"))
+        //     test_print(main_str->arg_list);
         
-            dup_on_pipes(&main_str->arg_list, input);
-            split_init(&main_str->arg_list);
-			parsing(&main_str->arg_list, &main_str->env);
-            is_builtin(main_str->arg_list->data ,&main_str->env, main_str->path);
+        //     dup_on_pipes(&main_str->arg_list, input);
+        //     split_init(&main_str->arg_list);
+		// 	parsing(&main_str->arg_list, &main_str->env);
+        //     is_builtin(main_str->arg_list->data ,&main_str->env, main_str->path);
         }
-        if(ft_strcmp(input,  "test"))
-            test_print(main_str->arg_list);
-        
-        // else if (ft_strcmp(input, "pwd"))
-		//     ft_pwd(main_str->env);
-        // Libérer la mémoire allouée par readline
         free(input);
     }
 }

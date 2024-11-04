@@ -45,7 +45,7 @@ int ft_strcmp(const char *s1, const char *s2);
 void is_builtin(char **args, char ***envp, char **path);
 
 // parsing_command
-void	parsing(t_node *args_list, char ***envp);
+void	parsing(t_node **args_list, char ***envp);
 
 //exit
 void	ft_exit(char **args);

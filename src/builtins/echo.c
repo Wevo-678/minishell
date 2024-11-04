@@ -1,21 +1,13 @@
 #include "../../includes/minishell.h"
 
-int	find_dollar(char *str)
-{
-	int	i;
-
-	i = 0;
-	while (str[i] && str[i] != '$')
-		i++;
-	return (i);
-}
-
 int	ft_echo(char **args)
 {
 	int	i;
+	int	j;
 	int	newline;
 
 	i = 1;
+	j = 0;
 	newline = 1;
 	while (args[i] && strcmp(args[i], "-n") == 0)
 	{
@@ -24,7 +16,11 @@ int	ft_echo(char **args)
 	}
 	while (args[i])
 	{
-		printf("%s", args[i]);
+		while(args[i][j])
+		{
+			printf("%c", args[i][j]);
+			j++;
+		}
 		if (args[i + 1])
 			printf(" ");
 		i++;
