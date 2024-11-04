@@ -1,9 +1,11 @@
 #include "../includes/minishell.h"
 
-void test_print(t_node *node)
+void	test_print(t_node *node)
 {
-    int i = 0;
-    	while (node)
+	int i;
+
+	i = 0;
+	while (node)
 	{
 		i = 0;
 		while (node->data[i])
@@ -14,11 +16,12 @@ void test_print(t_node *node)
 		node = node->next;
 	}
 }
-void start_shell(t_main *main_str)
-{
-    char *input;
 
-    setup_signal_handlers();
+void	start_shell(t_main *main_str)
+{
+	char	*input;
+
+	setup_signal_handlers();
     while (1) {
         // Lire la commande utilisateur avec une invite "Minishell$ "
         input = readline("Minishell$ ");
@@ -162,4 +165,3 @@ int main(int ac, char **av, char **envp)
 // 	ft_free_array(env_copy);
 // 	return (0);
 // }
-
