@@ -28,7 +28,8 @@ void	start_shell(t_main *main_str)
         if (input == NULL)
         {
             printf("exit\n");
-            break;
+            if(ft_strcmp(get_env_value(main_str->env, "SHLVL"), "2") == 0)
+                break;
         }
             if (input[0] == '\0')
         {
@@ -39,11 +40,12 @@ void	start_shell(t_main *main_str)
         if (*input)
         {
             add_history(input);
+
             if (!treat_input(input))
             {
                 dup_on_pipes(&main_str->arg_list, input);
                 split_init(&main_str->arg_list);
-                is_builtin(main_str->arg_list->data ,&main_str->env, main_str->path);
+                execution(main_str->path, main_str->arg_list, main_str->env);
                 //free;
             }
         }

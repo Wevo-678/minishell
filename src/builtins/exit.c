@@ -18,7 +18,12 @@ int	is_numeric(const char *str)
 
 void	ft_exit(char **args)
 {
+<<<<<<< HEAD
+	printf("exitfunc %s\n", args[1]);
+
+=======
 	printf("exit\n");
+>>>>>>> 70f391be24ed4c920964bfd67e125e7d9f48fcff
 	if (args[1] == NULL)
 		exit(0); // Pas d'argument, on quitte avec code 0
 	if (!ft_isdigit(ft_atoi(args[1])))
