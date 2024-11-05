@@ -6,7 +6,7 @@
 /*   By: ziratya <ziratya@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/03 11:27:07 by alribeyr          #+#    #+#             */
-/*   Updated: 2024/11/05 12:32:27 by ziratya          ###   ########.fr       */
+/*   Updated: 2024/11/05 12:36:10 by ziratya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ void	clear_list(t_node **first)
 	t_node	*tmp;
 	int		i;
 
+	tmp = (*first);
 	while (tmp)
 	{
 		tmp = (*first)->next;

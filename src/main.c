@@ -45,6 +45,7 @@ void	start_shell(t_main *main_str)
             {
                 dup_on_pipes(&main_str->arg_list, input);
                 split_init(&main_str->arg_list);
+				parsing(&main_str->arg_list, &main_str->env);
                 execution(main_str->path, main_str->arg_list, main_str->env);
                 //free;
             }
