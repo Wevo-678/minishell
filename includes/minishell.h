@@ -28,6 +28,12 @@ typedef struct s_main
     t_node *arg_list;
 }   t_main;
 
+typedef struct s_list
+{
+void *content;
+struct s_list *next;
+} t_list;
+
 //array_utils
 int ft_print_env(char **envp);
 int	ft_arraylen(char **array);
@@ -42,7 +48,10 @@ int	ft_pwd(char **env);
 
 // checking_args
 int ft_strcmp(const char *s1, const char *s2);
-void is_builtin(char **args, char ***envp, char **path);
+//void is_builtin(t_node *tokens, char ***envp, char **path);
+
+// parsing_command
+void	parsing(t_node **args_list, char ***envp);
 
 //exit
 void	ft_exit(char **args);
@@ -53,7 +62,7 @@ int	ft_increment_shlvl(char ***envp);
 int	ft_echo(char **args);
 
 //execution
-void execute_command(char **path, char **args, char **envp);
+//void execute_command(char **path, char **args, char **envp);
 
 
 //env
@@ -134,5 +143,14 @@ int ft_isdigit(int c);
 
 //signal
 void setup_signal_handlers();
+
+int	execution(char **path, t_node *tokens, char **envp);
+char *pathfinding(char **path, char *command);
+void	*ft_calloc(size_t count, size_t size);
+void	ft_lstadd_back(t_list **lst, t_list *new);
+void	ft_lstclear(t_list **lst, void (*del)(void *));
+void	ft_lstiter(t_list *lst, void (*f)(void *));
+t_list	*ft_lstnew(void *content);
+void	ft_bzero(void *s, size_t n);
 
 #endif

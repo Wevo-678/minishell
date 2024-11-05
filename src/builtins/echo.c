@@ -3,18 +3,25 @@
 int	ft_echo(char **args)
 {
 	int	i;
+	int	j;
 	int	newline;
 
 	i = 1;
+	j = 0;
 	newline = 1;
-	if (args[1] && strcmp(args[1], "-n") == 0)
+	while (args[i] && strcmp(args[i], "-n") == 0)
 	{
 		newline = 0;
 		i++;
 	}
 	while (args[i])
 	{
-		printf("%s", args[i]);
+		j = 0;
+		while(args[i][j])
+		{
+			printf("%c", args[i][j]);
+			j++;
+		}
 		if (args[i + 1])
 			printf(" ");
 		i++;
