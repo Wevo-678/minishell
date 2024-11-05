@@ -1,21 +1,5 @@
 #include "../includes/minishell.h"
 
-void	test_print(t_node *node)
-{
-	int i;
-
-	i = 0;
-	while (node)
-	{
-		i = 0;
-		while (node->data[i])
-		{
-			printf("Split %d : %s\n",i, node->data[i]);
-			i++;
-		}
-		node = node->next;
-	}
-}
 
 void	start_shell(t_main *main_str)
 {
@@ -50,8 +34,6 @@ void	start_shell(t_main *main_str)
                 //free;
             }
         }
-        if(ft_strcmp(input,  "test"))
-            test_print(main_str->arg_list);
         free(input);
     }
 }
