@@ -103,37 +103,3 @@ void	*dup_on_pipes(t_node **first, char *input)
 	}
 	return (first);
 }
-
-/*
-#include <stdio.h>
-int	main(int argc, char **argv)
-{
-	t_node	*first;
-	t_node	*tmp;
-
-	dup_on_pipes(&first, argv[1]);
-	tmp = first;
-	while (tmp)
-	{
-		printf("%s\n", tmp->data_dup);
-		tmp = tmp->next;
-	}
-	return (0);
-}*/
-/*
-#include <stdio.h>
-int	main(int argc, char **argv)
-{
-	t_node	*first;
-	t_node	*tmp;
-
-	first = struct_init(&first);
-	dup
-	tmp = first;
-	while (tmp)
-	{
-		printf("%s\n", tmp->data);
-		tmp = tmp->next;
-	}
-	return (0);
-}*/

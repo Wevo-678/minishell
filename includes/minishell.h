@@ -50,6 +50,9 @@ int	ft_pwd(char **env);
 int ft_strcmp(const char *s1, const char *s2);
 //void is_builtin(t_node *tokens, char ***envp, char **path);
 
+// parsing_command
+void	parsing(t_node **args_list, char ***envp);
+
 //exit
 void	ft_exit(char **args);
 
@@ -125,7 +128,7 @@ void    *dup_on_pipes(t_node **first, char *input);
 
 //treat_input
 
-void treat_input(char *input ,t_main *main_str);
+int treat_input(char *input);
 int parse_input(char *input);
 
 //unset_export
