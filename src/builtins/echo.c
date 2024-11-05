@@ -16,6 +16,7 @@ int	ft_echo(char **args)
 	}
 	while (args[i])
 	{
+		j = 0;
 		while(args[i][j])
 		{
 			printf("%c", args[i][j]);

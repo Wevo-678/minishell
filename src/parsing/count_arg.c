@@ -105,11 +105,3 @@ int	cmd_len(char *input, int i)
 	}
 	return (j);
 }
-
-/*
-int	main(int argc, char **argv)
-{
-	printf("string : %s\n", argv[1]);
-	printf("count : %d\n", count_cmd(argv[1]));
-	return (0);
-}*/
