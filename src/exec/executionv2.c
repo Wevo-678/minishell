@@ -73,22 +73,20 @@ int	child(t_node *tokens, char **path, char **envp, int *redir)
 	return (pid);
 }
 
-int	execution(char **path, t_node *tokens, char **envp)
+int	execution(t_main *main_str, t_node *tokens)
 {
 	int		fd[2];
 	int		redir[2];
-	int		ogout;
-	int		ogin;
 	t_list	*pidlst;
 
-	redir[0] = 0;
-	redir[1] = 1;
+	if (main_str->fdin == -1)
+		redir[0] = 0;
+	else
+		redir[0] = main_str->fdin;
 	pidlst = NULL;
-	ogin = dup(0);
-	ogout = dup(1);
 	while (tokens != NULL)
 	{
-		if (is_builtin(tokens->data, &envp))
+		if (is_builtin(tokens->data, &(main_str->env)))
 			return (0);
 		if (tokens->next != NULL)
 		{
@@ -98,10 +96,17 @@ int	execution(char **path, t_node *tokens, char **envp)
 				ft_lstclear(&pidlst, free);
 				return (1);
 			}
+			redir[1] = fd[1];
 		}
-		redir[1] = fd[1];
+		else
+		{
+			if (main_str->fdout == -1)
+				redir[1] = 1;
+			else
+				redir[1] = main_str->fdout;
+		}
 		//if (ft_lstadd_back(&pidlst, ft_lstnew(child(tokens, path, envp))))
-		if (pid_list_add(&pidlst, child(tokens, path, envp, redir)))
+		if (pid_list_add(&pidlst, child(tokens, main_str->path, main_str->env, redir)))
 		{
 			ft_lstclear(&pidlst, free);
 			return (1);
@@ -111,7 +116,7 @@ int	execution(char **path, t_node *tokens, char **envp)
 	}
 	ft_lstiter(pidlst, lst_wait);
 	ft_lstclear(&pidlst, free);
-	dup2(ogout, 1);
-	dup2(ogin, 0);
+	dup2(main_str->stdin, 0);
+	dup2(main_str->stdout, 1);
 	return (0);
 }

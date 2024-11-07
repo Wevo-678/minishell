@@ -29,8 +29,9 @@ void	start_shell(t_main *main_str)
             {
                 dup_on_pipes(&main_str->arg_list, input);
                 split_init(&main_str->arg_list);
+                redir(main_str, main_str->arg_list);
 				parsing(&main_str->arg_list, &main_str->env);
-                execution(main_str->path, main_str->arg_list, main_str->env);
+                execution(main_str, main_str->arg_list);
                 //free;
             }
         }
@@ -59,6 +60,10 @@ int main(int ac, char **av, char **envp)
         printf("Erreur d'allocation pour main_str\n");
         return (1);
     }
+    main_str->stdin = dup(0);
+    main_str->stdout = dup(1);
+    main_str->fdin = -1;
+    main_str->fdout = -1;
 
     // Copie de l'environnement dans la structure main_str->env
     if (dup_array(&main_str->env, envp) != 0)

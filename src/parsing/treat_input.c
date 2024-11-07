@@ -41,7 +41,7 @@ int	treat_input(char *input)
 	}
 	return (0);
 }
-int treat_input(char *input)
+/*int treat_input(char *input)
 {
 	if (unclosed_quote_check(input) == 0)
 	{
@@ -54,4 +54,4 @@ int treat_input(char *input)
 		return (-2);
 	}
 return (0);
-}
+}*/

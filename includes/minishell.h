@@ -12,6 +12,7 @@
 # include <readline/readline.h>
 # include <readline/history.h>
 # include <sys/wait.h>
+# include <fcntl.h>
 
 
 typedef struct s_node
@@ -26,6 +27,10 @@ typedef struct s_main
     char **path;
     char **env;
     t_node *arg_list;
+    int     stdin;
+    int     stdout;
+    int     fdin;
+    int     fdout;
 }   t_main;
 
 typedef struct s_list
@@ -144,8 +149,9 @@ int ft_isdigit(int c);
 //signal
 void setup_signal_handlers();
 
-int	execution(char **path, t_node *tokens, char **envp);
+int	execution(t_main *main_str, t_node *tokens);
 char *pathfinding(char **path, char *command);
+void	redir(t_main *main_str, t_node *tokens);
 void	*ft_calloc(size_t count, size_t size);
 void	ft_lstadd_back(t_list **lst, t_list *new);
 void	ft_lstclear(t_list **lst, void (*del)(void *));
