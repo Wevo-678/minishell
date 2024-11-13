@@ -83,6 +83,8 @@ int	execution(t_main *main_str, t_node *tokens)
 		redir[0] = 0;
 	else
 		redir[0] = main_str->fdin;
+	if (main_str->fdout != -1)
+		dup2(main_str->fdout, 1);
 	pidlst = NULL;
 	while (tokens != NULL)
 	{
