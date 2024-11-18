@@ -1,9 +1,28 @@
 #include "../../includes/minishell.h"
 
-/*int	heredoc(char *EOF)
+int	heredoc(char *strEOF)
 {
+	int		fd;
+	char	*line;
 
-}*/
+	fd = open(".tmp", O_RDWR | O_CREAT | O_TRUNC, 0777);
+	printf("%s\n", strEOF);
+	while (1)
+	{
+		line = readline(">");
+		if (!ft_strcmp(line, strEOF))
+		{
+			close(fd);
+			fd = open(".tmp", O_RDONLY, 0777);
+			unlink(".tmp");
+			free(line);
+			return (fd);
+		}
+		write(fd, line, ft_strlen(line));
+		write(fd, "\n", 1);
+		free(line);
+	}
+}
 
 void	make_redir(t_main *main_str, t_node *tokens, int j)
 {
@@ -15,12 +34,12 @@ void	make_redir(t_main *main_str, t_node *tokens, int j)
 				close(main_str->fdin);
 			main_str->fdin = open(tokens->data[j + 1], O_RDONLY, 0777);
 		}
-		/*else
+		else
 		{
 			if (main_str->fdin != -1)
 				close(main_str->fdin);
-			main_str->fdin = heredoc(tokens->data[1]);
-		}*/
+			main_str->fdin = heredoc(tokens->data[j + 1]);
+		}
 	}
 	else if (tokens->data[j][0] == '>')
 	{
