@@ -41,17 +41,3 @@ int	treat_input(char *input)
 	}
 	return (0);
 }
-int treat_input(char *input)
-{
-	if (unclosed_quote_check(input) == 0)
-	{
-		printf("minishell: unclosed quote error.\n");
-		return (-1);
-	}
-	else if (check_empty_pipe(input) == 1 || check_empty_redir(input) == 1)
-	{
-		printf("minishell: syntax error near unexpected token\n");
-		return (-2);
-	}
-return (0);
-}
