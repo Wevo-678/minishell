@@ -24,6 +24,24 @@ int	heredoc(char *strEOF)
 	}
 }
 
+void	redir_out(t_main *main_str, t_node *tokens, int j)
+{
+	if (tokens->data[j][1] == '>')
+	{
+		if (main_str->fdout != -1)
+			close(main_str->fdout);
+		main_str->fdout = open(tokens->data[j + 1],
+				O_RDWR | O_CREAT | O_TRUNC, 0777);
+	}
+	else
+	{
+		if (main_str->fdout != -1)
+			close(main_str->fdout);
+		main_str->fdout = open(tokens->data[j + 1],
+				O_RDWR | O_CREAT | O_APPEND, 0777);
+	}
+}
+
 void	make_redir(t_main *main_str, t_node *tokens, int j)
 {
 	if (tokens->data[j][0] == '<')
@@ -43,18 +61,7 @@ void	make_redir(t_main *main_str, t_node *tokens, int j)
 	}
 	else if (tokens->data[j][0] == '>')
 	{
-		if (tokens->data[j][1] == '>')
-		{
-			if (main_str->fdout != -1)
-				close(main_str->fdout);
-			main_str->fdout = open(tokens->data[j + 1], O_RDWR | O_CREAT | O_TRUNC, 0777);
-		}
-		else
-		{
-			if (main_str->fdout != -1)
-				close(main_str->fdout);
-			main_str->fdout = open(tokens->data[j + 1], O_RDWR | O_CREAT | O_APPEND, 0777);
-		}
+		redir_out(main_str, tokens, j);
 	}
 }
 
@@ -87,15 +94,40 @@ void	remv_redir(t_node *tokens, int j)
 	tokens->data = newstr;
 }
 
+void	redir_cut(t_main *main_str, t_node *tokens)
+{
+	t_node	*temp;
+	int		i;
+
+	if (tokens->data_dup)
+		free(tokens->data_dup);
+	i = -1;
+	while (tokens->data[++i])
+		free(tokens->data[i]);
+	free(tokens->data);
+	if (tokens == main_str->arg_list)
+	{
+		main_str->arg_list = tokens->next;
+		free(tokens);
+		tokens = main_str->arg_list;
+	}
+	else
+	{
+		temp = main_str->arg_list;
+		while (temp->next != tokens)
+			temp = temp->next;
+		temp->next = tokens->next;
+		free(tokens);
+		tokens = temp->next;
+	}
+}
+
 void	redir(t_main *main_str, t_node *tokens)
 {
-	int		i;
 	int		j;
-	t_node	*temp;
 
 	while (tokens != NULL)
 	{
-		printf("%c\n", tokens->data[0][0]);
 		j = 0;
 		while (tokens->data[j])
 		{
@@ -104,33 +136,11 @@ void	redir(t_main *main_str, t_node *tokens)
 				if (!tokens->data[j + 1])
 				{
 					printf("redir without argument\n");
-					break;
+					break ;
 				}
 				make_redir(main_str, tokens, j);
 				if (j == 0 && !tokens->data[j + 2])
-				{
-					if (tokens->data_dup)
-						free(tokens->data_dup);
-					i = -1;
-					while (tokens->data[++i])
-						free(tokens->data[i]);
-					free(tokens->data);
-					if (tokens == main_str->arg_list)
-					{
-						main_str->arg_list = tokens->next;
-						free(tokens);
-						tokens = main_str->arg_list;
-					}
-					else
-					{
-						temp = main_str->arg_list;
-						while (temp->next != tokens)
-							temp = temp->next;
-						temp->next = tokens->next;
-						free(tokens);
-						tokens = temp->next;
-					}
-				}
+					redir_cut(main_str, tokens);
 				else
 					remv_redir(tokens, j);
 			}
