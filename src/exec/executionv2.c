@@ -127,6 +127,11 @@ int	execution(t_main *main_str, t_node *tokens)
 	pidlst = NULL;
 	while (tokens != NULL)
 	{
+		if (!strcmp(tokens->data[0], "exit"))
+		{
+			printf("passededant");
+			is_builtin(tokens->data, &main_str->env);
+		}
 		if (ft_pipe(main_str, tokens, fd, redir))
 		{
 			ft_lstclear(&pidlst, free);

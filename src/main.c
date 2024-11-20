@@ -29,8 +29,8 @@ void	start_shell(t_main *main_str)
             {
                 dup_on_pipes(&main_str->arg_list, input);
                 split_init(&main_str->arg_list);
-                redir(main_str, main_str->arg_list);
 				parsing(&main_str->arg_list, &main_str->env);
+                redir(main_str, main_str->arg_list);
                 execution(main_str, main_str->arg_list);
                 //free;
             }
