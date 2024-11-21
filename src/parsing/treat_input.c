@@ -39,6 +39,8 @@ int	treat_input(char *input)
 		printf("minishell: syntax error near unexpected token\n");
 		return (-2);
 	}
+	else if (check_empty_pipe(input) == 2)
+		return (-2);
 	return (0);
 }
 /*int treat_input(char *input)
