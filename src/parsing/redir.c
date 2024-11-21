@@ -143,10 +143,10 @@ void	redir(t_main *main_str, t_node *tokens)
 					redir_cut(main_str, tokens);
 				else
 					remv_redir(tokens, j);
+				return ;
 			}
 			j++;
 		}
 		tokens = tokens->next;
-
 	}
 }

@@ -93,6 +93,8 @@ void	setup(t_main *main_str, int *redir, int start)
 	{
 		dup2(main_str->stdin, 0);
 		dup2(main_str->stdout, 1);
+		main_str->fdin = -1;
+		main_str->fdout = -1;
 	}
 }
 
@@ -128,10 +130,7 @@ int	execution(t_main *main_str, t_node *tokens)
 	while (tokens != NULL)
 	{
 		if (!strcmp(tokens->data[0], "exit"))
-		{
-			printf("passededant");
 			is_builtin(tokens->data, &main_str->env);
-		}
 		if (ft_pipe(main_str, tokens, fd, redir))
 		{
 			ft_lstclear(&pidlst, free);
