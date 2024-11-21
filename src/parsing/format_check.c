@@ -57,6 +57,8 @@ int	check_empty_pipe(char *input)
 {
 	int	i;
 
+	if (whitespace_cmd(input, 0))
+		return (2);
 	if (input[0] == '|')
 		return (1);
 	i = 0;
@@ -67,8 +69,6 @@ int	check_empty_pipe(char *input)
 				return (1);
 		i++;
 	}
-	if (whitespace_cmd(input, i - 1))
-		return (2);
 	return (0);
 }
 
