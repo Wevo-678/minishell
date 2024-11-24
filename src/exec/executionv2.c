@@ -69,8 +69,7 @@ int	child(t_node *tokens, char **path, char **envp, int *redir)
 		else
 		{
 			fullpath = pathfinding(path, tokens->data[0]);
-			if (execve(fullpath, tokens->data, envp) == -1)
-				printf("%s: command not found\n", tokens->data[0]);
+			execve(fullpath, tokens->data, envp);
 			exit (0);
 		}
 	}

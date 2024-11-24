@@ -80,7 +80,7 @@ int	check_empty_redir(char *input)
 	int	i;
 
 	if (input[0] == '<' || input[0] == '>')
-		return (1);
+		return (0);
 	i = 0;
 	while (input[i])
 	{
