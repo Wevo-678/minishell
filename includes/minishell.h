@@ -13,7 +13,9 @@
 # include <readline/history.h>
 # include <sys/wait.h>
 # include <fcntl.h>
+# include <errno.h>
 
+extern pid_t	g_signal_pid;
 
 typedef struct s_node
 {
@@ -148,6 +150,7 @@ int ft_isdigit(int c);
 
 //signal
 void setup_signal_handlers();
+void	signals(void);
 
 int	execution(t_main *main_str, t_node *tokens);
 char *pathfinding(char **path, char *command);
@@ -158,5 +161,6 @@ void	ft_lstclear(t_list **lst, void (*del)(void *));
 void	ft_lstiter(t_list *lst, void (*f)(void *));
 t_list	*ft_lstnew(void *content);
 void	ft_bzero(void *s, size_t n);
+
 
 #endif

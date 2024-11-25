@@ -1,23 +1,37 @@
 #include "../../includes/minishell.h"
 
-void sigint_handler(int signum)
+void	clear_rl_line(void)
 {
-    (void)signum; // Supprimer l'avertissement sur l'argument inutilisé
-    printf("\n"); // Nouvelle ligne pour l'affichage propre
-    rl_on_new_line(); // Informer readline qu'une nouvelle ligne commence
-    rl_replace_line("", 0); // Effacer la ligne courante
-    rl_redisplay(); // Afficher à nouveau le prompt
+	rl_replace_line("", 0);
+	rl_on_new_line();
 }
 
-// Handler pour SIGQUIT (Ctrl+\)
-void sigquit_handler(int signum)
+static void	handle_sigint(int code)
 {
-    (void)signum;
-    // Ignorer le signal, ne rien faire
+	(void)code;
+	printf("\n");
+	clear_rl_line();
+	if (g_signal_pid == 0)
+		rl_redisplay();
 }
 
-void setup_signal_handlers()
+
+static void	handle_sigabrt(int code)
 {
-    signal(SIGINT, sigint_handler); // Assigner le handler pour Ctrl+C
-    signal(SIGQUIT, sigquit_handler); // Assigner le handler pour Ctrl+
+	(void)code;
+	write(1, "abort\n", 6);
 }
+
+void	signals2(void)
+{
+	signal(SIGQUIT, SIG_DFL);
+}
+
+void	signals(void)
+{
+	signal(SIGINT, &handle_sigint);
+	signal(SIGABRT, &handle_sigabrt);
+	signal(SIGQUIT, SIG_IGN);
+}
+
+

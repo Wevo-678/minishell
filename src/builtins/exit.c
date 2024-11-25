@@ -21,7 +21,7 @@ void	ft_exit(char **args)
 	printf("exit\n");
 	if (args[1] == NULL)
 		exit(0); // Pas d'argument, on quitte avec code 0
-	if (!ft_isdigit(ft_atoi(args[1])))
+	if (is_numeric(args[1]) == 0)
 	{
 		printf("minishell: exit: %s: numeric argument required\n", args[1]);
 		exit(2); // Code d'erreur pour argument non numérique

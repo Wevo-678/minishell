@@ -1,11 +1,12 @@
 #include "../includes/minishell.h"
 
+pid_t   g_signal_pid;
 
 void	start_shell(t_main *main_str)
 {
 	char	*input;
-
-	setup_signal_handlers();
+    
+	signals();
     while (1) {
         // Lire la commande utilisateur avec une invite "Minishell$ "
         input = readline("Minishell$ ");
@@ -43,7 +44,6 @@ void	start_shell(t_main *main_str)
 int main(int ac, char **av, char **envp)
 {
     t_main *main_str;
-
     (void)av; // Cela évite le warning de la variable inutilisée
 
     // Vérification des arguments
@@ -77,8 +77,8 @@ int main(int ac, char **av, char **envp)
     
     // Lancer le shell
     start_shell(main_str);
-
     // Libérer l'environnement et la structure avant de quitter
+    g_signal_pid = 0;
     free(main_str->env);
     free(main_str);
 
