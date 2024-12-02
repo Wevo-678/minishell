@@ -44,6 +44,7 @@ int	is_builtin(char **args, char ***envp)
 	}
 	else
 	{
+		printf("Minishell: %s: command not found\n", args[0]);
 		return (0);
 	}
 	return (1);
