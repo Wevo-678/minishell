@@ -26,7 +26,7 @@ void	count_cmd2(char *input, int *i, int *new_cmd, int *count)
 		(*count)++;
 		*new_cmd = 0;
 	}
-	if (input[*i] == '<' || input[*i] == '>')
+	if ((input[*i] == '<' || input[*i] == '>') && !between_quotes(input, *i))
 	{
 		if (input[*i + 1] == '<' || input[*i + 1] == '>')
 			(*i)++;
