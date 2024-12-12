@@ -24,7 +24,7 @@ char	*expand_env_var(const char *str, int *i, char ***envp)
 	if (str[++(*i)] == '?')
 	{
 		(*i)++;
-		return (ft_strdup("0"));
+		return (ft_strdup(ft_itoa(g_signal_pid)));
 	}
 	if (ft_isdigit(str[*i]))
 	{
