@@ -50,7 +50,7 @@ int	is_builtin(char **args, char ***envp)
 	return (1);
 }
 
-int	child(t_node *tokens, char **path, char **envp, int *redir)
+int	child(t_node *tokens, t_main *main_str, int *redir)
 {
 	int		pid;
 	char	*fullpath;
@@ -65,12 +65,12 @@ int	child(t_node *tokens, char **path, char **envp, int *redir)
 	{
 		dup2(redir[0], 0);
 		dup2(redir[1], 1);
-		if (is_builtin(tokens->data, &envp))
+		if (is_builtin(tokens->data, &main_str->env))
 			exit (0);
 		else
 		{
-			fullpath = pathfinding(path, tokens->data[0]);
-			execve(fullpath, tokens->data, envp);
+			fullpath = pathfinding(main_str->path, tokens->data[0]);
+			execve(fullpath, tokens->data, main_str->env);
 			exit (0);
 		}
 	}
@@ -130,17 +130,20 @@ int	execution(t_main *main_str, t_node *tokens)
 	pidlst = NULL;
 	while (tokens != NULL)
 	{
-		if (!strcmp(tokens->data[0], "exit"))
+		if (!strcmp(tokens->data[0], "exit") || !strcmp(tokens->data[0], "cd") || !strcmp(tokens->data[0], "unset") || !strcmp(tokens->data[0], "export"))
 			is_builtin(tokens->data, &main_str->env);
-		if (ft_pipe(main_str, tokens, fd, redir))
+		else
 		{
-			ft_lstclear(&pidlst, free);
-			return (1);
-		}
-		if (pid_list_add(&pidlst, child(tokens, main_str->path, main_str->env, redir)))
-		{
-			ft_lstclear(&pidlst, free);
-			return (1);
+			if (ft_pipe(main_str, tokens, fd, redir))
+			{
+				ft_lstclear(&pidlst, free);
+				return (1);
+			}
+			if (pid_list_add(&pidlst, child(tokens, main_str, redir)))
+			{
+				ft_lstclear(&pidlst, free);
+				return (1);
+			}
 		}
 		redir[0] = fd[0];
 		tokens = tokens->next;
