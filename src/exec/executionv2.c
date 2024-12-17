@@ -43,10 +43,7 @@ int	is_builtin(char **args, char ***envp)
 		ft_exit(args);
 	}
 	else
-	{
-		printf("Minishell: %s: command not found\n", args[0]);
-		return (0);
-	}
+		return(0);
 	return (1);
 }
 
@@ -70,8 +67,12 @@ int	child(t_node *tokens, t_main *main_str, int *redir)
 		else
 		{
 			fullpath = pathfinding(main_str, tokens->data[0]);
-			execve(fullpath, tokens->data, main_str->env);
-			exit (0);
+			if (execve(fullpath, tokens->data, main_str->env) == -1 )
+			{
+				printf("Command not found \n");
+				// exit (0);
+				exit(127);
+			}
 		}
 	}
 	close(redir[0]);
