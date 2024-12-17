@@ -31,14 +31,14 @@ void	redir_out(t_main *main_str, t_node *tokens, int j)
 		if (main_str->fdout != -1)
 			close(main_str->fdout);
 		main_str->fdout = open(tokens->data[j + 1],
-				O_RDWR | O_CREAT | O_TRUNC, 0777);
+				O_RDWR | O_CREAT | O_APPEND, 0777);
 	}
 	else
 	{
 		if (main_str->fdout != -1)
 			close(main_str->fdout);
 		main_str->fdout = open(tokens->data[j + 1],
-				O_RDWR | O_CREAT | O_APPEND, 0777);
+				O_RDWR | O_CREAT | O_TRUNC, 0777);
 	}
 }
 
@@ -143,7 +143,7 @@ void	redir(t_main *main_str, t_node *tokens)
 					redir_cut(main_str, tokens);
 				else
 					remv_redir(tokens, j);
-				return ;
+				j--;
 			}
 			j++;
 		}

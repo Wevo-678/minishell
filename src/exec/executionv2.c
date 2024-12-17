@@ -69,7 +69,7 @@ int	child(t_node *tokens, t_main *main_str, int *redir)
 			exit (0);
 		else
 		{
-			fullpath = pathfinding(main_str->path, tokens->data[0]);
+			fullpath = pathfinding(main_str, tokens->data[0]);
 			execve(fullpath, tokens->data, main_str->env);
 			exit (0);
 		}

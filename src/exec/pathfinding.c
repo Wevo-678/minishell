@@ -21,12 +21,14 @@ char	*join_path(char *dir, char *command)
 	}
 }
 
-char	*pathfinding(char **path, char *command)
+char	*pathfinding(t_main *main_str, char *command)
 {
 	char	*complete_path;
 	int		i;
+	char	**path;
 
 	complete_path = NULL;
+	init_path(get_env_value(main_str->env, "PATH"), &path);
 	i = 0;
 	while (path[i])
 	{

@@ -153,7 +153,7 @@ void setup_signal_handlers();
 void	signals(void);
 
 int	execution(t_main *main_str, t_node *tokens);
-char *pathfinding(char **path, char *command);
+char *pathfinding(t_main *main_str, char *command);
 void	redir(t_main *main_str, t_node *tokens);
 void	*ft_calloc(size_t count, size_t size);
 void	ft_lstadd_back(t_list **lst, t_list *new);
