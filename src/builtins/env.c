@@ -43,7 +43,8 @@ int	ft_increment_shlvl(char ***envp)
 		}
 		i++;
 	}
-	*envp = ft_realloc(*envp, sizeof(char *) * (i + 1), sizeof(char *) * (i + 2));
+	*envp = ft_realloc(*envp, sizeof(char *)
+			* (i + 1), sizeof(char *) * (i + 2));
 	(*envp)[i] = ft_strdup("SHLVL=1");
 	(*envp)[i + 1] = NULL;
 	return (0);

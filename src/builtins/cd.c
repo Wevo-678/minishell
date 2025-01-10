@@ -48,7 +48,7 @@ int	ft_cd(char **args, char ***envp)
 
 	oldpwd = get_env_value(*envp, "PWD");
 	set_env_value(envp, "OLDPWD", oldpwd);
-	if (!args[1]) // Aucun argument donné, aller dans $HOME
+	if (!args[1])
 	{
 		home = get_env_value(*envp, "HOME");
 		if (!home)
@@ -56,7 +56,6 @@ int	ft_cd(char **args, char ***envp)
 			printf("cd: HOME not set\n");
 			return (1);
 		}
-		// printf("Trying to change directory to HOME: %s\n", home);  // Debug
 		if (chdir(home) != 0)
 		{
 			perror("cd");
@@ -65,19 +64,16 @@ int	ft_cd(char **args, char ***envp)
 	}
 	else
 	{
-		// printf("Trying to change directory to: '%s'\n", args[1]);  // Debug
-		if (chdir(args[1]) != 0) // Essayer de changer vers le répertoire donné
+		if (chdir(args[1]) != 0)
 		{
 			perror("cd");
 			return (1);
 		}
 	}
-	// Vérifier si le répertoire a bien changé et mettre à jour PWD
 	if (ft_update_pwd(envp) != 0)
 	{
 		printf("Error updating PWD\n");
 		return (1);
 	}
-	// printf("Updated PWD: %s\n", getenv("PWD"));  // Debug
 	return (0);
 }

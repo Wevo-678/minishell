@@ -1,4 +1,16 @@
-# include "../../includes/minishell.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   pathfinding.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: alribeyr <alribeyr@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/01/10 17:10:35 by alribeyr          #+#    #+#             */
+/*   Updated: 2025/01/10 17:22:26 by alribeyr         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "../../includes/minishell.h"
 
 char	*join_path(char *dir, char *command)
 {
@@ -13,7 +25,6 @@ char	*join_path(char *dir, char *command)
 		complete_path = malloc(len);
 		if (!complete_path)
 			return (NULL);
-
 		strcpy(complete_path, dir);
 		strcat(complete_path, "/");
 		strcat(complete_path, command);

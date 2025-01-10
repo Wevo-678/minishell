@@ -3,14 +3,14 @@
 int	ft_echo(char **args)
 {
 	int	i;
+	int	j;
 	int	newline;
 
 	i = 1;
 	newline = 1;
-
 	while (args[i] && args[i][0] == '-' && args[i][1] == 'n')
 	{
-		int j = 1;
+		j = 1;
 		while (args[i][j] == 'n')
 			j++;
 		if (args[i][j] == '\0')
@@ -19,9 +19,8 @@ int	ft_echo(char **args)
 			i++;
 		}
 		else
-			break;
+			break ;
 	}
-
 	while (args[i])
 	{
 		printf("%s", args[i]);
@@ -29,9 +28,7 @@ int	ft_echo(char **args)
 			printf(" ");
 		i++;
 	}
-
 	if (newline)
 		printf("\n");
-
 	return (0);
 }
