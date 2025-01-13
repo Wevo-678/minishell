@@ -15,3 +15,17 @@ int	ft_isdigit(int c)
 	else
 		return (0);
 }
+
+int is_valid_export(const char *str)
+{
+    if (!str || !strchr(str, '='))
+        return 0;
+    for (int i = 0; str[i] != '='; i++)
+    {
+        if (i == 0 && !isalpha(str[i]) && str[i] != '_')
+            return 0;
+        if (!isalnum(str[i]) && str[i] != '_')
+            return 0;
+    }
+    return (1);
+}

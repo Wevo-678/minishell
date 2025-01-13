@@ -79,6 +79,8 @@ int ft_export(char **args, char ***envp)
 	int		i;
 
     i = 0;
+	if (is_valid_export(args[1]) != 1)
+		printf("export: `%s': not a valid identifier\n", args[1]);
     if (!args[1])
     {
 		sorted_env = sort_ascii(*envp);

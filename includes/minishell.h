@@ -158,5 +158,6 @@ void	ft_lstclear(t_list **lst, void (*del)(void *));
 void	ft_lstiter(t_list *lst, void (*f)(void *));
 t_list	*ft_lstnew(void *content);
 void	ft_bzero(void *s, size_t n);
+int is_valid_export(const char *str);
 
 #endif
