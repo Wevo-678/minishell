@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   executionv2.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alribeyr <alribeyr@student.42.fr>          +#+  +:+       +#+        */
+/*   By: picarlie <picarlie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/10 17:10:41 by alribeyr          #+#    #+#             */
-/*   Updated: 2025/01/10 17:14:36 by alribeyr         ###   ########.fr       */
+/*   Updated: 2025/01/15 16:16:24 by picarlie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ static int	pid_list_add(t_list **pid_lst, int pid)
 	return (0);
 }
 
-int	is_builtin(char **args, char ***envp)
+int	is_builtin(char **args, char ***envp, t_main *main_str)
 {
 	if (strcmp(args[0], "cd") == 0)
 		ft_cd(args, envp);
@@ -52,7 +52,7 @@ int	is_builtin(char **args, char ***envp)
 		ft_env(*envp);
 	else if (strcmp(args[0], "exit") == 0)
 	{
-		ft_exit(args);
+		ft_exit(args, main_str);
 	}
 	else
 		return (0);
@@ -74,7 +74,7 @@ int	child(t_node *tokens, t_main *main_str, int *redir)
 	{
 		dup2(redir[0], 0);
 		dup2(redir[1], 1);
-		if (is_builtin(tokens->data, &main_str->env))
+		if (is_builtin(tokens->data, &main_str->env, main_str))
 			exit (0);
 		else
 		{
@@ -143,7 +143,7 @@ int	execution(t_main *main_str, t_node *tokens)
 	while (tokens != NULL)
 	{
 		if (!strcmp(tokens->data[0], "exit") || !strcmp(tokens->data[0], "cd") || !strcmp(tokens->data[0], "unset") || !strcmp(tokens->data[0], "export"))
-			is_builtin(tokens->data, &main_str->env);
+			is_builtin(tokens->data, &main_str->env, main_str);
 		else
 		{
 			if (ft_pipe(main_str, tokens, fd, redir))

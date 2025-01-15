@@ -1,3 +1,5 @@
+//valgrind --leak-check=full --show-leak-kinds=all --suppressions=realine_leak.supp ./minishell
+
 #include "../includes/minishell.h"
 
 pid_t	g_signal_pid;
@@ -66,8 +68,16 @@ int	main(int ac, char **av, char **envp)
 	ft_increment_shlvl(&main_str->env);
 	init_path(get_env_value(envp, "PATH"), &main_str->path);
 	start_shell(main_str);
-	g_signal_pid = 0;
-	free(main_str->env);
-	free(main_str);
+	// g_signal_pid = 0;
+	// int	i;
+	// i = 0;
+	// while (main_str->env[i])
+	// {
+	// 	free(main_str->env[i]);
+	// 	i++;
+	// }
+	// free(main_str->env);
+	// free(main_str->path);
+	// free(main_str);
 	return (0);
 }

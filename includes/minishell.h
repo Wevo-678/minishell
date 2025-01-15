@@ -61,7 +61,7 @@ int		ft_strcmp(const char *s1, const char *s2);
 void	parsing(t_node **args_list, char ***envp);
 
 //exit
-void	ft_exit(char **args);
+void	ft_exit(char **args, t_main *main_str);
 
 //env_echo
 int		ft_env(char **envpm);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_lstclear.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ziratya <ziratya@student.42.fr>            +#+  +:+       +#+        */
+/*   By: picarlie <picarlie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/03 11:27:07 by alribeyr          #+#    #+#             */
-/*   Updated: 2024/11/05 12:36:10 by ziratya          ###   ########.fr       */
+/*   Updated: 2025/01/13 17:28:07 by picarlie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,12 @@ void	clear_list(t_node **first)
 	{
 		tmp = (*first)->next;
 		i = 0;
+		printf("Hello\n");
+		free(tmp->data);
+		printf("Hello\n");
 		while (tmp->data[i])
 		{
+		printf("Hello\n");
 			free(tmp->data[i]);
 			i++;
 		}
