@@ -3,12 +3,15 @@
 char	*delete_quote(char *str)
 {
 	char	*res;
+	char	*tmp;
 
-	if ((str[0] == '\"' && str[ft_strlen(str) - 1] == '\"')
-		|| (str[0] == '\'' && str[ft_strlen(str) - 1] == '\''))
+	tmp = str;
+	if ((tmp[0] == '\"' && tmp[ft_strlen(tmp) - 1] == '\"')
+		|| (tmp[0] == '\'' && tmp[ft_strlen(tmp) - 1] == '\''))
 	{
-		res = ft_strdup(++str);
+		res = ft_strdup(++tmp);
 		res[ft_strlen(res) - 1] = '\0';
+		free(str);
 		return (res);
 	}
 	return (str);
@@ -24,12 +27,12 @@ char	*expand_env_var(const char *str, int *i, char ***envp)
 	if (str[++(*i)] == '?')
 	{
 		(*i)++;
-		return (ft_strdup(ft_itoa(g_signal_pid)));
+		return (ft_itoa(g_signal_pid));
 	}
 	if (ft_isdigit(str[*i]))
 	{
 		(*i)++;
-		return (ft_strdup(""));
+		return ("");
 	}
 	while (str[*i] && (str[*i] == '_' || ft_isalnum(str[*i])) && k < 99)
 		var_name[k++] = str[(*i)++];
@@ -38,12 +41,12 @@ char	*expand_env_var(const char *str, int *i, char ***envp)
 	{
 		env_value = get_env_value(*envp, var_name);
 		if (env_value)
-			return (ft_strdup(env_value));
+			return (env_value);
 	}
-	return (ft_strdup(""));
+	return ("");
 }
 
-char	*process_env_vars(const char *str, char ***envp)
+char	*process_env_vars(char *str, char ***envp)
 {
 	char	*result;
 	int		i;
@@ -66,10 +69,11 @@ char	*process_env_vars(const char *str, char ***envp)
 			result[j++] = str[i++];
 	}
 	result[j] = '\0';
+	free(str);
 	return (result);
 }
 
-char	*replace_env_vars(const char *str, char ***envp)
+char	*replace_env_vars(char *str, char ***envp)
 {
 	return (process_env_vars(str, envp));
 }
