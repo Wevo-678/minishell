@@ -46,7 +46,7 @@ char	*expand_env_var(const char *str, int *i, char ***envp)
 	return ("");
 }
 
-char	*process_env_vars(char *str, char ***envp)
+char	*replace_env_vars(char *str, char ***envp)
 {
 	char	*result;
 	int		i;
@@ -73,10 +73,6 @@ char	*process_env_vars(char *str, char ***envp)
 	return (result);
 }
 
-char	*replace_env_vars(char *str, char ***envp)
-{
-	return (process_env_vars(str, envp));
-}
 
 void	parsing(t_node **args_list, char ***envp)
 {
