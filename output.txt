@@ -1,0 +1,6 @@
+Commande: true || echo aaa && echo bbb
+Minishell$ true || echo aaa && echo bbb
+minishell: syntax error near unexpected token
+Minishell$ exit
+-----------------------
+

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pathfinding.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alribeyr <alribeyr@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gvalogne <gvalogne@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/10 17:10:35 by alribeyr          #+#    #+#             */
-/*   Updated: 2025/01/10 17:22:26 by alribeyr         ###   ########.fr       */
+/*   Updated: 2025/01/20 15:38:13 by gvalogne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ char	*pathfinding(t_main *main_str, char *command)
 	char	**path;
 
 	complete_path = NULL;
-	init_path(get_env_value(main_str->env, "PATH"), &path);
+	path = ft_split(get_env_value(main_str->env, "PATH"), ':');
 	i = 0;
 	while (path[i])
 	{
@@ -49,5 +49,6 @@ char	*pathfinding(t_main *main_str, char *command)
 		free(complete_path);
 		i++;
 	}
+
 	return (NULL);
 }

@@ -23,9 +23,9 @@ int	count_tokens(const char *str, char delim)
 
 void	init_path(char *path, char ***path_tab)
 {
-	int	count;
+	// int	count;
 
-	count = count_tokens(path, ':');
-	*path_tab = malloc(sizeof(char *) * (count + 1));
+	// count = count_tokens(path, ':');
+	// *path_tab = malloc(sizeof(char *) * (count + 1));
 	*path_tab = ft_split(path, ':');
 }

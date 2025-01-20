@@ -43,8 +43,6 @@ int	dup_array(char ***array1, char **array2)
 	int		i;
 	int		len;
 
-	if (*array1 != NULL)
-		ft_free_array(*array1);
 	len = ft_arraylen(array2);
 	*array1 = (char **)malloc(sizeof(char *) * (len + 1));
 	if (!*array1)
