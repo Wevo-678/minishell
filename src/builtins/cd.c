@@ -36,6 +36,7 @@ int	ft_update_pwd(char ***envp)
 			sizeof(char *) * (ft_arraylen(*envp) + 2));
 	if (!*envp)
 		return (1);
+	free((*envp)[ft_arraylen(*envp)]);
 	(*envp)[ft_arraylen(*envp)] = pwd;
 	(*envp)[ft_arraylen(*envp) + 1] = NULL;
 	return (0);

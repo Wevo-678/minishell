@@ -3,14 +3,29 @@
 /*                                                        :::      ::::::::   */
 /*   pathfinding.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gvalogne <gvalogne@student.42.fr>          +#+  +:+       +#+        */
+/*   By: picarlie <picarlie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/10 17:10:35 by alribeyr          #+#    #+#             */
-/*   Updated: 2025/01/20 15:38:13 by gvalogne         ###   ########.fr       */
+/*   Updated: 2025/01/20 18:00:01 by picarlie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
+
+void	free_path(char **path)
+{
+	int	i;
+
+	i = 0;
+	while (path[i])
+	{
+		free(path[i]);
+		i++;
+	}
+	free(path[i]);
+	free(path);
+	return;
+}
 
 char	*join_path(char *dir, char *command)
 {
@@ -45,10 +60,13 @@ char	*pathfinding(t_main *main_str, char *command)
 	{
 		complete_path = join_path(path[i], command);
 		if (access(complete_path, F_OK | X_OK) == 0)
+		{
+			free_path(path);
 			return (complete_path);
+		}
 		free(complete_path);
 		i++;
 	}
-
+	free_path(path);
 	return (NULL);
 }

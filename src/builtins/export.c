@@ -25,6 +25,7 @@ int	add_env_var(char *name, char *value, char ***envp, int i)
 			sizeof(char *) * (i + 2));
 	if (!*envp)
 		return (1);
+	free((*envp)[i]);
 	(*envp)[i] = new_entry;
 	(*envp)[i + 1] = NULL;
 	return (0);
@@ -50,10 +51,9 @@ char	**sort_ascii(char **array)
 	char	*temp;
 
 	len = ft_arraylen(array);
-	sorted_array = malloc(sizeof(char *) * (len + 1));
-	if (!sorted_array || dup_array(&sorted_array, array) != 0)
+	if (dup_array(&sorted_array, array) != 0)
 		return (NULL);
-
+	free(array);
 	i = 0;
 	while (i < len - 1)
 	{

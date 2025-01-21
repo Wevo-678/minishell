@@ -52,8 +52,10 @@ int	set_env_value(char ***envp, const char *name, const char *value)
 		free(new_entry);
 		return (-1);
 	}
+	free(new_env[count]);
 	new_env[count] = new_entry;
 	new_env[count + 1] = NULL;
+	free(*envp);
 	*envp = new_env;
 	return (0);
 }
