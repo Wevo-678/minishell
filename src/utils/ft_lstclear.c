@@ -37,12 +37,9 @@ void	clear_list(t_node **first)
 	{
 		tmp = (*first)->next;
 		i = 0;
-		printf("Hello\n");
 		free(tmp->data);
-		printf("Hello\n");
 		while (tmp->data[i])
 		{
-		printf("Hello\n");
 			free(tmp->data[i]);
 			i++;
 		}

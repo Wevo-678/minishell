@@ -4,6 +4,30 @@
 
 pid_t	g_signal_pid;
 
+void	ft_free2(t_main *main_str)
+{
+	int	i;
+	t_node *tmp;
+
+	tmp = main_str->arg_list;
+	while (tmp)
+	{
+		i = 0;
+		while (main_str->arg_list->data[i])
+		{
+			free(main_str->arg_list->data[i]);
+			i++;
+		}
+		free(main_str->arg_list->data[i]);
+		free(main_str->arg_list->data);
+		tmp = tmp->next;
+		free(main_str->arg_list);
+		main_str->arg_list = tmp;
+	}
+	free(main_str->arg_list);
+	return ;
+}
+
 void	start_shell(t_main *main_str)
 {
 	char	*input;
@@ -33,6 +57,7 @@ void	start_shell(t_main *main_str)
 				parsing(&main_str->arg_list, &main_str->env);
 				redir(main_str, main_str->arg_list);
 				execution(main_str, main_str->arg_list);
+				ft_free2(main_str);
 			}
 		}
 		free(input);
