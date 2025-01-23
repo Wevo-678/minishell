@@ -53,28 +53,16 @@ int	ft_cd(char **args, char ***envp)
 	{
 		home = get_env_value(*envp, "HOME");
 		if (!home)
-		{
-			printf("cd: HOME not set\n");
-			return (1);
-		}
+			return (printf("cd: HOME not set\n"), 1);
 		if (chdir(home) != 0)
-		{
-			perror("cd");
-			return (1);
-		}
+			return (perror("cd"), 1);
 	}
 	else
 	{
 		if (chdir(args[1]) != 0)
-		{
-			perror("cd");
-			return (1);
-		}
+			return (perror("cd"), 1);
 	}
 	if (ft_update_pwd(envp) != 0)
-	{
-		printf("Error updating PWD\n");
-		return (1);
-	}
+		return (printf("Error updating PWD\n"), 1);
 	return (0);
 }
