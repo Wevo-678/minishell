@@ -62,6 +62,7 @@ void	parsing(t_node **args_list, char ***envp);
 
 //exit
 void	ft_free(t_main *main_str);
+void	ft_free3(t_main *main_str);
 void	ft_exit(char **args, t_main *main_str);
 
 //env_echo

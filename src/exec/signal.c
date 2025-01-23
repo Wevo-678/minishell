@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   signal.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alribeyr <alribeyr@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mabenet <mabenet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/10 17:10:30 by alribeyr          #+#    #+#             */
-/*   Updated: 2025/01/10 17:10:49 by alribeyr         ###   ########.fr       */
+/*   Updated: 2025/01/23 16:15:37 by mabenet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,11 +30,6 @@ static void	handle_sigabrt(int code)
 {
 	(void)code;
 	write(1, "abort\n", 6);
-}
-
-void	signals2(void)
-{
-	signal(SIGQUIT, SIG_DFL);
 }
 
 void	signals(void)
