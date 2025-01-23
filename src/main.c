@@ -49,9 +49,11 @@ void	start_shell(t_main *main_str)
 		if (input == NULL)
 		{
 			printf("exit\n");
-			ft_free(main_str);
 			if (ft_strcmp(get_env_value(main_str->env, "SHLVL"), "2") == 0)
-				break ;
+			{
+				ft_free3(main_str);
+				exit(0);
+			}
 		}
 		if (input[0] == '\0')
 		{

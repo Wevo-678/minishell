@@ -57,6 +57,30 @@ void	ft_free(t_main *main_str)
 	return ;
 }
 
+void	ft_free3(t_main *main_str)
+{
+	int	i;
+
+	i = 0;
+	while (main_str->path[i])
+	{
+		free(main_str->path[i]);
+		i++;
+	}
+	free(main_str->path[i]);
+	free(main_str->path);
+	i = 0;
+	while (main_str->env[i])
+	{
+		free(main_str->env[i]);
+		i++;
+	}
+	free(main_str->env[i]);
+	free(main_str->env);
+	free(main_str);
+	return ;
+}
+
 void	ft_exit(char **args, t_main *main_str)
 {
 	printf("exit\n");
