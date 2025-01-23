@@ -6,8 +6,8 @@ pid_t	g_signal_pid;
 
 void	ft_free2(t_main *main_str)
 {
-	int	i;
-	t_node *tmp;
+	int		i;
+	t_node	*tmp;
 
 	tmp = main_str->arg_list;
 	while (tmp)
@@ -26,6 +26,16 @@ void	ft_free2(t_main *main_str)
 	}
 	free(main_str->arg_list);
 	return ;
+}
+
+void	full_exec(t_main *main_str, char *input)
+{
+	dup_on_pipes(&main_str->arg_list, input);
+	split_init(&main_str->arg_list);
+	parsing(&main_str->arg_list, &main_str->env);
+	redir(main_str, main_str->arg_list);
+	execution(main_str, main_str->arg_list);
+	ft_free2(main_str);
 }
 
 void	start_shell(t_main *main_str)
@@ -51,17 +61,18 @@ void	start_shell(t_main *main_str)
 		{
 			add_history(input);
 			if (!treat_input(input))
-			{
-				dup_on_pipes(&main_str->arg_list, input);
-				split_init(&main_str->arg_list);
-				parsing(&main_str->arg_list, &main_str->env);
-				redir(main_str, main_str->arg_list);
-				execution(main_str, main_str->arg_list);
-				ft_free2(main_str);
-			}
+				full_exec(main_str, input);
 		}
 		free(input);
 	}
+}
+
+void	std_init(t_main **main_str)
+{
+	(*main_str)->stdin = dup(0);
+	(*main_str)->stdout = dup(1);
+	(*main_str)->fdin = -1;
+	(*main_str)->fdout = -1;
 }
 
 int	main(int ac, char **av, char **envp)
@@ -80,10 +91,7 @@ int	main(int ac, char **av, char **envp)
 		printf("Erreur d'allocation pour main_str\n");
 		return (1);
 	}
-	main_str->stdin = dup(0);
-	main_str->stdout = dup(1);
-	main_str->fdin = -1;
-	main_str->fdout = -1;
+	std_init(&main_str);
 	if (dup_array(&main_str->env, envp) != 0)
 	{
 		printf("Erreur lors de la copie de l'environnement\n");
@@ -93,16 +101,5 @@ int	main(int ac, char **av, char **envp)
 	ft_increment_shlvl(&main_str->env);
 	init_path(get_env_value(envp, "PATH"), &main_str->path);
 	start_shell(main_str);
-	// g_signal_pid = 0;
-	// int	i;
-	// i = 0;
-	// while (main_str->env[i])
-	// {
-	// 	free(main_str->env[i]);
-	// 	i++;
-	// }
-	// free(main_str->env);
-	// free(main_str->path);
-	// free(main_str);
 	return (0);
 }
