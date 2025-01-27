@@ -6,7 +6,7 @@
 /*   By: picarlie <picarlie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 14:05:54 by picarlie          #+#    #+#             */
-/*   Updated: 2025/01/27 14:05:55 by picarlie         ###   ########.fr       */
+/*   Updated: 2025/01/27 14:17:31 by picarlie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,10 +28,9 @@ int	is_numeric(const char *str)
 	return (1);
 }
 
-void	ft_free(t_main *main_str)
+void	ft_free_env_path(t_main *main_str)
 {
 	int	i;
-	t_node *tmp;
 
 	i = 0;
 	while (main_str->path[i])
@@ -49,6 +48,15 @@ void	ft_free(t_main *main_str)
 	}
 	free(main_str->env[i]);
 	free(main_str->env);
+	return ;
+}
+
+void	ft_free(t_main *main_str)
+{
+	int		i;
+	t_node	*tmp;
+
+	ft_free_env_path(main_str);
 	tmp = main_str->arg_list;
 	while (tmp)
 	{

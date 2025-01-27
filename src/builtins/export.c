@@ -6,7 +6,7 @@
 /*   By: picarlie <picarlie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 14:05:58 by picarlie          #+#    #+#             */
-/*   Updated: 2025/01/27 14:05:59 by picarlie         ###   ########.fr       */
+/*   Updated: 2025/01/27 14:21:46 by picarlie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,15 +43,16 @@ int	add_env_var(char *name, char *value, char ***envp, int i)
 	return (0);
 }
 
-void print_env_vars(char **envp)
+void	print_env_vars(char **envp)
 {
-    int i = 0;
+	int	i;
 
-    while (envp[i])
-    {
-        printf("declare -x %s\n", envp[i]);
-        i++;
-    }
+	i = 0;
+	while (envp[i])
+	{
+		printf("declare -x %s\n", envp[i]);
+		i++;
+	}
 }
 
 char	**sort_ascii(char **array)
@@ -85,34 +86,35 @@ char	**sort_ascii(char **array)
 	return (sorted_array);
 }
 
-int ft_export(char **args, char ***envp)
+int	ft_export(char **args, char ***envp)
 {
-    char	**sorted_env;
+	char	*name;
+	char	*value;
+	char	**sorted_env;
 	int		i;
 
-    i = 0;
+	i = 0;
 	if (is_valid_export(args[1]) != 1)
 		printf("export: `%s': not a valid identifier\n", args[1]);
-    if (!args[1])
-    {
+	if (!args[1])
+	{
 		sorted_env = sort_ascii(*envp);
 		if (!sorted_env)
 			return (1);
 		print_env_vars(sorted_env);
 		ft_free_array(sorted_env);
 		return (0);
-    }
-    char *name = ft_strtok(args[1], "=");
-    char *value = ft_strtok(NULL, "=");
-    if (!name || !value)
-        return (1);
-
-    while ((*envp)[i])
-    {
-        if (strncmp((*envp)[i], name, strlen(name)) == 0 && (*envp)[i][strlen(name)] == '=')
-            return update_env_var(name, value, envp, i);
-        i++;
-    }
-    return add_env_var(name, value, envp, i);
+	}
+	name = ft_strtok(args[1], "=");
+	value = ft_strtok(NULL, "=");
+	if (!name || !value)
+		return (1);
+	while ((*envp)[i])
+	{
+		if (strncmp((*envp)[i], name, strlen(name)) == 0
+				&& (*envp)[i][strlen(name)] == '=')
+			return (update_env_var(name, value, envp, i));
+		i++;
+	}
+	return (add_env_var(name, value, envp, i));
 }
-
