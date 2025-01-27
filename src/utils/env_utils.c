@@ -6,7 +6,7 @@
 /*   By: picarlie <picarlie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 14:07:55 by picarlie          #+#    #+#             */
-/*   Updated: 2025/01/27 14:07:56 by picarlie         ###   ########.fr       */
+/*   Updated: 2025/01/27 14:32:19 by picarlie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,8 @@ char	*get_env_value(char **envp, const char *name)
 	return ("Error dir no find");
 }
 
-static char *create_env_entry(const char *name, const char *value) {
+static char	*create_env_entry(const char *name, const char *value)
+{
     char *new_entry;
     if (!name || !value)
         return NULL;
@@ -38,14 +39,13 @@ static char *create_env_entry(const char *name, const char *value) {
     new_entry = malloc(strlen(name) + strlen(value) + 2);
     if (!new_entry)
         return NULL;
-
     strcpy(new_entry, name);
     strcat(new_entry, "=");
     strcat(new_entry, value);
-    return new_entry;
+    return (new_entry);
 }
 
-static int update_env_value(char **envp, const char *name, char *new_entry)
+static int	update_env_value(char **envp, const char *name, char *new_entry)
 {
     int len = strlen(name);
     for (int i = 0; envp[i]; i++) 
@@ -54,14 +54,13 @@ static int update_env_value(char **envp, const char *name, char *new_entry)
 		{
             free(envp[i]);
             envp[i] = new_entry;
-            return 1; 
+            return (1); 
     	}
 	}
-    return 0;
+    return (0);
 }
 
-
-static int add_env_entry(char ***envp, char *new_entry) {
+static int	add_env_entry(char ***envp, char *new_entry) {
     int count = 0;
     while ((*envp)[count])
         count++;
@@ -69,26 +68,26 @@ static int add_env_entry(char ***envp, char *new_entry) {
     char **new_env = realloc(*envp, (count + 2) * sizeof(char *));
     if (!new_env) {
         free(new_entry);
-        return -1;
+        return (-1);
     }
 
     new_env[count] = new_entry;
     new_env[count + 1] = NULL;
     *envp = new_env;
-    return 0;
+    return (0);
 }
 
-int set_env_value(char ***envp, const char *name, const char *value) 
+int	set_env_value(char ***envp, const char *name, const char *value) 
 {
     if (!envp || !name || !value)
-        return -1;
+        return (-1);
 
     char *new_entry = create_env_entry(name, value);
     if (!new_entry)
-        return -1;
+        return (-1);
 
     if (update_env_value(*envp, name, new_entry))
-        return 0;
+        return (0);
 
     return (add_env_entry(envp, new_entry));
 }

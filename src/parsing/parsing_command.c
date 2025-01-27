@@ -6,7 +6,7 @@
 /*   By: picarlie <picarlie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 14:07:28 by picarlie          #+#    #+#             */
-/*   Updated: 2025/01/27 14:07:29 by picarlie         ###   ########.fr       */
+/*   Updated: 2025/01/27 14:28:50 by picarlie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,6 @@ char	*replace_env_vars(char *str, char ***envp)
 	free(str);
 	return (result);
 }
-
 
 void	parsing(t_node **args_list, char ***envp)
 {
