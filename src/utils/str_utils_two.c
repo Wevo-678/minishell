@@ -3,43 +3,78 @@
 /*                                                        :::      ::::::::   */
 /*   str_utils_two.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: picarlie <picarlie@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mabenet <mabenet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 14:08:47 by picarlie          #+#    #+#             */
-/*   Updated: 2025/01/27 14:08:48 by picarlie         ###   ########.fr       */
+/*   Updated: 2025/01/27 15:24:09 by mabenet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-char	**ft_split(char const *s, char c)
+#include <stdlib.h>
+
+static int	word_count(const char *s, char c)
+{
+	int	count;
+
+	count = 0;
+	while (*s)
+	{
+		if (*s != c && (*(s + 1) == c || *(s + 1) == '\0'))
+			count++;
+		s++;
+	}
+	return (count);
+}
+
+static char	*alloc_word(const char *s, char c)
+{
+	int		len;
+	int		i;
+	char	*word;
+
+	len = 0;
+	while (s[len] && s[len] != c)
+		len++;
+	word = malloc(len + 1);
+	if (!word)
+		return (NULL);
+	i = 0;
+	while (i < len)
+	{
+		word[i] = s[i];
+		i++;
+	}
+	word[len] = '\0';
+	return (word);
+}
+
+char	**ft_split(const char *s, char c)
 {
 	char	**result;
+	int		words;
 	int		i;
-	int		j;
-	int		k;
 
 	i = 0;
-	j = 0;
-	k = 0;
-	result = malloc(sizeof(char *) * (ft_strlen(s) + 1));
+	if (!s)
+		return (NULL);
+	words = word_count(s, c);
+	result = malloc(sizeof(char *) * (words + 1));
 	if (!result)
 		return (NULL);
-	while (s[i])
+	while (*s)
 	{
-		if (s[i] != c)
+		if (*s != c)
 		{
-			j = i;
-			while (s[i] != c && s[i] != '\0')
-				i++;
-			result[k] = malloc(i - j + 1);
-			ft_strncpy(result[k], &s[j], i - j);
-			result[k++][i - j] = '\0';
+			result[i++] = alloc_word(s, c);
+			while (*s && *s != c)
+				s++;
 		}
 		else
-			i++;
+			s++;
 	}
-	result[k] = NULL;
+	result[i] = NULL;
 	return (result);
 }
 

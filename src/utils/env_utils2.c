@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env_utils2.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: picarlie <picarlie@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mabenet <mabenet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 14:07:58 by picarlie          #+#    #+#             */
-/*   Updated: 2025/01/27 14:07:59 by picarlie         ###   ########.fr       */
+/*   Updated: 2025/01/27 16:03:55 by mabenet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,9 +35,5 @@ int	count_tokens(const char *str, char delim)
 
 void	init_path(char *path, char ***path_tab)
 {
-	// int	count;
-
-	// count = count_tokens(path, ':');
-	// *path_tab = malloc(sizeof(char *) * (count + 1));
 	*path_tab = ft_split(path, ':');
 }
