@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: picarlie <picarlie@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/01/27 14:09:03 by picarlie          #+#    #+#             */
+/*   Updated: 2025/01/27 14:09:04 by picarlie         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 //valgrind --leak-check=full --show-leak-kinds=all --suppressions=realine_leak.supp ./minishell
 
 #include "../includes/minishell.h"
