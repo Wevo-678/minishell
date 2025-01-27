@@ -6,11 +6,12 @@
 /*   By: picarlie <picarlie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 14:09:03 by picarlie          #+#    #+#             */
-/*   Updated: 2025/01/27 14:09:04 by picarlie         ###   ########.fr       */
+/*   Updated: 2025/01/27 17:11:15 by picarlie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-//valgrind --leak-check=full --show-leak-kinds=all --suppressions=realine_leak.supp ./minishell
+//valgrind --leak-check=full --show-leak-kinds=all
+//--suppressions=realine_leak.supp ./minishell
 
 #include "../includes/minishell.h"
 
@@ -42,12 +43,16 @@ void	ft_free2(t_main *main_str)
 
 void	full_exec(t_main *main_str, char *input)
 {
-	dup_on_pipes(&main_str->arg_list, input);
-	split_init(&main_str->arg_list);
-	parsing(&main_str->arg_list, &main_str->env);
-	redir(main_str, main_str->arg_list);
-	execution(main_str, main_str->arg_list);
-	ft_free2(main_str);
+	add_history(input);
+	if (!treat_input(input))
+	{
+		dup_on_pipes(&main_str->arg_list, input);
+		split_init(&main_str->arg_list);
+		parsing(&main_str->arg_list, &main_str->env);
+		redir(main_str, main_str->arg_list);
+		execution(main_str, main_str->arg_list);
+		ft_free2(main_str);
+	}
 }
 
 void	start_shell(t_main *main_str)
@@ -73,11 +78,7 @@ void	start_shell(t_main *main_str)
 			continue ;
 		}
 		if (*input && (treat_input(input) == 0))
-		{
-			add_history(input);
-			if (!treat_input(input))
-				full_exec(main_str, input);
-		}
+			full_exec(main_str, input);
 		free(input);
 	}
 }

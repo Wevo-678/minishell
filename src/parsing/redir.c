@@ -6,35 +6,11 @@
 /*   By: picarlie <picarlie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 14:07:36 by picarlie          #+#    #+#             */
-/*   Updated: 2025/01/27 14:07:37 by picarlie         ###   ########.fr       */
+/*   Updated: 2025/01/27 17:05:03 by picarlie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
-
-int	heredoc(char *strEOF)
-{
-	int		fd;
-	char	*line;
-
-	fd = open(".tmp", O_RDWR | O_CREAT | O_TRUNC, 0777);
-	printf("%s\n", strEOF);
-	while (1)
-	{
-		line = readline(">");
-		if (!ft_strcmp(line, strEOF))
-		{
-			close(fd);
-			fd = open(".tmp", O_RDONLY, 0777);
-			unlink(".tmp");
-			free(line);
-			return (fd);
-		}
-		write(fd, line, ft_strlen(line));
-		write(fd, "\n", 1);
-		free(line);
-	}
-}
 
 void	redir_out(t_main *main_str, t_node *tokens, int j)
 {

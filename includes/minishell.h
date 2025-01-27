@@ -6,7 +6,7 @@
 /*   By: picarlie <picarlie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 14:05:35 by picarlie          #+#    #+#             */
-/*   Updated: 2025/01/27 14:10:39 by picarlie         ###   ########.fr       */
+/*   Updated: 2025/01/27 17:04:47 by picarlie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,9 @@ void	ft_exit(char **args, t_main *main_str);
 int		ft_env(char **envpm);
 int		ft_increment_shlvl(char ***envp);
 int		ft_echo(char **args);
+
+//redir2
+int		heredoc(char *strEOF);
 
 //execution
 //void execute_command(char **path, char **args, char **envp);
