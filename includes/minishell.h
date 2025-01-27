@@ -6,7 +6,7 @@
 /*   By: picarlie <picarlie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 14:05:35 by picarlie          #+#    #+#             */
-/*   Updated: 2025/01/27 17:04:47 by picarlie         ###   ########.fr       */
+/*   Updated: 2025/01/27 17:21:40 by picarlie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,10 @@ int		ft_echo(char **args);
 int		heredoc(char *strEOF);
 
 //execution
-//void execute_command(char **path, char **args, char **envp);
+void	lst_wait(void *content);
+int		pid_list_add(t_list **pid_lst, int pid);
+int		is_builtin(char **args, char ***envp, t_main *main_str);
+int		child(t_node *tokens, t_main *main_str, int *redir);
 
 //env
 char	*get_env_value(char **envp, const char *name);
