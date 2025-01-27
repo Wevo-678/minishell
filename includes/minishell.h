@@ -6,7 +6,7 @@
 /*   By: picarlie <picarlie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 14:05:35 by picarlie          #+#    #+#             */
-/*   Updated: 2025/01/27 14:05:36 by picarlie         ###   ########.fr       */
+/*   Updated: 2025/01/27 14:10:39 by picarlie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -172,6 +172,6 @@ void	ft_lstclear(t_list **lst, void (*del)(void *));
 void	ft_lstiter(t_list *lst, void (*f)(void *));
 t_list	*ft_lstnew(void *content);
 void	ft_bzero(void *s, size_t n);
-int is_valid_export(const char *str);
+int		is_valid_export(const char *str);
 
 #endif
