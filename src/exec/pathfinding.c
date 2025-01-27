@@ -6,7 +6,7 @@
 /*   By: picarlie <picarlie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 14:07:01 by picarlie          #+#    #+#             */
-/*   Updated: 2025/01/27 14:07:02 by picarlie         ###   ########.fr       */
+/*   Updated: 2025/01/27 14:26:14 by picarlie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	free_path(char **path)
 	}
 	free(path[i]);
 	free(path);
-	return;
+	return ;
 }
 
 char	*join_path(char *dir, char *command)

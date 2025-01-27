@@ -6,7 +6,7 @@
 /*   By: picarlie <picarlie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 14:06:27 by picarlie          #+#    #+#             */
-/*   Updated: 2025/01/27 14:06:28 by picarlie         ###   ########.fr       */
+/*   Updated: 2025/01/27 14:26:00 by picarlie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -142,7 +142,9 @@ int	execution(t_main *main_str, t_node *tokens)
 	pidlst = NULL;
 	while (tokens != NULL)
 	{
-		if (!strcmp(tokens->data[0], "exit") || !strcmp(tokens->data[0], "cd") || !strcmp(tokens->data[0], "unset") || !strcmp(tokens->data[0], "export"))
+		if (!strcmp(tokens->data[0], "exit") || !strcmp(tokens->data[0], "cd")
+			|| !strcmp(tokens->data[0], "unset")
+			|| !strcmp(tokens->data[0], "export"))
 			is_builtin(tokens->data, &main_str->env, main_str);
 		else
 		{
