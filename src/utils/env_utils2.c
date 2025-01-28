@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env_utils2.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mabenet <mabenet@student.42.fr>            +#+  +:+       +#+        */
+/*   By: picarlie <picarlie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 14:07:58 by picarlie          #+#    #+#             */
-/*   Updated: 2025/01/27 16:03:55 by mabenet          ###   ########.fr       */
+/*   Updated: 2025/01/28 19:50:24 by picarlie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,5 +53,5 @@ char	*get_env_value_env(char **envp, const char *name)
 		}
 		i++;
 	}
-	return ("\n");
+	return ("");
 }
