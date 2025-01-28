@@ -6,7 +6,7 @@
 /*   By: gvalogne <gvalogne@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 14:07:28 by picarlie          #+#    #+#             */
-/*   Updated: 2025/01/28 21:34:31 by gvalogne         ###   ########.fr       */
+/*   Updated: 2025/01/28 22:33:03 by gvalogne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ int	check_var_size(const char *str, char ***envp)
 				var_name[k++] = str[i++];
 			var_name[k] = '\0';
 			if (var_name[0] != '\0')
-				total_var_size += ft_strlen(get_env_value(*envp, var_name));
+				total_var_size += ft_strlen(get_env_value_env(*envp, var_name));
 			free(var_name);
 		}
 		else
@@ -76,19 +76,19 @@ char	*expand_env_var(const char *str, int *i, char ***envp)
 	if (str[++(*i)] == '?')
 		return ((*i)++, ft_itoa(g_signal_pid));
 	if (ft_isdigit(str[*i]))
-		return ((*i)++, "");
+		return ((*i)++, ft_strdup(""));
 	var_name = (char *)malloc(sizeof(char) * (ft_strlen(str) + 1));
 	while (str[*i] && (str[*i] == '_' || ft_isalnum(str[*i])))
 		var_name[k++] = str[(*i)++];
 	var_name[k] = '\0';
 	if (var_name[0] != '\0')
 	{
-		env_value = get_env_value(*envp, var_name);
+		env_value = get_env_value_env(*envp, var_name);
 		if (env_value)
-			return (free(var_name), env_value);
+			return (free(var_name), ft_strdup(env_value));
 	}
 	free(var_name);
-	return ("");
+	return (ft_strdup(""));
 }
 
 char	*replace_env_vars(char *str, char ***envp)
