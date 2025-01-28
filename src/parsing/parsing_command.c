@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_command.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: picarlie <picarlie@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gvalogne <gvalogne@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 14:07:28 by picarlie          #+#    #+#             */
-/*   Updated: 2025/01/27 14:28:50 by picarlie         ###   ########.fr       */
+/*   Updated: 2025/01/28 21:34:31 by gvalogne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,32 +29,65 @@ char	*delete_quote(char *str)
 	return (str);
 }
 
+int	check_var_size(const char *str, char ***envp)
+{
+	char	*var_name;
+	int		i;
+	int		k;
+	int		total_var_size;
+	char	*code_erreur;
+
+	total_var_size = 0;
+	i = 0;
+	while (str[i] != '\0')
+	{
+		if (str[i] == '$' && str[i + 1] != '\0' && str[0] != '\'')
+		{
+			var_name = malloc(sizeof(char) * ft_strlen(str) + 1);
+			i++;
+			if (str[i] == '?')
+			{
+				code_erreur = ft_itoa(g_signal_pid);
+				total_var_size += ft_strlen(code_erreur);
+				free(code_erreur);
+				i++;
+			}
+			k = 0;
+			while (str[i] && (str[i] == '_' || ft_isalnum(str[i])))
+				var_name[k++] = str[i++];
+			var_name[k] = '\0';
+			if (var_name[0] != '\0')
+				total_var_size += ft_strlen(get_env_value(*envp, var_name));
+			free(var_name);
+		}
+		else
+			i++;
+	}
+	return (total_var_size);
+}
+
 char	*expand_env_var(const char *str, int *i, char ***envp)
 {
-	char	var_name[100];
+	char	*var_name;
 	char	*env_value;
 	int		k;
 
 	k = 0;
 	if (str[++(*i)] == '?')
-	{
-		(*i)++;
-		return (ft_itoa(g_signal_pid));
-	}
+		return ((*i)++, ft_itoa(g_signal_pid));
 	if (ft_isdigit(str[*i]))
-	{
-		(*i)++;
-		return ("");
-	}
-	while (str[*i] && (str[*i] == '_' || ft_isalnum(str[*i])) && k < 99)
+		return ((*i)++, "");
+	var_name = (char *)malloc(sizeof(char) * (ft_strlen(str) + 1));
+	while (str[*i] && (str[*i] == '_' || ft_isalnum(str[*i])))
 		var_name[k++] = str[(*i)++];
 	var_name[k] = '\0';
 	if (var_name[0] != '\0')
 	{
 		env_value = get_env_value(*envp, var_name);
 		if (env_value)
-			return (env_value);
+			return (free(var_name), env_value);
 	}
+	free(var_name);
 	return ("");
 }
 
@@ -65,9 +98,9 @@ char	*replace_env_vars(char *str, char ***envp)
 	int		j;
 	char	*expanded;
 
-	result = malloc(ft_strlen(str) + 1);
 	i = 0;
 	j = 0;
+	result = malloc(sizeof(char) * ft_strlen(str) + check_var_size(str, envp) + 1);
 	while (str[i] != '\0')
 	{
 		if (str[i] == '$' && str[i + 1] != '\0' && str[0] != '\'')
