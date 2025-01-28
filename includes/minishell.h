@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: picarlie <picarlie@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alribeyr <alribeyr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 14:05:35 by picarlie          #+#    #+#             */
-/*   Updated: 2025/01/27 17:21:40 by picarlie         ###   ########.fr       */
+/*   Updated: 2025/01/28 18:07:43 by alribeyr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -160,6 +160,9 @@ char	*ft_strchr(const char *s, int c);
 char	*ft_strtok(char *str, const char *delim);
 int		ft_unset(char **args, char ***envp);
 int		ft_export(char **args, char ***envp);
+int		no_arg(char ***envp);
+char	**sort_ascii(char **array);
+void	print_env_vars(char **envp);
 
 //utils
 int		ft_isalnum(int c);

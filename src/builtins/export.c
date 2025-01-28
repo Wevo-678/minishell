@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: picarlie <picarlie@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alribeyr <alribeyr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 14:05:58 by picarlie          #+#    #+#             */
-/*   Updated: 2025/01/28 17:44:09 by picarlie         ###   ########.fr       */
+/*   Updated: 2025/01/28 18:06:12 by alribeyr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,8 +66,8 @@ char	**sort_ascii(char **array)
 	len = ft_arraylen(array);
 	if (dup_array(&sorted_array, array) != 0)
 		return (NULL);
-	i = 0;
-	while (i < len - 1)
+	i = -1;
+	while (++i < len - 1)
 	{
 		j = i + 1;
 		while (j < len)
@@ -80,7 +80,6 @@ char	**sort_ascii(char **array)
 			}
 			j++;
 		}
-		i++;
 	}
 	return (sorted_array);
 }
@@ -89,31 +88,22 @@ int	ft_export(char **args, char ***envp)
 {
 	char	*name;
 	char	*value;
-	char	**sorted_env;
 	int		i;
 
-	i = 0;
+	i = -1;
 	if (is_valid_export(args[1]) != 1)
 		printf("export: `%s': not a valid identifier\n", args[1]);
 	if (!args[1])
-	{
-		sorted_env = sort_ascii(*envp);
-		if (!sorted_env)
-			return (1);
-		print_env_vars(sorted_env);
-		ft_free_array(sorted_env);
-		return (0);
-	}
+		return (no_arg(envp));
 	name = ft_strtok(args[1], "=");
 	value = ft_strtok(NULL, "=");
 	if (!name || !value)
 		return (1);
-	while ((*envp)[i])
+	while ((*envp)[++i])
 	{
 		if (strncmp((*envp)[i], name, strlen(name)) == 0
 				&& (*envp)[i][strlen(name)] == '=')
 			return (update_env_var(name, value, envp, i));
-		i++;
 	}
 	return (add_env_var(name, value, envp, i));
 }
