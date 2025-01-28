@@ -6,7 +6,7 @@
 /*   By: picarlie <picarlie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 14:05:58 by picarlie          #+#    #+#             */
-/*   Updated: 2025/01/27 14:21:46 by picarlie         ###   ########.fr       */
+/*   Updated: 2025/01/28 17:44:09 by picarlie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,6 @@ char	**sort_ascii(char **array)
 	len = ft_arraylen(array);
 	if (dup_array(&sorted_array, array) != 0)
 		return (NULL);
-	free(array);
 	i = 0;
 	while (i < len - 1)
 	{
