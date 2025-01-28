@@ -6,7 +6,7 @@
 /*   By: picarlie <picarlie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 14:06:07 by picarlie          #+#    #+#             */
-/*   Updated: 2025/01/27 14:06:08 by picarlie         ###   ########.fr       */
+/*   Updated: 2025/01/28 18:00:35 by picarlie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,12 @@ char	*ft_strchr(const char *s, int c)
 	return (NULL);
 }
 
+char	*save_ptr_null(char **save_ptr)
+{
+	*save_ptr = NULL;
+	return (NULL);
+}
+
 char	*ft_strtok(char *str, const char *delim)
 {
 	static char	*save_ptr;
@@ -39,10 +45,7 @@ char	*ft_strtok(char *str, const char *delim)
 	while (*start && ft_strchr(delim, *start))
 		start++;
 	if (*start == '\0')
-	{
-		save_ptr = NULL;
-		return (NULL);
-	}
+		return (save_ptr_null(&save_ptr));
 	end = start;
 	while (*end && !ft_strchr(delim, *end))
 		end++;
