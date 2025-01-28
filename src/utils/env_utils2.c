@@ -37,3 +37,21 @@ void	init_path(char *path, char ***path_tab)
 {
 	*path_tab = ft_split(path, ':');
 }
+
+char	*get_env_value_env(char **envp, const char *name)
+{
+	int	len;
+	int	i;
+
+	len = ft_strlen(name);
+	i = 0;
+	while (envp[i])
+	{
+		if (ft_strncmp(envp[i], name, len) == 0 && envp[i][len] == '=')
+		{
+			return ((envp[i]) + len + 1);
+		}
+		i++;
+	}
+	return ("\n");
+}

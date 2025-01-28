@@ -104,6 +104,9 @@ void	ft_test(char ***env, t_main *main_str);
 int		count_tokens(const char *str, char delim);
 void	init_path(char *path, char ***path_tab);
 
+//env_utils2
+char	*get_env_value_env(char **envp, const char *name);
+
 //format_check
 int		between_quotes(char *str, int i);
 int		whitespace_cmd(char *str, int i);
