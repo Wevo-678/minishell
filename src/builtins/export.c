@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alribeyr <alribeyr@student.42.fr>          +#+  +:+       +#+        */
+/*   By: picarlie <picarlie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 14:05:58 by picarlie          #+#    #+#             */
-/*   Updated: 2025/01/28 18:06:12 by alribeyr         ###   ########.fr       */
+/*   Updated: 2025/01/29 15:10:33 by picarlie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,8 +91,6 @@ int	ft_export(char **args, char ***envp)
 	int		i;
 
 	i = -1;
-	if (is_valid_export(args[1]) != 1)
-		printf("export: `%s': not a valid identifier\n", args[1]);
 	if (!args[1])
 		return (no_arg(envp));
 	name = ft_strtok(args[1], "=");
