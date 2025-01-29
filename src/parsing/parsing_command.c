@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_command.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gvalogne <gvalogne@student.42.fr>          +#+  +:+       +#+        */
+/*   By: picarlie <picarlie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/27 14:07:28 by picarlie          #+#    #+#             */
-/*   Updated: 2025/01/29 13:12:17 by gvalogne         ###   ########.fr       */
+/*   Created: 2025/01/29 15:15:10 by picarlie          #+#    #+#             */
+/*   Updated: 2025/01/29 15:18:03 by picarlie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-void	check_var_size_utils(char *str, int *total_var_size, int *i, char ***envp)
+void	check_var_size_ut(char *str, int *total_var_size, int *i, char ***envp)
 {
 	char	*var_name;
 	char	*code_erreur;
@@ -48,7 +48,7 @@ int	check_var_size(char *str, char ***envp)
 		if (str[i] == '$' && str[i + 1] != '\0' && str[0] != '\'')
 		{
 			i++;
-			check_var_size_utils(str, &total_var_size, &i, envp);
+			check_var_size_ut(str, &total_var_size, &i, envp);
 		}
 		else
 			i++;
@@ -90,7 +90,8 @@ char	*replace_env_vars(char *str, char ***envp)
 
 	i = 0;
 	j = 0;
-	result = malloc(sizeof(char) * ft_strlen(str) + check_var_size(str, envp) + 1);
+	result = malloc(sizeof(char) * ft_strlen(str)
+			+ check_var_size(str, envp) + 1);
 	while (str[i] != '\0')
 	{
 		if (str[i] == '$' && str[i + 1] != '\0' && str[0] != '\'')
