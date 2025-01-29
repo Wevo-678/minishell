@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alribeyr <alribeyr@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gvalogne <gvalogne@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 14:05:35 by picarlie          #+#    #+#             */
-/*   Updated: 2025/01/28 18:07:43 by alribeyr         ###   ########.fr       */
+/*   Updated: 2025/01/29 12:14:31 by gvalogne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -141,6 +141,9 @@ size_t	ft_strlen(const char *str);
 char	*ft_strcpy(char *dest, const char *src);
 char	*ft_strcat(char *dest, const char *src);
 char	*ft_strncpy(char *dest, const char *src, size_t n);
+
+//quote_utils
+char	*delete_quote(char *str);
 
 //struct_init
 void	*append_node(t_node **first);

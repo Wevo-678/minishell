@@ -6,36 +6,40 @@
 /*   By: gvalogne <gvalogne@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 14:07:28 by picarlie          #+#    #+#             */
-/*   Updated: 2025/01/28 22:33:03 by gvalogne         ###   ########.fr       */
+/*   Updated: 2025/01/29 13:12:17 by gvalogne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-char	*delete_quote(char *str)
-{
-	char	*res;
-	char	*tmp;
-
-	tmp = str;
-	if ((tmp[0] == '\"' && tmp[ft_strlen(tmp) - 1] == '\"')
-		|| (tmp[0] == '\'' && tmp[ft_strlen(tmp) - 1] == '\''))
-	{
-		res = ft_strdup(++tmp);
-		res[ft_strlen(res) - 1] = '\0';
-		free(str);
-		return (res);
-	}
-	return (str);
-}
-
-int	check_var_size(const char *str, char ***envp)
+void	check_var_size_utils(char *str, int *total_var_size, int *i, char ***envp)
 {
 	char	*var_name;
-	int		i;
-	int		k;
-	int		total_var_size;
 	char	*code_erreur;
+	int		k;
+
+	var_name = malloc(sizeof(char) * ft_strlen(str) + 1);
+	if (str[*i] == '?')
+	{
+		code_erreur = ft_itoa(g_signal_pid);
+		*total_var_size += ft_strlen(code_erreur);
+		free(code_erreur);
+		(*i)++;
+		return (free(var_name));
+	}
+	k = 0;
+	while (str[*i] && (str[*i] == '_' || ft_isalnum(str[*i])))
+		var_name[k++] = str[(*i)++];
+	var_name[k] = '\0';
+	if (var_name[0] != '\0')
+		*total_var_size += ft_strlen(get_env_value_env(*envp, var_name));
+	free(var_name);
+}
+
+int	check_var_size(char *str, char ***envp)
+{
+	int		i;
+	int		total_var_size;
 
 	total_var_size = 0;
 	i = 0;
@@ -43,22 +47,8 @@ int	check_var_size(const char *str, char ***envp)
 	{
 		if (str[i] == '$' && str[i + 1] != '\0' && str[0] != '\'')
 		{
-			var_name = malloc(sizeof(char) * ft_strlen(str) + 1);
 			i++;
-			if (str[i] == '?')
-			{
-				code_erreur = ft_itoa(g_signal_pid);
-				total_var_size += ft_strlen(code_erreur);
-				free(code_erreur);
-				i++;
-			}
-			k = 0;
-			while (str[i] && (str[i] == '_' || ft_isalnum(str[i])))
-				var_name[k++] = str[i++];
-			var_name[k] = '\0';
-			if (var_name[0] != '\0')
-				total_var_size += ft_strlen(get_env_value_env(*envp, var_name));
-			free(var_name);
+			check_var_size_utils(str, &total_var_size, &i, envp);
 		}
 		else
 			i++;
@@ -66,7 +56,7 @@ int	check_var_size(const char *str, char ***envp)
 	return (total_var_size);
 }
 
-char	*expand_env_var(const char *str, int *i, char ***envp)
+char	*expand_env_var(char *str, int *i, char ***envp)
 {
 	char	*var_name;
 	char	*env_value;
